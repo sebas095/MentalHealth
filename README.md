@@ -27,3 +27,16 @@ permita diagnosticar, que sea usable y rápida, y cuenta con los siguientes mód
   * Tratamientos químicos, naturales y de vida sugereridos por el médico general, especialista o EPS.
 
 **5° Módulo de Prevención y Promoción:** Se espera que el sistema muestre tips de promoción y prevención básicos para la salud mental.
+
+<h1>**Guia**</h1>
+<h3>Instalación</h3>
+====================
+    (sudo) npm install
+<h3>Ejecución</h3>
+=================
+    npm start
+<h3>Visualizar la App</h3>
+=========================
+Ingresar en el navegador a:
+
+    http://localhost:3000
