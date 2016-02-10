@@ -28,7 +28,7 @@ permita diagnosticar, que sea usable y rápida, y cuenta con los siguientes mód
 
 **5° Módulo de Prevención y Promoción:** Se espera que el sistema muestre tips de promoción y prevención básicos para la salud mental.
 
-<h1>**Guia**</h1>
+<h1>Guia</h1>
 <h3>Instalación</h3>
 ====================
     (sudo) npm install
