@@ -6,7 +6,7 @@ _Integrantes:_
 * Carolina Gomez Trejos
 * Fernando Santa
 
-**Proyecto: MentalHealth**
+**MentalHealth**
 MentalHealthes una app que por medio de análisis de datos (BigData)
 permita diagnosticar, que sea usable y rápida, y cuenta con los siguientes módulos:
 
