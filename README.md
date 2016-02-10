@@ -29,7 +29,10 @@ permita diagnosticar, que sea usable y rápida, y cuenta con los siguientes mód
 **5° Módulo de Prevención y Promoción:** Se espera que el sistema muestre tips de promoción y prevención básicos para la salud mental.
 
 <h1>Guia</h1>
-<h3>Instalación</h3>
+<h3>Frameworks</h3>
+* [NodeJS](https://nodejs.org/en/)
+* [ExpressJS](http://expressjs.com/es/)
+<h3>Instalación de la App</h3>
 ====================
     (sudo) npm install
 <h3>Ejecución</h3>
