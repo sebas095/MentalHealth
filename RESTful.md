@@ -9,4 +9,4 @@
 | /users/:id              | DELETE   | borra logicamente un usuario | <ul><li>Por definir</li></ul> |
 | /users/new              | POST     | crea un nuevo usuario      | <ul> <li> email </li> <li> name </li> <li> username </li> <li> ... Falta </li> </ul> |
 | /login                  | GET | muestra el fomulario para iniciar sesión | |
-| /login                  | POST | muestra el fomulario para iniciar sesión | <ul> <li> username (cédula) </li> <li> password </li> </ul> |
+| /login                  | POST | iniciar sesión | <ul> <li> username (cédula) </li> <li> password </li> </ul> |
