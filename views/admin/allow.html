@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="#" method="post">
+      <label>PACIENTE, MÉDICO GENERAL Y ESPECIALISTA</label><br><br>
+      <label >Tipo de Documento </label>
+      <select>
+        <option value="cedula-de-ciudadania">Cedula de Ciudadanía</option>
+        <option value="cedula-de-extranjeria">Cédula de Extranjería</option>
+        <option value="pasaporte">Pasaporte</option>
+        <option value="id">Id</option>
+      </select>
+      <label for="numDocumento">N° de Documento </label>
+      <input type="text" name="numDocumento" id="numDocumento"><br><br>
+      <label for="nombre">Nombre </label>
+      <input type="text" name="nombre" id="nombre">
+      <label for="apellidos">Apellidos </label>
+      <input type="text" name="apellidos" id="apellidos"><br><br>
+      <label >Género </label>
+      <select name="genero">
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+      </select>
+      <label for="nacimiento">Fecha de Nacimiento </label>
+      <input type="date" name="nacimiento" value="nacimiento"><br><br>
+      <label for="correo">Correo </label>
+      <input type="text" name="correo" id="correo">
+      <label for="telefono">Telefono </label>
+      <input type="text" name="telefono" id="telefono"><br><br>
+      <label for="direccion">Dirección </label>
+      <input type="text" name="direccion" id="direccion">
+      <label for="eps-asociada">EPS Asociada </label>
+      <input type="text" name="eps-asociada" id="eps-asociada"><br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>Aprobadas</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>Rechazadas</label><br><br>
+      Paciente
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="aprobar-paciente" value="aprobar-paciente">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="rechazar-paciente" value="rechazar-paciente"><br><br>
+      Médico General
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="aprobar-medico-general" value="aprobar-medico-general">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="rechazar-medico-general" value="rechazar-medico-general"><br><br>
+      Médico Especialista
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="aprobar-medico-especialista" value="aprobar-medico-especialista">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="checkbox" name="rechazar-medico-especialista" value="rechazar-medico-especialista"><br><br>
+      <input type="submit" name="enviar" value="ACEPTAR">
+    </form>
+  </body>
+</html>
