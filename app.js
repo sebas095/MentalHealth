@@ -5,7 +5,9 @@ const express = require('express'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
       partials = require('express-partials'),
-      colors = require('colors');
+      colors = require('colors'),
+      session = require('express-session'),
+      methodOverride = require('method-override');
 
 var app = express();
 

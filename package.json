@@ -12,6 +12,8 @@
     "ejs": "^2.4.1",
     "express": "~4.0.0",
     "express-partials": "^0.3.0",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.5",
     "morgan": "~1.0.0",
     "static-favicon": "~1.0.0"
   }
