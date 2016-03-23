@@ -34,19 +34,19 @@
                 <option value="id">Id</option>
               </select>
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="numDocumento" id="numDocumento">
               <label for="numDocumento">N° de Documento </label>
-              <input class="input-field" type="input" name="numDocumento" id="numDocumento">
             </div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="nombre" id="nombre">
               <label for="nombre">Nombres </label>
-              <input type="input" name="nombre" id="nombre">
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="apellidos" id="apellidos">
               <label for="apellidos">Apellidos </label>
-              <input type="input" name="apellidos" id="apellidos">
             </div>
           </div>
           <div class="row">
@@ -63,23 +63,23 @@
             </div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="correo" id="correo">
               <label for="correo">Correo </label>
-              <input type="mail" name="correo" id="correo">
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="telefono" id="telefono">
               <label for="telefono">Telefono </label>
-              <input type="input" name="telefono" id="telefono">
             </div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="direccion" id="direccion">
               <label for="direccion">Dirección </label>
-              <input type="input" name="direccion" id="direccion">
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="eps-asociada" id="eps-asociada">
               <label for="eps-asociada">EPS Asociada </label>
-              <input type="input" name="eps-asociada" id="eps-asociada">
             </div>
           </div>
           <div class="row">
@@ -87,25 +87,28 @@
               <label>Roles </label>
               <form action="#">
                 <p>
-                  <input type="checkbox" id="test5" />
-                  <label for="test5">Red</label>
+                  <input type="checkbox" class="filled-in" name="paciente" value="paciente" id="paciente-check">
+                  <label for="paciente-check">Paciente</label>
                 </p>
-                <p>Paciente <input type="checkbox" name="paciente" value="paciente"></p>
-                <p>Médico General <input type="checkbox" name="medico-general" value="medico-general"></p>
-                <p>Médico Especialista <input type="checkbox" name="medico-especialista" value="medico-especialista"></p>
-
+                <p>
+                  <input type="checkbox" class="filled-in" name="medico-general" value="medico-general" id="medicogeneral-check">
+                  <label for="medicogeneral-check">Médico General</label>
+                </p>
+                <p>
+                  <input type="checkbox" class="filled-in" name="medico-especialista" value="medico-especialista" id="medicoespecialista-check">
+                  <label for="medicoespecialista-check">Médico Especialista</label>
+                </p>
               </form>
-
             </div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="pwd" id="pwd">
               <label for="pwd">Contraseña </label>
-              <input type="input" name="pwd" id="pwd">
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="cpwd" id="cpwd">
               <label for="cpwd">Confirmar Contraseña </label>
-              <input type="input" name="cpwd" id="cpwd">
             </div>
           </div>
         </div>
