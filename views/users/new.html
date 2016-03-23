@@ -2,26 +2,38 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../../public/css/materialize.min.css" rel="stylesheet" media="screen,projection">
+    <link href="../../public/css/style.css" rel="stylesheet" media="screen,projection">
     <title></title>
   </head>
   <body>
     <div>
-      <label>Registro</label><br>
-      <button type="button" name="button">PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS</button>
-      <button type="button" name="button">EPS</button>
+      <div class="container">
+        <label><h2>Registro</h2></label><br>
+        <button class="waves-effect waves-light btn" type="button" name="button">PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS</button>
+        <button class="waves-effect waves-light btn" type="button" name="button">EPS</button>
+      </div>
 
       <form action="#" method="post">
-        <div>
+        <div class="container">
           <hr><label>REGISTRO PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS</label><br><br>
-          <label >Tipo de Documento </label>
-          <select name="tipo-documento">
-            <option value="cedula-de-ciudadania">Cedula de Ciudadanía</option>
-            <option value="cedula-de-extranjeria">Cédula de Extranjería</option>
-            <option value="pasaporte">Pasaporte</option>
-            <option value="id">Id</option>
-          </select>
-          <label for="numDocumento">N° de Documento </label>
-          <input type="input" name="numDocumento" id="numDocumento"><br><br>
+          <div class="row">
+            <div class="col l6">
+              <label >Tipo de Documento </label>
+              <select class="multiple" name="tipo-documento">
+                <option value="cedula-de-ciudadania">Cedula de Ciudadanía</option>
+                <option value="cedula-de-extranjeria">Cédula de Extranjería</option>
+                <option value="pasaporte">Pasaporte</option>
+                <option value="id">Id</option>
+              </select>
+            </div>
+            <div class="col l6">
+              <label for="numDocumento">N° de Documento </label>
+              <input class="input-field" type="input" name="numDocumento" id="numDocumento">
+            </div>
+          </div>
+
           <label for="nombre">Nombres </label>
           <input type="input" name="nombre" id="nombre">
           <label for="apellidos">Apellidos </label>
@@ -42,15 +54,17 @@
           <label for="eps-asociada">EPS Asociada </label>
           <input type="input" name="eps-asociada" id="eps-asociada"><br><br>
           <label>Roles </label>
-          Paciente <input type="checkbox" name="paciente" value="paciente">
-          Médico General <input type="checkbox" name="medico-general" value="medico-general">
-          Médico Especialista <input type="checkbox" name="medico-especialista" value="medico-especialista"><br><br>
+          <p>Paciente <input type="checkbox" name="paciente" value="paciente"></p>
+          <p>Médico General <input type="checkbox" name="medico-general" value="medico-general"></p>
+          <p>Médico Especialista <input type="checkbox" name="medico-especialista" value="medico-especialista"></p>
+          <br><br>
           <label for="pwd">Contraseña </label>
           <input type="input" name="pwd" id="pwd"><br><br>
           <label for="cpwd">Confirmar Contraseña </label>
           <input type="input" name="cpwd" id="cpwd"><br><br>
         </div>
-        <div>
+
+        <div class="container">
           <hr><label>REGISTRO EPS</label><br><br>
           <label for="nit">NIT </label>
           <input type="input" name="nit">
@@ -87,8 +101,9 @@
           <input type="input" name="pwd" id="pwd"><br><br>
           <label for="cpwd">Confirmar Contraseña </label>
           <input type="input" name="cpwd" id="cpwd"><br><br>
+
+          <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
         </div>
-        <input type="submit" value="ENVIAR">
       </form>
     </div>
   </body>
