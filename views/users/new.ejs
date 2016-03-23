@@ -1,18 +1,21 @@
 <div>
   <div class="container">
-    <div class="row">
+    <div class="row center">
       <label><h2>Registro</h2></label>
     </div>
     <div class="row center">
-      <button class="waves-effect waves-light btn" type="button" name="button">PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS</button>
-      <button class="waves-effect waves-light btn" type="button" name="button">EPS</button>
+      <button class="waves-effect waves-light btn" type="button" name="button" id="users">
+        PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS
+      </button>
+      <button class="waves-effect waves-light btn" type="button" name="button" id="eps">
+        EPS
+      </button>
     </div>
   </div>
 <form class="" action="#" method="post">
-  <% include _userForm.ejs %>
-  <% include _epsForm.ejs %>
-  <% include _rootForm.ejs %>
-  <div class="row center">
+  <div id="userForm"><% include _userForm.ejs %></div>
+  <div id="epsForm"><% include _epsForm.ejs %></div>
+  <div class="row center" id="submitForm">
     <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
   </div>
 </form>
