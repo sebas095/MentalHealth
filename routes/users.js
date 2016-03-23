@@ -3,6 +3,10 @@ var router = express.Router();
 
 module.exports = function(app, mountPoint) {
   // GET
+  router.get('/new', function(req, res) {
+    res.render('users/new');
+  });
+
   router.get('/:id/:rol', function(req, res) {
     res.render('index');
   });
@@ -20,7 +24,7 @@ module.exports = function(app, mountPoint) {
   });
 
   // POST
-  router.post('/new', function(req, res) {
+  router.post('/create', function(req, res) {
     res.render('index');
   });
 
