@@ -11,6 +11,10 @@ module.exports = function(app, mountPoint) {
     res.render('index');
   });
 
+  router.get('/:id/:rol/edit', function(req, res) {
+    res.render('users/edit');
+  });
+
   router.get('/:id/:rol/calendar', function(req, res) {
     res.render('index');
   });
