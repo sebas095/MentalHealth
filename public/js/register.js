@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function() {
   $('#users').click(function() {
     $('#userForm').show();
     $('#epsForm').hide();
