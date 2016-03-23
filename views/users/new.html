@@ -27,7 +27,7 @@
           <div class="row">
             <div class="col l6">
               <label >Tipo de Documento </label>
-              <select class="multiple" name="tipo-documento">
+              <select>
                 <option value="cedula-de-ciudadania">Cedula de Ciudadanía</option>
                 <option value="cedula-de-extranjeria">Cédula de Extranjería</option>
                 <option value="pasaporte">Pasaporte</option>
@@ -85,9 +85,17 @@
           <div class="row">
             <div class="col l12">
               <label>Roles </label>
-              <p>Paciente <input type="checkbox" name="paciente" value="paciente"></p>
-              <p>Médico General <input type="checkbox" name="medico-general" value="medico-general"></p>
-              <p>Médico Especialista <input type="checkbox" name="medico-especialista" value="medico-especialista"></p>
+              <form action="#">
+                <p>
+                  <input type="checkbox" id="test5" />
+                  <label for="test5">Red</label>
+                </p>
+                <p>Paciente <input type="checkbox" name="paciente" value="paciente"></p>
+                <p>Médico General <input type="checkbox" name="medico-general" value="medico-general"></p>
+                <p>Médico Especialista <input type="checkbox" name="medico-especialista" value="medico-especialista"></p>
+
+              </form>
+
             </div>
           </div>
           <div class="row">
@@ -105,78 +113,78 @@
         <div class="container">
           <hr><label><h4>REGISTRO EPS</h4></label><br><br>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="nit" class="validate">
               <label for="nit">NIT </label>
-              <input type="input" name="nit">
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="nombre" class="validate">
               <label for="nombre">Nombre o Razón Social </label>
-              <input type="input" name="nombre">
             </div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="correo" id="correo" class="validate">
               <label for="correo">Correo </label>
-              <input type="mail" name="correo" id="correo">
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="telefono" id="telefono" class="validate">
               <label for="telefono">Telefono </label>
-              <input type="input" name="telefono" id="telefono">
             </div>
           </div>
           <div class="row">
-            <div class="col l12">
+            <div class="input-field col l12">
+              <input type="text" name="direccion" id="direccion" class="validate">
               <label for="direccion">Dirección </label>
-              <input type="input" name="direccion" id="direccion">
             </div>
           </div>
           <div class="row"><h5>Persona Responsable</h5></div>
           <div class="row">
             <div class="col l6">
               <label >Tipo de Documento </label>
-              <select name="tipo-documento">
+              <select>
                 <option value="cedula-de-ciudadania">Cedula de Ciudadanía</option>
                 <option value="cedula-de-extranjeria">Cédula de Extranjería</option>
                 <option value="pasaporte">Pasaporte</option>
                 <option value="id">Id</option>
               </select>
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="numDocumento" id="numDocumento" class="validate">
               <label for="numDocumento">N° de Documento </label>
-              <input type="input" name="numDocumento" id="numDocumento">
             </div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="nombre" id="nombre" class="validate">
               <label for="nombre">Nombres </label>
-              <input type="input" name="nombre" id="nombre">
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" name="apellidos" id="apellidos" class="validate">
               <label for="apellidos">Apellidos </label>
-              <input type="input" name="apellidos" id="apellidos">
             </div>
           </div>
           <div class="row">
             <div class="col l6">
               <label >Género </label>
-              <select name="genero">
+              <select>
                 <option value="masculino">Masculino</option>
                 <option value="femenino">Femenino</option>
               </select>
             </div>
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" id="telefono" class="validate">
               <label for="telefono">Telefono </label>
-              <input type="input" name="telefono" id="telefono">
             </div>
           </div>
           <div class="row">
-            <div class="col l6">
+            <div class="input-field col l6">
+              <input type="text" id="pwd" class="validate">
               <label for="pwd">Contraseña </label>
-              <input type="input" name="pwd" id="pwd">
             </div>
-            <div class="col l6">
-              <label for="cpwd">Confirmar Contraseña </label>
-              <input type="input" name="cpwd" id="cpwd">
+            <div class="input-field col l6">
+              <input type="text" id="cpwd" class="validate">
+              <label for="cpwd">Confirmar Contraseña</label>
             </div>
           </div>
           <div class="row center">
@@ -185,5 +193,8 @@
         </div>
       </form>
     </div>
+    <script src="../../public/js/jquery.js"></script>
+    <script src="../../public/js/materialize.min.js"></script>
+    <script src="../../public/js/select.js"></script>
   </body>
 </html>
