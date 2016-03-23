@@ -14,5 +14,7 @@
 | /users/:id/:rol/calendar | DELETE     | Elimina un cita en la agenda de citas | |
 | /users/:id/:rol/allow | GET | Muestra el formulario para aprobar o rechazar cuentas | |
 | /users/:id/:rol/allow | POST | permite aprobar o rechazar cuentas (solo lo puede hacer el root y la eps)| |
+| /users/:id/recovery | GET | Muestra un formulario para recuperar la contraseña | |
+| /users/:id/recovery | POST | Cambia la contraseña de un usuario | |
 | /login                  | GET | muestra el fomulario para iniciar sesión | |
 | /login                  | POST | iniciar sesión | <ul> <li> username (cédula) </li> <li> password </li> </ul> |
