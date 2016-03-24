@@ -7,7 +7,7 @@ module.exports = function(app, mountPoint) {
     res.render('users/new');
   });
 
-  router.get('/:id/:rol', function(req, res) {
+  router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))', function(req, res) {
     res.render('index');
   });
 
@@ -15,23 +15,22 @@ module.exports = function(app, mountPoint) {
     res.render('users/edit');
   });
 
-  router.get('/:id/:rol/edit', function(req, res) {
+  router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', function(req, res) {
     res.render('users/editRol');
   });
 
-  router.get('/:id/:rol/calendar', function(req, res) {
+  router.get('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });
 
-  router.get('/:id/:rol/pending', function(req, res) {
+  router.get('/:id/:rol(\\eps|root)/pending', function(req, res) {
     res.render('admin/pending');
   });
 
-  router.get('/:id/:rol/allow', function(req, res) {
+  router.get('/:id/:rol(\\eps|root)/allow', function(req, res) {
     var rol = req.params.rol;
     if (rol == 'eps')  res.render('admin/allowEps');
     if (rol == 'root') res.render('admin/allowUsers');
-    else               res.redirect('/');
   });
 
   router.get('/:id/recovery', function(req, res) {
@@ -43,11 +42,11 @@ module.exports = function(app, mountPoint) {
     res.render('index');
   });
 
-  router.post('/:id/:rol/calendar', function(req, res) {
+  router.post('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });
 
-  router.post('/:id/:rol/allow', function(req, res) {
+  router.post('/:id/:rol(\\eps|root)/allow', function(req, res) {
     res.render('index');
   });
 
@@ -57,11 +56,15 @@ module.exports = function(app, mountPoint) {
   });
 
   // PUT
-  router.put('/:id/:rol/edit', function(req, res) {
-    res.render('index');
+  router.put('/:id/edit', function(req, res) {
+    //res.render();
   });
 
-  router.put('/:id/:rol/calendar', function(req, res) {
+  router.put('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', function(req, res) {
+    //res.render();
+  });
+
+  router.put('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });
 
@@ -70,7 +73,7 @@ module.exports = function(app, mountPoint) {
     res.render('index');
   });
 
-  router.delete('/:id/:rol/calendar', function(req, res) {
+  router.delete('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });
 
