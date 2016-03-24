@@ -5,6 +5,7 @@ _Integrantes:_
 * William Enrique Choque
 * Carolina Gomez Trejos
 * Fernando Santa
+* Nicolas Restrepo Villa
 
 <h1>MentalHealth</h1>
 MentalHealthes una app que por medio de análisis de datos (BigData)
