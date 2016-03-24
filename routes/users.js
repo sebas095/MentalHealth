@@ -39,7 +39,7 @@ module.exports = function(app, mountPoint) {
 
   // POST
   router.post('/create', function(req, res) {
-    res.render('index');
+    res.redirect('/');
   });
 
   router.post('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
