@@ -17,6 +17,7 @@
 | /users/:id/:rol/calendar | POST      | Crea un cita en la agenda de citas | |
 | /users/:id/:rol/calendar | PUT     | Modifica un cita en la agenda de citas | |
 | /users/:id/:rol/calendar | DELETE     | Elimina un cita en la agenda de citas | |
+| /users/:id/:rol/pending | GET | Muestra el el listado de cuentas pendientes por aprobar o rechazar | |
 | /users/:id/:rol/allow | GET | Muestra el formulario para aprobar o rechazar cuentas | |
 | /users/:id/:rol/allow | POST | permite aprobar o rechazar cuentas (solo lo puede hacer el root y la eps)| |
 | /users/:id/recovery | GET | Muestra un formulario para recuperar la contraseña | |

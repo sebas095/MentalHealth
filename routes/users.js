@@ -11,16 +11,27 @@ module.exports = function(app, mountPoint) {
     res.render('index');
   });
 
-  router.get('/:id/:rol/edit', function(req, res) {
+  router.get('/:id/edit', function(req, res) {
     res.render('users/edit');
+  });
+
+  router.get('/:id/:rol/edit', function(req, res) {
+    res.render('users/editRol');
   });
 
   router.get('/:id/:rol/calendar', function(req, res) {
     res.render('index');
   });
 
+  router.get('/:id/:rol/pending', function(req, res) {
+    res.render('admin/pending');
+  });
+
   router.get('/:id/:rol/allow', function(req, res) {
-    res.render('index');
+    var rol = req.params.rol;
+    if (rol == 'eps')  res.render('admin/allowEps');
+    if (rol == 'root') res.render('admin/allowUsers');
+    else               res.redirect('/');
   });
 
   router.get('/:id/recovery', function(req, res) {
