@@ -6,6 +6,8 @@ exports.Eps = resourceful.define('eps', function() {
   this.string('email');
   this.string('epsPhone');
   this.string('address');
+  this.json('rol');
+  this.bool('accept');
   this.string('password');
 
   // Persona Encargada de la EPS

@@ -13,6 +13,7 @@ exports.User = resourceful.define('user', function() {
   this.string('epsRelated');
   this.array('roles');
   this.string('password');
-  
+  this.bool('accept');
+
   this.timestamps(); //Time marks
 });

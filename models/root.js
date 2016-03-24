@@ -10,6 +10,7 @@ exports.Root = resourceful.define('root', function() {
   this.string('email');
   this.string('phone');
   this.string('address');
+  this.json('rol');
   this.string('password');
 
   this.timestamps(); //Time marks
