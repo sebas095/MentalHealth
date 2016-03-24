@@ -5,7 +5,10 @@
 | ----------------------- | -------- | -------------------------- | ------------- |
 | /                       | GET      | Muestra el HOME de la app  |               |
 | /users/:id/:rol         | GET      | retorna el perfil de un usuario en el rol seleccionado | <ul><li>Por definir</li></ul> |
-| /users/:id/:rol/edit    | PUT      | modifica el perfil de un usuario en el rol seleccionado | <ul><li>Por definir</li></ul> |
+| /users/:id/:rol/edit    | GET      | muestra el formulario para modificar la foto del rol de un usuario | <ul><li>Por definir</li></ul> |
+| /users/:id/:rol/edit    | PUT      | modifica la foto del rol de un usuario | <ul><li>Por definir</li></ul> |
+| /users/:id/edit         | GET      | muestra un formulario con los datos de perfil de un usuario para modificarlos | <ul><li>Por definir</li></ul> |
+| /users/:id/edit         | PUT      | modifica los datos de perfil de un usuario | <ul><li>Por definir</li></ul> |
 | /users/:id              | DELETE   | borra logicamente un usuario | <ul><li>Por definir</li></ul> |
 | /users/new              | GET    | Muestra el formulario de registro | |
 | /users/create           | POST     | crea un nuevo usuario      | <ul> <li> email </li> <li> name </li> <li> username </li> <li> ... Falta </li>
