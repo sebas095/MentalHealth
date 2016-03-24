@@ -79,20 +79,22 @@
           <input type="text" name="telefono" id="telefono">
         </div>
       </div>
-
-
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <label>Aprobadas</label>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <label>Rechazadas</label><br><br>
-      EPS
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="checkbox" name="aprobar-eps" value="aprobar-eps">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="checkbox" name="reprobar-eps" value="reprobar-eps"><br><br>
-      <input type="submit" name="enviar" value="ACEPTAR">
+      <div class="row">
+        <label>EPS</label>
+        <form action="#">
+          <p>
+            <input type="checkbox" class="filled-in" name="aprobar-eps" value="aprobar-eps" id="aprobada-check">
+            <label for="aprobada-check">Aprobadas</label>
+          </p>
+          <p>
+            <input type="checkbox" class="filled-in" name="reprobar-eps" value="reprobar-eps" id="reprobada-check">
+            <label for="reprobada-check">Rechazadas</label>
+          </p>
+        </form>
+      </div>
+      <div class="row center">
+        <input class="btn waves-effect waves-light" type="submit" name="enviar" value="ACEPTAR">
+      </div>
     </form>
 
     <script src="../../public/js/jquery.js"></script>
