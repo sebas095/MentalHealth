@@ -6,7 +6,7 @@ exports.Root = resourceful.define('root', function() {
   this.string('names');
   this.string('lastnames');
   this.string('gender');
-  this.date('birthdate');
+  this.string('birthdate');
   this.string('email');
   this.string('phone');
   this.string('address');

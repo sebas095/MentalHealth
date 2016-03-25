@@ -1,12 +1,12 @@
 const resourceful = require('resourceful');
 
-exports.User = resourceful.define('user', function() {
+var User = resourceful.define('user', function() {
   this.string('documentType');
   this.string('documentNumber');
   this.string('names');
   this.string('lastnames');
   this.string('gender');
-  this.date('birthdate');
+  this.string('birthdate');
   this.string('email');
   this.string('phone');
   this.string('address');
@@ -17,3 +17,9 @@ exports.User = resourceful.define('user', function() {
 
   this.timestamps(); //Time marks
 });
+
+User.prototype.addRol = function(rol) {
+  this.roles.push(rol);
+};
+
+module.exports = User;
