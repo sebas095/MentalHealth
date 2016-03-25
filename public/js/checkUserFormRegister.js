@@ -5,7 +5,7 @@ function checkForm(form) {
     ok = false;
   }
   if (form.pwd.value != form.cpwd.value) {
-    alert("La contraseñas no coinciden");
+    alert("Las contraseñas no coinciden");
     ok = false;
   }
   if (ok) {
