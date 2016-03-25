@@ -81,11 +81,13 @@
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <input type="password" name="pwd" id="pwdUser" required="" aria-required="true">
+    <input type="password" name="pwd" id="pwdUser"
+      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
     <label for="pwdUser">Contraseña </label>
   </div>
   <div class="input-field col l6">
-    <input type="password" name="cpwd" id="cpwdUser" required="" aria-required="true">
+    <input type="password" name="cpwd" id="cpwdUser"
+      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
     <label for="cpwdUser">Confirmar Contraseña </label>
   </div>
 </div>

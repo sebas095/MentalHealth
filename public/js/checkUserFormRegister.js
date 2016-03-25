@@ -8,5 +8,8 @@ function checkForm(form) {
     alert("La contraseñas no coinciden");
     ok = false;
   }
+  if (ok) {
+    alert("Pronto le enviaremos un correo con el estado de aprobación de su cuenta");
+  }
   return ok;
 }
