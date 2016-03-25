@@ -16,7 +16,7 @@ exports.create = function(req, res) {
   }, function(data) {
     if (!Object.keys(data.value).length <= 2) {
       res.status(500);
-      return new Error("Eps not defined");
+      return new Error("Root not defined");
     }
     console.log(data.value);
     res.json(data.value);
