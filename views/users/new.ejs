@@ -1,22 +1,30 @@
-<div>
-  <div class="container">
-    <div class="row center">
-      <label><h2>Registro</h2></label>
-    </div>
-    <div class="row center">
-      <button class="waves-effect waves-light btn" type="button" name="button" id="users">
-        PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS
-      </butto></div>
-      <div class="row center">
-      <button class="waves-effect waves-light btn" type="button" name="button" id="eps">
-        EPS
-      </button>
-    </div>
+<div class="container">
+  <div class="row center">
+    <label><h2>Registro</h2></label>
   </div>
-<form action="/users/create" method="post">
-  <div id="userForm"><% include _userForm.ejs %></div>
-  <div id="epsForm"><% include _epsForm.ejs %></div>
-  <div class="row center" id="submitForm">
-    <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
+  <div class="row center">
+    <button class="waves-effect waves-light btn" type="button" name="button" id="users">
+      PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS
+    </butto></div>
+    <div class="row center">
+    <button class="waves-effect waves-light btn" type="button" name="button" id="eps">
+      EPS
+    </button>
   </div>
-</form>
+</div>
+<div id="epsForm">
+  <form action="/users/create" method="post">
+    <% include _epsForm.ejs %>
+    <div class="row center">
+      <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
+    </div>
+  </form>
+</div>
+<div id="userForm">
+  <form action="/users/create" method="post">
+    <% include _userForm.ejs %>
+    <div class="row center">
+      <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
+    </div>
+  </form>
+</div>
