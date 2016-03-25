@@ -1,24 +1,25 @@
-const User = require('../models/user');
+const Eps = require('../models/eps');
 
 exports.create = function(req, res) {
-  User.create({
+  Eps.create({
+    nit: ,
+    epsName: ,
+    email: ,
+    epsPhone: ,
+    address: ,
+    rol: {'name': 'eps', 'photo': null, 'ok': false},
+    accept: false,
+    password: ,
     documentType: ,
     documentNumber: ,
     names: ,
     lastnames: ,
     gender: ,
-    birthdate: ,
-    email: ,
     phone: ,
-    address: ,
-    epsRelated: ,
-    roles: ,
-    password: ,
-    accept: false
   }, function(data) {
     if (!Object.keys(data.value).length <= 2) {
       res.status(500);
-      return new Error("User not defined");
+      return new Error("Eps not defined");
     }
     console.log(data.value);
     res.json(data.value);

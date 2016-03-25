@@ -1,7 +1,7 @@
-const User = require('../models/user');
+const Root = require('../models/root');
 
 exports.create = function(req, res) {
-  User.create({
+  Root.create({
     documentType: ,
     documentNumber: ,
     names: ,
@@ -11,14 +11,12 @@ exports.create = function(req, res) {
     email: ,
     phone: ,
     address: ,
-    epsRelated: ,
-    roles: ,
-    password: ,
-    accept: false
+    rol: {'name': 'root', 'photo': null, 'ok': true},
+    password:
   }, function(data) {
     if (!Object.keys(data.value).length <= 2) {
       res.status(500);
-      return new Error("User not defined");
+      return new Error("Eps not defined");
     }
     console.log(data.value);
     res.json(data.value);

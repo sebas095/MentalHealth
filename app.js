@@ -7,13 +7,20 @@ const express = require('express'),
       partials = require('express-partials'),
       colors = require('colors'),
       session = require('express-session'),
-      methodOverride = require('method-override');
+      methodOverride = require('method-override'),
+      resourceful = require('resourceful');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+resourceful.use('couchdb', {
+  host: 'localhost',
+  port: '5984',
+  database: 'mentalHealth'
+});
 
 app.use(partials());
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
