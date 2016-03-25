@@ -1,5 +1,9 @@
-var express = require('express');
+const express = require('express');
 var router = express.Router();
+
+const userController = require('../controllers/users');
+const rootController = require('../controllers/root');
+const epsController = require('../controllers/eps');
 
 module.exports = function(app, mountPoint) {
   // GET
@@ -38,10 +42,11 @@ module.exports = function(app, mountPoint) {
   });
 
   // POST
-  router.post('/create', function(req, res) {
-    console.log(req.body);
-    res.redirect('/');
-  });
+  router.post('/create/root', rootController.create);
+
+  router.post('/create/eps', epsController.create);
+
+  router.post('/create/user', userController.create);
 
   router.post('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');

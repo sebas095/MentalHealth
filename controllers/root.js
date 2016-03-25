@@ -1,24 +1,25 @@
 const Root = require('../models/root');
+const uuid = require('uuid');
 
 exports.create = function(req, res) {
   Root.create({
-    documentType: ,
-    documentNumber: ,
-    names: ,
-    lastnames: ,
-    gender: ,
-    birthdate: ,
-    email: ,
-    phone: ,
-    address: ,
+    id: uuid.v4(),
+    documentType: req.body.typeDocument,
+    documentNumber: req.body.numDocument,
+    names: req.body.names,
+    lastnames: req.body.lastnames,
+    gender: req.body.gender,
+    birthdate: req.body.birthdate,
+    email: req.body.mail,
+    phone: req.body.phone,
+    address: req.body.address,
     rol: {'name': 'root', 'photo': null, 'ok': true},
-    password:
-  }, function(data) {
-    if (!Object.keys(data.value).length <= 2) {
-      res.status(500);
-      return new Error("Root not defined");
+    password: req.body.pwd
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
     }
-    console.log(data.value);
-    res.json(data.value);
+    res.redirect('/');
   });
 }

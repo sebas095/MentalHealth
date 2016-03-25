@@ -8,7 +8,8 @@ const express = require('express'),
       colors = require('colors'),
       session = require('express-session'),
       methodOverride = require('method-override'),
-      resourceful = require('resourceful');
+      resourceful = require('resourceful'),
+      flash = require('connect-flash');
 
 var app = express();
 
@@ -19,7 +20,7 @@ app.set('view engine', 'ejs');
 resourceful.use('couchdb', {
   host: 'localhost',
   port: '5984',
-  database: 'mentalHealth'
+  database: 'mental_health'
 });
 
 app.use(partials());
@@ -29,6 +30,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: '094cslkvepcq61tg',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(flash());
 
 require('./routes')(app);
 require('./routes/session')(app, '/');

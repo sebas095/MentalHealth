@@ -1,12 +1,13 @@
 const resourceful = require('resourceful');
 
-exports.Eps = resourceful.define('eps', function() {
+ var Eps = resourceful.define('eps', function() {
+  this.string('id');
   this.string('nit');
   this.string('epsName');
   this.string('email');
   this.string('epsPhone');
   this.string('address');
-  this.json('rol');
+  this.object('rol');
   this.bool('accept');
   this.string('password');
 
@@ -20,3 +21,5 @@ exports.Eps = resourceful.define('eps', function() {
 
   this.timestamps(); //Time marks
 });
+
+module.exports = Eps;

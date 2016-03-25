@@ -1,6 +1,7 @@
 const resourceful = require('resourceful');
 
-exports.Root = resourceful.define('root', function() {
+var Root = resourceful.define('root', function() {
+  this.string('id');
   this.string('documentType');
   this.string('documentNumber');
   this.string('names');
@@ -10,8 +11,10 @@ exports.Root = resourceful.define('root', function() {
   this.string('email');
   this.string('phone');
   this.string('address');
-  this.json('rol');
+  this.object('rol');
   this.string('password');
 
   this.timestamps(); //Time marks
 });
+
+module.exports = Root;

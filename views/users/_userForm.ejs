@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col l6">
     <label >Tipo de Documento </label>
-    <select required="" aria-required="true">
+    <select name="typeDocument" required="" aria-required="true">
       <option value="cedula-de-ciudadania">Cédula de Ciudadanía</option>
       <option value="cedula-de-extranjeria">Cédula de Extranjería</option>
       <option value="pasaporte">Pasaporte</option>
@@ -19,11 +19,11 @@
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <input type="text" name="names" id="nombre" required="" aria-required="true">
+    <input type="text" name="names" id="nombre" pattern="[a-zA-Z ]+" required="" aria-required="true">
     <label for="nombre">Nombres </label>
   </div>
   <div class="input-field col l6">
-    <input type="text" name="lastnames" id="apellidos" required="" aria-required="true">
+    <input type="text" name="lastnames" id="apellidos" pattern="[a-zA-Z ]+" required="" aria-required="true">
     <label for="apellidos">Apellidos </label>
   </div>
 </div>
@@ -37,16 +37,17 @@
   </div>
   <div class="col l6">
     <label for="nacimiento">Fecha de Nacimiento </label>
-    <input type="date" name="birthday" required="" aria-required="true"><br><br>
+    <input type="date" name="birthdate" required="" aria-required="true"><br><br>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <input type="text" name="mail" id="correo" required="" aria-required="true">
+    <input type="text" name="mail" id="correo"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="" aria-required="true">
     <label for="correo">Correo </label>
   </div>
   <div class="input-field col l6">
-    <input type="text" name="phone" id="telefono" required="" aria-required="true">
+    <input type="text" name="phone" id="telefono" pattern="[0-9]+" required="" aria-required="true">
     <label for="telefono">Telefono </label>
   </div>
 </div>
@@ -56,7 +57,7 @@
     <label for="direccion">Dirección </label>
   </div>
   <div class="input-field col l6">
-    <input type="text" name="epsRelated" id="eps-asociada" required="" aria-required="true">
+    <input type="text" name="epsRelated" id="eps-asociada" pattern="[a-zA-Z ]+" required="" aria-required="true">
     <label for="eps-asociada">EPS Asociada </label>
   </div>
 </div>

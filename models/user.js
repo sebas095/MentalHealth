@@ -1,6 +1,7 @@
 const resourceful = require('resourceful');
 
 var User = resourceful.define('user', function() {
+  this.string('id');
   this.string('documentType');
   this.string('documentNumber');
   this.string('names');
@@ -17,9 +18,5 @@ var User = resourceful.define('user', function() {
 
   this.timestamps(); //Time marks
 });
-
-User.prototype.addRol = function(rol) {
-  this.roles.push(rol);
-};
 
 module.exports = User;
