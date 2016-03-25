@@ -6,6 +6,12 @@
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/css/materialize.min.css" rel="stylesheet" media="screen,projection">
     <link href="/css/style.css" rel="stylesheet" media="screen,projection">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/materialize.min.js"></script>
+    <script src="/js/select.js"></script>
+    <script src="/js/register.js"></script>
+    <script src="/js/checkUserFormRegister.js"></script>
+    <script src="/js/comparePassword.js"></script>
   </head>
   <body>
     <nav>
@@ -14,21 +20,13 @@
       <a href="/users/new">Registrarse</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="/login">Iniciar Sesión</a>
     </nav>
-    <div class="container">
-      <div class="row">
-        <div class="nav-left col l3">
-          <h1>Aqui ira el menu</h1>
-        </div>
-        <div class="col l9">
-          <%- body %>
-        </div>
+    <div class="row">
+      <div class="nav-left col l2">
+        <h1>Aqui ira el menu</h1>
       </div>
-
+      <div class="col l9">
+        <%- body %>
+      </div>
     </div>
-
-    <script src="/js/jquery.js"></script>
-    <script src="/js/materialize.min.js"></script>
-    <script src="/js/select.js"></script>
-    <script src="/js/register.js"></script>
   </body>
 </html>

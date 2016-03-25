@@ -13,7 +13,7 @@
   </div>
 </div>
 <div id="epsForm">
-  <form action="/users/create" method="post">
+  <form action="/users/create" class="epsValidate" method="post" onsubmit="return compare(this);" autocomplete="off" novalidate>
     <% include _epsForm.ejs %>
     <div class="row center">
       <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
@@ -21,7 +21,7 @@
   </form>
 </div>
 <div id="userForm">
-  <form action="/users/create" method="post">
+  <form action="/users/create" class="userValidate" method="post" onsubmit="return checkForm(this);" autocomplete="off" novalidate>
     <% include _userForm.ejs %>
     <div class="row center">
       <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">

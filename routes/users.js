@@ -39,6 +39,7 @@ module.exports = function(app, mountPoint) {
 
   // POST
   router.post('/create', function(req, res) {
+    console.log(req.body);
     res.redirect('/');
   });
 
