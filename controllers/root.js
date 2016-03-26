@@ -24,3 +24,7 @@ exports.create = function(req, res) {
     res.redirect('/');
   });
 }
+
+exports.allowEps = function(req, res) {
+  
+}

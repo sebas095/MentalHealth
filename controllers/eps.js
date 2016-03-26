@@ -26,3 +26,7 @@ exports.create = function(req, res) {
     res.redirect('/');
   });
 }
+
+exports.allowUsers = function(req, res) {
+  
+}

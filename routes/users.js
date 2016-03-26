@@ -34,11 +34,7 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
 
-  router.get('/:id/:rol(\\eps|root)/allow', function(req, res) {
-    var rol = req.params.rol;
-    if (rol == 'eps')  res.render('admin/allowEps');
-    if (rol == 'root') res.render('admin/allowUsers');
-  });
+  router.get('/:id/:rol(\\eps|root)/allow', sessionController.loginRequired, userController.allow);
 
   router.get('/:id/recovery', function(req, res) {
     res.render('users/recovery');
@@ -51,14 +47,15 @@ module.exports = function(app, mountPoint) {
 
   router.post('/create/user', userController.create);
 
+  router.post('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.allowUser);
+
   router.post('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });
 
-  router.post('/:id/:rol(\\eps|root)/allow', function(req, res) {
-    res.render('index');
-  });
+  router.post('/:id/:rol(\\eps)/allow', sessionController.loginRequired, epsController.allowUsers);
 
+  router.post('/:id/:rol(\\root)/allow', sessionController.loginRequired, rootController.allowEps);
 
   router.post('/:id/recovery', function(req, res) {
     res.render('index');

@@ -1,31 +1,31 @@
-<form action="#" method="post">
+<form action="#" method="post" onsubmit="return allowEps(this);">
   <div class="row center">
     <label><h3>EPS</h3></label>
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <label for="nit">NIT </label>
-      <input type="text" name="nit" id="nit">
+      <label>NIT </label>
+      <input type="text" name="nit" disabled value="<%= allowUser.documentNumber %>">
     </div>
     <div class="input-field col l6">
-      <label for="nombre">Nombre o Razón Social </label>
-      <input type="text" name="nombre" id="nombre">
+      <label>Nombre o Razón Social </label>
+      <input type="text" name="nombre" disabled value="<%= allowUser.names %>">
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <label for="correo">Correo </label>
-      <input type="text" name="correo" id="correo">
+      <label>Correo </label>
+      <input type="text" name="correo" disabled value="<%= allowUser.email %>">
     </div>
     <div class="input-field col l6">
-      <label for="telefono">Teléfono </label>
-      <input type="text" name="telefono" id="telefono">
+      <label>Teléfono </label>
+      <input type="text" name="telefono" disabled value="<%= allowUser.epsPhone %>">
     </div>
   </div>
   <div class="row">
     <div class="input-field col l12">
-      <label for="direccion">Dirreción </label>
-      <input type="text" name="direccion" id="direccion">
+      <label>Dirreción </label>
+      <input type="text" name="direccion" disabled value="<%= allowUser.address %>">
     </div>
   </div>
   <div class="row">
@@ -33,54 +33,52 @@
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <select>
-        <option value="" disabled selected>Tipo de Documento</option>
-        <option value="cedula-de-ciudadania">Cedula de Ciudadanía</option>
-        <option value="cedula-de-extranjeria">Cédula de Extranjería</option>
-        <option value="pasaporte">Pasaporte</option>
-        <option value="id">Id</option>
-      </select>
+      <label>Tipo de Documento</label>
+      <% var dt = (allowUser.documentType).split('-') %>
+      <% for (var i in dt) { %>
+        <% dt[i] = (dt[i][0]).toUpperCase() + dt[i].slice(1) %>
+      <% } %>
+      <% allowUser.documentType = dt.join(" ") %>
+      <input type="text" name="numDocument" disabled value="<%= allowUser.documentType %>">
     </div>
     <div class="input-field col l6">
-      <label for="numDocumento">N° de Documento </label>
-      <input type="text" name="numDocumento" id="numDocumento">
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l6">
-      <label for="nombre">Nombre </label>
-      <input type="text" name="nombre" id="nombre">
-    </div>
-    <div class="input-field col l6">
-      <label for="apellidos">Apellidos </label>
-      <input type="text" name="apellidos" id="apellidos">
+      <label>N° de Documento </label>
+      <input type="text" name="numDocumento" disabled value="<%= allowUser.documentNumberPerson %>">
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <select name="genero">
-        <option value="" disabled selected>Tipo de Documento</option>
-        <option value="masculino">Masculino</option>
-        <option value="femenino">Femenino</option>
-      </select>
+      <label>Nombre </label>
+      <input type="text" name="nombre" disabled value="<%= allowUser.namesPerson %>">
     </div>
     <div class="input-field col l6">
-      <label for="telefono">Telefono </label>
-      <input type="text" name="telefono" id="telefono">
+      <label>Apellidos </label>
+      <input type="text" name="apellidos" disabled value="<%= allowUser.lastnames %>">
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6">
+      <% allowUser.gender = (allowUser.gender[0]).toUpperCase() + allowUser.gender.slice(1) %>
+      <label>Género</label>
+      <input type="text" name="gender" disabled value="<%= allowUser.gender %>">
+    </div>
+    <div class="input-field col l6">
+      <label>Telefono </label>
+      <input type="text" name="telefono" disabled value="<%= allowUser.phone %>">
     </div>
   </div>
   <div class="row">
     <label>EPS</label>
-    <form action="#">
+    <div>
       <p>
-        <input type="checkbox" class="filled-in" name="aprobar-eps" value="aprobar-eps" id="aprobada-check">
-        <label for="aprobada-check">Aprobadas</label>
+        <input type="checkbox" class="filled-in" name="aprobarEps" value="aprobar-eps" id="aprobada-check">
+        <label for="aprobada-check">Aprobar</label>
       </p>
       <p>
-        <input type="checkbox" class="filled-in" name="reprobar-eps" value="reprobar-eps" id="reprobada-check">
-        <label for="reprobada-check">Rechazadas</label>
+        <input type="checkbox" class="filled-in" name="reprobarEps" value="reprobar-eps" id="reprobada-check">
+        <label for="reprobada-check">Rechazar</label>
       </p>
-    </form>
+    </div>
   </div>
   <div class="row center">
     <input class="btn waves-effect waves-light" type="submit" name="enviar" value="ACEPTAR">
