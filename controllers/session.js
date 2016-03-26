@@ -66,6 +66,7 @@ exports.create = function(req, res) {
             else {
               req.session.user = {id: data.id, rol: data.rol};
               req.flash('message', 'Bienvenido a MentalHealth');
+              console.log('LOL: ', req.session.user);
               res.redirect('/');
             }
           });
