@@ -36,6 +36,15 @@ li a:hover {
   color: white;
 }
 
+li.logout:hover {
+  background-color: #555;
+  color: white;
+}
+
+li.logout:hover input {
+  color: white;
+}
+
 input.link {
   font-family: "Verdana" sans-serif;
   font-size: 1em;
