@@ -4,6 +4,10 @@ function allowUsers(form) {
       alert('Por favor seleccione la opción aprobar o rechazar');
       return false;
     }
+    if (form.aprobarpaciente.checked && form.reprobarpaciente.checked) {
+      alert('Por favor solo seleccione en cada rol la opción de aprobar o rechazar, no selecciones ambas');
+      return false;
+    }
   }
 
   if (form.aprobarmedicoGeneral) {
@@ -11,11 +15,19 @@ function allowUsers(form) {
       alert('Por favor seleccione la opción aprobar o rechazar');
       return false;
     }
+    if (form.aprobarmedicoGeneral.checked && form.reprobarmedicoGeneral.checked) {
+      alert('Por favor solo seleccione en cada rol la opción de aprobar o rechazar, no selecciones ambas');
+      return false;
+    }
   }
 
   if (form.aprobarmedicoEspecialista) {
     if (!form.aprobarmedicoEspecialista.checked && !form.rechazarmedicoEspecialista.checked) {
       alert('Por favor seleccione la opción aprobar o rechazar');
+      return false;
+    }
+    if (form.aprobarmedicoEspecialista.checked && form.reprobarmedicoEspecialista.checked) {
+      alert('Por favor solo seleccione en cada rol la opción de aprobar o rechazar, no selecciones ambas');
       return false;
     }
   }
