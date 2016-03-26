@@ -35,3 +35,15 @@ li a:hover {
     background-color: #555;
     color: white;
 }
+
+input.link {
+			font-family: "Verdana" sans-serif;
+			font-size: 1em;
+			text-align: center;
+			color: black;
+			background: none;
+			margin: 10px;
+			padding: 0;
+			border: none;
+			cursor: pointer;
+}

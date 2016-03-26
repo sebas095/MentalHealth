@@ -41,7 +41,7 @@
           <% } else { %>
             <li><a href="/users/<%= session.user.id %>">Home</a></li>
             <form action="/logout?_method=delete" method="post">
-              <input type="submit" value="Cerrar Sesión">
+              <input type="button" class="link" value="Cerrar Sesión">
             </form>
           <% } %>
         </ul>
