@@ -29,10 +29,9 @@ exports.create = function(req, res) {
       return;
     }
     if (data.length > 0) {
-      req.flash('message', 'Bienvenido a MentalHealth');
       req.session.user = {id: data.id, rol: data.rol};
+      req.flash('message', 'Bienvenido a MentalHealth');
       res.redirect('/');
-      return;
     }
     else {
       Eps.find({
@@ -45,10 +44,9 @@ exports.create = function(req, res) {
           return;
         }
         if (data.length > 0) {
-          req.flash('message', 'Bienvenido a MentalHealth');
           req.session.user = {id: data.id, rol: data.rol};
+          req.flash('message', 'Bienvenido a MentalHealth');
           res.redirect('/');
-          return;
         }
         else {
           Root.find({
@@ -61,16 +59,14 @@ exports.create = function(req, res) {
               return;
             }
             if (data.length == 0) {
-              req.flash('message', 'Datos incorrectos!');
               req.session.errors = [{"message": 'Los datos son incorrectos'}];
+              req.flash('message', 'Datos incorrectos!');
               res.redirect('/login');
-              return;
             }
             else {
-              req.flash('message', 'Bienvenido a MentalHealth');
               req.session.user = {id: data.id, rol: data.rol};
+              req.flash('message', 'Bienvenido a MentalHealth');
               res.redirect('/');
-              return;
             }
           });
         }
@@ -82,5 +78,5 @@ exports.create = function(req, res) {
 // DELETE /logout  -- Destruir sesion
 exports.destroy = function(req, res){
 	delete req.session.user;
-	res.redirect('/');
+	res.redirect((req.session.redir).toString());
 };

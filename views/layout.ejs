@@ -18,8 +18,14 @@
     <nav>
       &nbsp;&nbsp;
       <a href="/">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="/users/new">Registrarse</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="/login">Iniciar Sesión</a>
+      <% if (!session.user) { %>
+        <a href="/users/new">Registrarse</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/login">Iniciar Sesión</a>
+      <% } else { %>
+        <form action="/logout?_method=delete" method="post">
+          <input type="submit" value="Cerrar Sesión">
+        </form>
+      <% } %>
     </nav>
     <div class="row">
       <div class="nav-left col l2">

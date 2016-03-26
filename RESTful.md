@@ -27,4 +27,4 @@
 | /users/:id/recovery | POST | Cambia la contraseña de un usuario | |
 | /login                  | GET | muestra el fomulario para iniciar sesión | |
 | /login                  | POST | iniciar sesión | <ul> <li> username (cédula) </li> <li> password </li> </ul> |
-| /logout                 | GET | cierra la sesión | |
+| /logout                 | DELETE | cierra la sesión | |

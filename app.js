@@ -17,12 +17,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-resourceful.use('couchdb', {
-  host: 'localhost',
-  port: '5984',
-  database: 'mental_health'
-});
-
 app.use(partials());
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -35,11 +29,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+app.use(methodOverride('_method'));
 app.use(flash());
-
-require('./routes')(app);
-require('./routes/session')(app, '/');
-require('./routes/users')(app, '/users');
 
 // Helpers dinamicos:
 app.use(function(req, res, next){
@@ -52,6 +43,10 @@ app.use(function(req, res, next){
   res.locals.session = req.session;
   next();
 });
+
+require('./routes')(app);
+require('./routes/session')(app, '/');
+require('./routes/users')(app, '/users');
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -84,6 +79,13 @@ app.use(function(err, req, res, next) {
         error: {},
         errors: []
     });
+});
+
+// COnfigurando la Base de Datos
+resourceful.use('couchdb', {
+  host: 'localhost',
+  port: '5984',
+  database: 'mental_health'
 });
 
 module.exports = app;

@@ -13,6 +13,7 @@ var Root = resourceful.define('root', function() {
   this.string('address');
   this.object('rol');
   this.string('password');
+  this.bool('accept');
 
   this.timestamps(); //Time marks
 });
