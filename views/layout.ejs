@@ -32,9 +32,6 @@
       <% } %>
     </nav>-->
     <div class="row">
-      <div class="col center l12">
-        <h4>MENTALHEALTH</h4><hr>
-      </div>
       <div class="nav-left col l2">
         <ul>
           <% if (!session.user) { %>
@@ -52,6 +49,9 @@
         </ul>
       </div>
       <div class="content col l10 offset-l2">
+        <div class="row center">
+          <h4>MENTALHEALTH</h4><hr>
+        </div>
         <%- body %>
         <% if (session.user && !Array.isArray(session.user.rol)) {%>
           <div class="center" id="pending">
