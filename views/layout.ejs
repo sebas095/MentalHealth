@@ -6,17 +6,9 @@
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/css/materialize.min.css" rel="stylesheet" media="screen,projection">
     <link href="/css/style.css" rel="stylesheet" media="screen,projection">
-    <script src="/js/jquery.js"></script>
-    <script src="/js/materialize.min.js"></script>
-    <script src="/js/select.js"></script>
-    <script src="/js/register.js"></script>
-    <script src="/js/checkUserFormRegister.js"></script>
-    <script src="/js/comparePassword.js"></script>
-    <script src="/js/checkDeleteAccount.js"></script>
-    <script src="/js/pending.js"></script>
   </head>
   <body>
-    <nav>
+    <!--<nav>
       &nbsp;&nbsp;
       <% if (!session.user) { %>
         <a href="/">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -28,12 +20,23 @@
           <input type="submit" value="Cerrar Sesión">
         </form>
       <% } %>
-    </nav>
+    </nav>-->
     <div class="row">
       <div class="nav-left col l2">
-        <h1>Aqui ira el menu</h1>
+        <ul>
+          <% if (!session.user) { %>
+            <li><a href="/">Home</a></li>
+            <li><a href="/users/new">Registrarse</a></li>
+            <li><a href="/login">Iniciar Sesión</a></li>
+          <% } else { %>
+            <li><a href="/users/<%= session.user.id %>">Home</a></li>
+            <form action="/logout?_method=delete" method="post">
+              <input type="submit" value="Cerrar Sesión">
+            </form>
+          <% } %>
+        </ul>
       </div>
-      <div class="col l9">
+      <div class="col l10">
         <%- body %>
         <% if (session.user && !Array.isArray(session.user.rol)) {%>
           <div class="center" id="pending">
@@ -45,5 +48,14 @@
         <% } %>
       </div>
     </div>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/materialize.min.js"></script>
+    <script src="/js/select.js"></script>
+    <script src="/js/register.js"></script>
+    <script src="/js/checkUserFormRegister.js"></script>
+    <script src="/js/comparePassword.js"></script>
+    <script src="/js/checkDeleteAccount.js"></script>
+    <script src="/js/pending.js"></script>
   </body>
 </html>
