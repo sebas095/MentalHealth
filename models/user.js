@@ -12,7 +12,7 @@ var User = resourceful.define('user', function() {
   this.string('phone');
   this.string('address');
   this.string('epsRelated');
-  this.array('roles');
+  this.array('rol');
   this.string('password');
   this.bool('accept');
 

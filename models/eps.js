@@ -2,8 +2,8 @@ const resourceful = require('resourceful');
 
  var Eps = resourceful.define('eps', function() {
   this.string('id');
-  this.string('nit');
-  this.string('epsName');
+  this.string('documentNumber');
+  this.string('names');
   this.string('email');
   this.string('epsPhone');
   this.string('address');
@@ -13,8 +13,8 @@ const resourceful = require('resourceful');
 
   // Persona Encargada de la EPS
   this.string('documentType');
-  this.string('documentNumber');
-  this.string('names');
+  this.string('documentNumberPerson');
+  this.string('namesPerson');
   this.string('lastnames');
   this.string('gender');
   this.string('phone');

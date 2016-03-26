@@ -4,8 +4,8 @@ const uuid = require('uuid');
 exports.create = function(req, res) {
   Eps.create({
     id: uuid.v4(),
-    nit: req.body.nit,
-    epsName: req.body.nameEps,
+    documentNumber: req.body.nit,
+    names: req.body.nameEps,
     email: req.body.mailEps,
     epsPhone: req.body.phoneEps,
     address: req.body.addressEps,
@@ -13,8 +13,8 @@ exports.create = function(req, res) {
     accept: false,
     password: req.body.pwd,
     documentType: req.body.typeDocument,
-    documentNumber: req.body.numDocument,
-    names: req.body.names,
+    documentNumberPerson: req.body.numDocument,
+    namesPerson: req.body.names,
     lastnames: req.body.lastnames,
     gender: req.body.gender,
     phone: req.body.phone,

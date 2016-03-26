@@ -4,6 +4,7 @@
 | url                     | método   | descripción                | parámetros |
 | ----------------------- | -------- | -------------------------- | ------------- |
 | /                       | GET      | Muestra el HOME de la app  |               |
+| /users/:id              | GET      | retorna el perfil de un usuario | <ul><li>Por definir</li></ul> |
 | /users/:id/:rol         | GET      | retorna el perfil de un usuario en el rol seleccionado | <ul><li>Por definir</li></ul> |
 | /users/:id/:rol/edit    | GET      | muestra el formulario para modificar la foto del rol de un usuario | <ul><li>Por definir</li></ul> |
 | /users/:id/:rol/edit    | PUT      | modifica la foto del rol de un usuario | <ul><li>Por definir</li></ul> |

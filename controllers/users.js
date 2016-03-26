@@ -37,7 +37,7 @@ exports.create = function(req, res) {
     phone: req.body.phone,
     address: req.body.address,
     epsRelated: req.body.epsRelated,
-    roles: roles,
+    rol: roles,
     password: req.body.pwd,
     accept: false
   }, function(err, data) {

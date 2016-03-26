@@ -42,7 +42,7 @@ require('./routes/session')(app, '/');
 require('./routes/users')(app, '/users');
 
 // Helpers dinamicos:
-/* app.use(function(req, res, next){
+app.use(function(req, res, next){
   // guardar path en session.redir para despues de login
   if(!req.path.match(/\/login|\/logout/)){
     req.session.redir = req.path;
@@ -51,8 +51,7 @@ require('./routes/users')(app, '/users');
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
   next();
-
-});*/
+});
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

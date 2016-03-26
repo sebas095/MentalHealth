@@ -1,18 +1,12 @@
-var express = require('express');
+const express = require('express');
 var router = express.Router();
 
+const sessionController = require('../controllers/session');
+
 module.exports = function(app, mountPoint) {
-  router.get('/login', function(req, res) {
-    res.render('session/new');
-  });
-
-  router.get('/logout', function(req, res) {
-    res.send('Adios');
-  });
-
-  router.post('/login', function(req, res) {
-    res.send('Datos enviados');
-  });
+  router.get('/login', sessionController.new);
+  router.get('/logout', sessionController.destroy);
+  router.post('/login', sessionController.create);
 
   app.use(mountPoint, router);
 }
