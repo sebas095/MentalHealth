@@ -1,11 +1,3 @@
 <div class="center">
   <h1>MENTAL HEALTH</h1>
 </div>
-<% if (session.user && !Array.isArray(user.rol)) {%>
-  <div class="center" id="pending">
-    <br><br>
-      <label>MENÚ</label>
-    <br><br>
-    <a href="/users/<%= user.id %>/<%= user.rol %>/pending" class="btn">Aprobación de Cuentas</a><br>
-  </div>
-<% } %>

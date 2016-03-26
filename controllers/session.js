@@ -64,9 +64,8 @@ exports.create = function(req, res) {
               res.redirect('/login');
             }
             else {
-              req.session.user = {id: data.id, rol: data.rol};
+              req.session.user = data[0];
               req.flash('message', 'Bienvenido a MentalHealth');
-              console.log('LOL: ', req.session.user);
               res.redirect('/');
             }
           });
@@ -79,5 +78,5 @@ exports.create = function(req, res) {
 // DELETE /logout  -- Destruir sesion
 exports.destroy = function(req, res){
 	delete req.session.user;
-	res.redirect((req.session.redir).toString());
+	res.redirect('/');
 };

@@ -5,11 +5,12 @@
   <div class="row">
     <div class="input-field col l6 col s12">
       <label for="user">Usuario </label>
-      <input type="text" name="user" required="" aria-required="true">
+      <input type="text" name="user" autocomplete="on" required="" aria-required="true">
     </div>
     <div class="input-field col l6 col s12">
       <label for="pwd">Contraseña </label>
-      <input type="password" name="pwd" required="" aria-required="true">
+      <input type="password" name="pwd"
+        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
       <a href="#">¿Has olvidado tu contraseña?</a><br><br>
     </div>
   </div>
