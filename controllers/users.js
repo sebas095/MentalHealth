@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Eps = require('../models/eps');
 const uuid = require('uuid');
 
 exports.create = function(req, res) {
@@ -47,4 +48,35 @@ exports.create = function(req, res) {
     }
     res.redirect('/');
   });
+}
+
+exports.pending = function(req, res) {
+  if (req.params.rol == 'root') {
+    Eps.find({accept: false}, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+      if (data.length == 0) {
+        res.render('admin/pending', {allUsers: []});
+      }
+      else {
+        res.render('admin/pending',{allUsers: data});
+      }
+    });
+  }
+  else {
+    User.find({accept: false}, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+      if (data.length == 0) {
+        res.render('admin/pending', {allUsers: []});
+      }
+      else {
+        res.render('admin/pending',{allUsers: data});
+      }
+    });
+  }
 }

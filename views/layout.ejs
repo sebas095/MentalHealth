@@ -18,11 +18,12 @@
   <body>
     <nav>
       &nbsp;&nbsp;
-      <a href="/">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <% if (!session.user) { %>
+        <a href="/">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="/users/new">Registrarse</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="/login">Iniciar Sesión</a>
       <% } else { %>
+        <a href="/users/<%= session.user.id %>">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <form action="/logout?_method=delete" method="post">
           <input type="submit" value="Cerrar Sesión">
         </form>

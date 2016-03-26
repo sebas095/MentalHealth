@@ -31,7 +31,7 @@ exports.create = function(req, res) {
     if (data.length > 0) {
       req.session.user = data[0];
       req.flash('message', 'Bienvenido a MentalHealth');
-      res.redirect('/');
+      res.redirect('/users/' + req.session.user.id);
     }
     else {
       Eps.find({
@@ -46,7 +46,7 @@ exports.create = function(req, res) {
         if (data.length > 0) {
           req.session.user = data[0];
           req.flash('message', 'Bienvenido a MentalHealth');
-          res.redirect('/');
+          res.redirect('/users/' + req.session.user.id);
         }
         else {
           Root.find({
@@ -66,7 +66,7 @@ exports.create = function(req, res) {
             else {
               req.session.user = data[0];
               req.flash('message', 'Bienvenido a MentalHealth');
-              res.redirect('/');
+              res.redirect('/users/' + req.session.user.id);
             }
           });
         }

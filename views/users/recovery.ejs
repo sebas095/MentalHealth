@@ -1,0 +1,20 @@
+<form action="#" method="post" onsubmit="return compare(this);">
+  <div class="row center">
+    <h2>Cambio de Contraseña</h2>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col s12">
+      <label for="npwd">Nueva Contraseña </label>
+      <input type="password" name="pwd"
+        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
+    </div>
+    <div class="input-field col l6 col s12">
+      <label for="cnpwd">Confirmar Contraseña </label>
+      <input type="password" name="cpwd"
+        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
+    </div>
+  </div>
+  <div class="row center">
+    <input class="btn waves-effect waves-light" type="submit" name="login" value="Guardar">
+  </div>
+</form>

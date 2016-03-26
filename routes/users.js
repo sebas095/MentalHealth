@@ -4,11 +4,16 @@ var router = express.Router();
 const userController = require('../controllers/users');
 const rootController = require('../controllers/root');
 const epsController = require('../controllers/eps');
+const sessionController = require('../controllers/session');
 
 module.exports = function(app, mountPoint) {
   // GET
   router.get('/new', function(req, res) {
     res.render('users/new');
+  });
+
+  router.get('/:id', sessionController.loginRequired, function(req, res) {
+    res.render('index');
   });
 
   router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))', function(req, res) {
@@ -27,9 +32,7 @@ module.exports = function(app, mountPoint) {
     res.render('index');
   });
 
-  router.get('/:id/:rol(\\eps|root)/pending', function(req, res) {
-    res.render('admin/pending');
-  });
+  router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
 
   router.get('/:id/:rol(\\eps|root)/allow', function(req, res) {
     var rol = req.params.rol;
@@ -38,7 +41,7 @@ module.exports = function(app, mountPoint) {
   });
 
   router.get('/:id/recovery', function(req, res) {
-    res.render('index');
+    res.render('users/recovery');
   });
 
   // POST
