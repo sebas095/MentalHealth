@@ -32,6 +32,9 @@
       <% } %>
     </nav>-->
     <div class="row">
+      <div class="col center l12">
+        <h4>MENTALHEALTH</h4><hr>
+      </div>
       <div class="nav-left col l2">
         <ul>
           <% if (!session.user) { %>
@@ -40,9 +43,11 @@
             <li><a href="/login">Iniciar Sesión</a></li>
           <% } else { %>
             <li><a href="/users/<%= session.user.id %>">Home</a></li>
-            <form action="/logout?_method=delete" method="post">
-              <input type="submit" value="Cerrar Sesión">
-            </form>
+            <li class="logout">
+              <form action="/logout?_method=delete" method="post">
+                <input type="button" class="link" value="Cerrar Sesión">
+              </form>
+            </li>
           <% } %>
         </ul>
       </div>
