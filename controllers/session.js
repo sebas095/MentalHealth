@@ -29,7 +29,7 @@ exports.create = function(req, res) {
       return;
     }
     if (data.length > 0) {
-      req.session.user = {id: data.id, rol: data.rol};
+      req.session.user = data[0];
       req.flash('message', 'Bienvenido a MentalHealth');
       res.redirect('/');
     }
@@ -44,7 +44,7 @@ exports.create = function(req, res) {
           return;
         }
         if (data.length > 0) {
-          req.session.user = {id: data.id, rol: data.rol};
+          req.session.user = data[0];
           req.flash('message', 'Bienvenido a MentalHealth');
           res.redirect('/');
         }
