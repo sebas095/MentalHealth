@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Eps = require('../models/eps');
+const Root = require('../models/root');
 const uuid = require('uuid');
 
 exports.create = function(req, res) {
@@ -79,6 +80,19 @@ exports.pending = function(req, res) {
       }
     });
   }
+}
+
+exports.new = function(req, res) {
+  Root.find({accept: true}, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    if (data.length == 0) {
+      res.render('users/new', {hasRoot: false});
+    }
+    else res.render('users/new', {hasRoot: true});
+  });
 }
 
 exports.allowUser = function(req, res) {

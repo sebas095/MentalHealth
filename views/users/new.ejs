@@ -2,11 +2,13 @@
   <div class="row center">
     <label><h2>Registro</h2></label>
   </div>
-  <div class="row center">
-    <button class="waves-effect waves-light btn" type="button" name="button" id="root">
-      ROOT DEL SISTEMA
-    </button>
-  </div>
+  <% if (hasRoot == false) {%>
+    <div class="row center">
+      <button class="waves-effect waves-light btn" type="button" name="button" id="root">
+        ROOT DEL SISTEMA
+      </button>
+    </div>
+  <% } %>
   <div class="row center">
     <button class="waves-effect waves-light btn" type="button" name="button" id="users">
       PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS

@@ -52,17 +52,18 @@ li.logout:hover {
 }
 
 li.logout:hover input {
+  background-color: #64b5f6;
   color: white;
 }
 
 input.link {
   font-family: "Verdana" sans-serif;
-  font-size: 1em;
+  font-size: 1rem;
   text-align: center;
-  color: black;
-  background: none;
+  color: white;
+  background-color: #2196f3;
   margin: 10px;
-  padding: 0;
+  padding: 10px 0;
   border: none;
   cursor: pointer;
 }

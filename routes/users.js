@@ -8,9 +8,7 @@ const sessionController = require('../controllers/session');
 
 module.exports = function(app, mountPoint) {
   // GET
-  router.get('/new', function(req, res) {
-    res.render('users/new');
-  });
+  router.get('/new', userController.new);
 
   router.get('/:id', sessionController.loginRequired, function(req, res) {
     res.render('index');
