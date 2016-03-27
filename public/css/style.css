@@ -51,7 +51,7 @@ li.logout:hover {
   color: white;
 }
 
-li.logout:hover input {
+li.logout:hover form div input {
   background-color: #64b5f6;
   color: white;
 }
@@ -66,4 +66,8 @@ input.link {
   padding: 10px 0;
   border: none;
   cursor: pointer;
+}
+
+.menuUser {
+  background: #A1C3EB;
 }
