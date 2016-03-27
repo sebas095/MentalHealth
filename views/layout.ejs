@@ -13,7 +13,9 @@
     <header>
       <nav class="top-nav">
         <div class="container">
-          <div class="nav-wrapper center"><a class="page-title">MENTALHEALTH</a></div>
+          <div class="nav-wrapper center">
+            <a class="page-title">&nbsp;&nbsp;&nbsp;&nbsp;MENTALHEALTH</a>
+            </div>
         </div>
       </nav>
 
@@ -25,7 +27,7 @@
           <li class="bold"><a href="/login" class="waves-effect waves-teal">Iniciar Sesión</a></li>
         <% } else { %>
           <li class="bold"><a href="/users/<%= session.user.id %>" class="waves-effect waves-teal">Home</a></li>
-          <hr><br><h7><b>Cambiar de Rol: </b></h7><br><br>
+          <hr><br><h6><b>Cambiar de Rol: </b></h6><br><br>
           <select class="roles" name="roles">
             <% if (Array.isArray(session.user.rol)) { %>
               <% for (var rol in session.user.rol) { %>
