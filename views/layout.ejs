@@ -12,120 +12,96 @@
     <header>
       <nav class="top-nav">
         <div class="container">
-          <div class="nav-wrapper"><a class="page-title">MENTALHEALTH</a></div>
+          <div class="nav-wrapper center"><a class="page-title">MENTALHEALTH</a></div>
         </div>
       </nav>
 
       <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="mdi-navigation-menu"></i></a></div>
       <ul id="nav-mobile" class="side-nav fixed">
-
+        <% if (!session.user) { %>
           <li class="bold"><a href="/" class="waves-effect waves-teal">Home</a></li>
           <li class="bold"><a href="/users/new" class="waves-effect waves-teal">Registrarse</a></li>
           <li class="bold"><a href="/login" class="waves-effect waves-teal">Iniciar Sesión</a></li>
-
-        <li class="bold"><a href="about.html" class="waves-effect waves-teal">About</a></li>
+        <% } else { %>
+          <li class="bold"><a href="/users/<%= session.user.id %>" class="waves-effect waves-teal">Home</a></li>
+          <hr><br><h7><b>Cambiar de Rol: </b></h7><br><br>
+          <select class="roles" name="roles">
+            <% if (Array.isArray(session.user.rol)) { %>
+              <% for (var rol in session.user.rol) { %>
+                <% var user = "" %>
+                <% if (session.user.rol[rol].name.toLowerCase() == 'paciente') { %>
+                  <% user = 'Paciente' %>
+                <% } else {%>
+                  <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
+                <% } %>
+                <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>">
+                  <%= user %>
+                </option>
+              <% } %>
+            <% } else {%>
+              <option name="<%= session.user.rol.name %>" value="<%= session.user.rol.name %>">
+                <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
+                <%= name %>
+              </option>
+            <% } %>
+          </select><br><hr>
+          <li class="bold"><a href="#" class="waves-effect waves-teal">Editar Rol</a></li>
+          <li class="bold"><a href="/users/<%= session.user.id %>/edit" class="waves-effect waves-teal">Editar Perfil</a></li>
+          <li class="bold logout">
+            <form action="/logout?_method=delete" method="post">
+              <div class="center">
+                <input type="submit" class="waves-effect waves-teal" value="Cerrar Sesión">
+              </div>
+            </form>
+          </li>
+        <% } %>
       </ul>
     </header>
 
-    <!--<div class="row">
-      <div class="nav-left col l2">
-        <ul>
-          <% if (!session.user) { %>
-            <li><a href="/">Home</a></li>
-            <li><a href="/users/new">Registrarse</a></li>
-            <li><a href="/login">Iniciar Sesión</a></li> -->
-            <!--<li class="logout">
-              <form action="/logout?_method=delete" method="post">
-                <div class="center">
-                  <input type="submit" class="link" value="Cerrar Sesión">
-                </div>
-              </form>
-            </li> Si quiere modificar el estilo de logout descomente esto :D -->
-          <!--<% } else { %>
-            <li><a href="/users/<%= session.user.id %>">Home</a></li>
-            <hr><br><h7><b>Cambiar de Rol: </b></h7><br><br>
-            <select class="roles" name="roles">
-              <% if (Array.isArray(session.user.rol)) { %>
-                <% for (var rol in session.user.rol) { %>
-                  <% var user = "" %>
-                  <% if (session.user.rol[rol].name.toLowerCase() == 'paciente') { %>
-                    <% user = 'Paciente' %>
-                  <% } else {%>
-                    <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
-                  <% } %>
-                  <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>">
-                    <%= user %>
-                  </option>
-                <% } %>
-              <% } else {%>
-                <option name="<%= session.user.rol.name %>" value="<%= session.user.rol.name %>">
-                  <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
-                  <%= name %>
-                </option>
-                <input type="hidden" name="rolSelect" value="<%= name %>">
-              <% } %>
-            </select><br><hr>
-            <li><a href="#">Editar Rol</a></li>
-            <li><a href="/users/<%= session.user.id %>/edit">Editar Perfil</a></li>
-            <li class="logout">
-              <form action="/logout?_method=delete" method="post">
-                <div class="center">
-                  <input type="submit" class="link" value="Cerrar Sesión">
-                </div>
-              </form>
-            </li>
-          <% } %>
-        </ul>
-      </div>-->
-
-
-
-      <main>
-        <div class="col l10">
-          <%- body %>
-          <% if (session.user && !Array.isArray(session.user.rol)) {%>
-            <div class="col l2"><br></div>
-            <div class="col l8 center" id="pending">
-              <div class="menuUser">
-                <br><br>
-                  <p><b><h5>MENÚ</h5></b></p>
-                <br>
-                <a href="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" class="btn">Aprobación de Cuentas</a>
-                <br><br><br>
-              </div>
+    <main>
+      <div class="col l10">
+        <%- body %>
+        <% if (session.user && !Array.isArray(session.user.rol)) {%>
+          <div class="col l2"><br></div>
+          <div class="col l8 center" id="pending">
+            <div class="menuUser">
+              <br><br>
+                <p><b><h5>MENÚ</h5></b></p>
+              <br>
+              <a href="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" class="btn">Aprobación de Cuentas</a>
+              <br><br><br>
             </div>
-          <% } %>
-          <br />
-        </div>
-      </main>
+          </div>
+        <% } %>
+        <br />
+      </div>
+    </main>
 
-      <footer class="page-footer">
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Footer Content</h5>
+            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
         <div class="container">
-          <div class="row">
-            <div class="col l6 s12">
-              <h5 class="white-text">Footer Content</h5>
-              <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-              <h5 class="white-text">Links</h5>
-              <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-              </ul>
-            </div>
-          </div>
+        © 2016 Grupo Fashion. Copyright Text
+        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
-        <div class="footer-copyright">
-          <div class="container">
-          © 2016 Grupo Fashion. Copyright Text
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-          </div>
-        </div>
-      </footer>
-
-
+      </div>
+    </footer>
 
     <script src="/js/jquery.js"></script>
     <script src="/js/materialize.min.js"></script>
