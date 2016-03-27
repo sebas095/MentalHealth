@@ -6,7 +6,7 @@
       </h2></label>
     </div>
   </div>
-<form action="#" method="post" onsubmit="return comparePwd(this);">
+<form action="/users/<%= session.user.id %>/edit?_method=put" method="post" onsubmit="return comparePwd(this);">
   <% if (Array.isArray(session.user.rol)) { %>
     <% include _editUserForm.ejs %>
   <% } else { %>

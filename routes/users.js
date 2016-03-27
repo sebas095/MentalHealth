@@ -54,9 +54,7 @@ module.exports = function(app, mountPoint) {
   });
 
   // PUT
-  router.put('/:id/edit', function(req, res) {
-    //res.render();
-  });
+  router.put('/:id/edit', sessionController.loginRequired, userController.saveChanges);
 
   router.put('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', function(req, res) {
     //res.render();
