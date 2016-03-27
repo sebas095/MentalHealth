@@ -1,5 +1,7 @@
 const Root = require('../models/root');
 const Eps = require('../models/eps');
+const nodemailer = require('nodemailer');
+const Email = nodemailer.createTransport();
 const uuid = require('uuid');
 
 exports.create = function(req, res) {
@@ -28,6 +30,7 @@ exports.create = function(req, res) {
 
 exports.allowEps = function(req, res) {
   var user = undefined;
+  var userMail = undefined;
 
   Eps.find({
     documentNumber: req.body.numDocument,
@@ -39,13 +42,24 @@ exports.allowEps = function(req, res) {
     }
     else {
       user = data[0];
-      
+      userMail = user.email;
+
       if (req.body.aprobarEps) {
         Eps.update(user.id, {accept: true}, function(err, data) {
           if (err) {
             console.log('Error: ', err);
             return res.send(500, err);
           }
+
+          Email.sendMail({
+            from: req.session.user.email,
+            to: userMail,
+            subject: "Estado de Aprobación de cuenta en MENTALHEALTH",
+            text: `Estimado Usuario ${user.names},\n\nSu cuenta de MentalHealth` +
+                  ` ha sido aprobada si deseas ingresar ve a la siguiente dirección: ${req.session.url}login` +
+                  `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+          });
+
           res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
         });
       }
@@ -56,6 +70,15 @@ exports.allowEps = function(req, res) {
             console.log('Error: ', err);
             return res.send(500, err);
           }
+
+          Email.sendMail({
+            from: req.session.user.email,
+            to: userMail,
+            subject: "Estado de Aprobación de cuenta en MENTALHEALTH",
+            text: `Estimado Usuario ${user.names},\n\nSu cuenta de MentalHealth ha sido rechazada.` +
+                  `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+          });
+
           res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
         });
       }

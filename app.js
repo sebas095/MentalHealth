@@ -12,6 +12,7 @@ const express = require('express'),
       flash = require('connect-flash');
 
 var app = express();
+var urlApp = undefined;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +42,7 @@ app.use(function(req, res, next){
 
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
+  res.locals.session.url = urlApp || 'http://localhost:8080/';
   next();
 });
 
