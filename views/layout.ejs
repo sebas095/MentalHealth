@@ -24,6 +24,29 @@
             </li> Si quiere modificar el estilo de logout descomente esto :D -->
           <% } else { %>
             <li><a href="/users/<%= session.user.id %>">Home</a></li>
+            <hr><br><h7><b>Cambiar de Rol: </b></h7><br><br>
+            <select class="roles" name="roles">
+              <% if (Array.isArray(session.user.rol)) { %>
+                <% for (var rol in session.user.rol) { %>
+                  <% var user = "" %>
+                  <% if (session.user.rol[rol].name.toLowerCase() == 'paciente') { %>
+                    <% user = 'Paciente' %>
+                  <% } else {%>
+                    <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
+                  <% } %>
+                  <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>">
+                    <%= user %>
+                  </option>
+                <% } %>
+              <% } else {%>
+                <option name="<%= session.user.rol.name %>"value="<%= session.user.rol.name %>">
+                  <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
+                  <%= name %>
+                </option>
+              <% } %>
+            </select><br><hr>
+            <li><a href="#">Editar Rol</a></li>
+            <li><a href="#">Editar Perfil</a></li>
             <li class="logout">
               <form action="/logout?_method=delete" method="post">
                 <div class="center">
