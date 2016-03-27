@@ -40,14 +40,15 @@
                   </option>
                 <% } %>
               <% } else {%>
-                <option name="<%= session.user.rol.name %>"value="<%= session.user.rol.name %>">
+                <option name="<%= session.user.rol.name %>" value="<%= session.user.rol.name %>">
                   <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
                   <%= name %>
                 </option>
+                <input type="hidden" name="rolSelect" value="<%= name %>">
               <% } %>
             </select><br><hr>
             <li><a href="#">Editar Rol</a></li>
-            <li><a href="#">Editar Perfil</a></li>
+            <li><a href="/users/<%= session.user.id %>/edit">Editar Perfil</a></li>
             <li class="logout">
               <form action="/logout?_method=delete" method="post">
                 <div class="center">
@@ -115,5 +116,6 @@
     <script src="/js/pending.js"></script>
     <script src="/js/allowEps.js"></script>
     <script src="/js/allowUsers.js"></script>
+    <script src="/js/editUser.js"></script>
   </body>
 </html>

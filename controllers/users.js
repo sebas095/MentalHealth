@@ -92,6 +92,10 @@ exports.new = function(req, res) {
   });
 }
 
+exports.edit = function(req, res) {
+  res.render('users/edit');
+}
+
 exports.allowUser = function(req, res) {
   req.session.pendingUser = req.body;
   res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/allow');

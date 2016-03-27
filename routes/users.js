@@ -18,9 +18,7 @@ module.exports = function(app, mountPoint) {
     res.render('index');
   });
 
-  router.get('/:id/edit', function(req, res) {
-    res.render('users/edit');
-  });
+  router.get('/:id/edit', sessionController.loginRequired, userController.edit);
 
   router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', function(req, res) {
     res.render('users/editRol');
