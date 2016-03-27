@@ -51,10 +51,6 @@ module.exports = function(app, mountPoint) {
     res.render('index');
   });
 
-  router.post('/:id/:rol(\\eps)/allow', sessionController.loginRequired, epsController.allowUsers);
-
-  router.post('/:id/:rol(\\root)/allow', sessionController.loginRequired, rootController.allowEps);
-
   router.post('/:id/recovery', function(req, res) {
     res.render('index');
   });
@@ -67,6 +63,10 @@ module.exports = function(app, mountPoint) {
   router.put('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', function(req, res) {
     //res.render();
   });
+
+  router.put('/:id/eps/allow', sessionController.loginRequired, epsController.allowUsers);
+
+  router.put('/:id/root/allow', sessionController.loginRequired, rootController.allowEps);
 
   router.put('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');

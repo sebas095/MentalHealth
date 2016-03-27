@@ -1,7 +1,11 @@
 <div class="row center">
   <h3>Listado de Solicitudes de Cuentas Pendientes</h3>
 </div>
-<form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" method="post">
+<% if (allUsers.length == 0) {%>
+  <form action="/users/<%= session.user.id %>" method="get" onclick="alert('No hay Solicitudes por revisar')">
+<% } else {%>
+  <form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" method="post">
+<% } %>
   <div class="row">
     <div class="col l8 offset-l2 col s12">
       <select name="requests">

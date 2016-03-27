@@ -1,4 +1,4 @@
-<form action="#" method="post" onsubmit="return allowUsers(this);">
+<form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>/allow?_method=put" method="post" onsubmit="return allowUsers(this);">
   <div class="row center">
     <label><h3>PACIENTE, MÉDICO GENERAL Y ESPECIALISTA</h3></label>
   </div>
@@ -15,16 +15,19 @@
     <div class="input-field col l6">
       <label>N° de Documento </label>
       <input type="text" name="numDocumento"  disabled value="<%= allowUser.documentNumber %>">
+      <input type="hidden" name="numDocument" value="<%= allowUser.documentNumber %>">
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6">
       <label>Nombre </label>
       <input type="text" name="nombre"  disabled value="<%= allowUser.names %>">
+      <input type="hidden" name="names" value="<%= allowUser.names %>">
     </div>
     <div class="input-field col l6">
       <label>Apellidos </label>
       <input type="text" name="apellidos"  disabled value="<%= allowUser.lastnames %>">
+      <input type="hidden" name="lastnames" value="<%= allowUser.lastnames %>">
     </div>
   </div>
   <div class="row">

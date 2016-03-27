@@ -8,22 +8,19 @@ exports.create = function(req, res) {
   if (req.body.paciente) {
     roles.push({
       name: req.body.paciente,
-      photo: null,
-      ok: false
+      photo: null
     });
   }
   if (req.body.medicoGeneral) {
     roles.push({
       name: req.body.medicoGeneral,
-      photo: null,
-      ok: false
+      photo: null
     });
   }
   if (req.body.medicoEspecialista) {
     roles.push({
       name: req.body.medicoEspecialista,
-      photo: null,
-      ok: false
+      photo: null
     });
   }
 
