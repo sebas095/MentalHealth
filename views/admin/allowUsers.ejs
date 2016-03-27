@@ -38,8 +38,7 @@
     </div>
     <div class="col l6">
       <label>Fecha de Nacimiento </label>
-      <% allowUser.birthdate = allowUser.birthdate.replace(/-/g, '/') %>
-      <input type="text" name="nacimiento" disabled value="<%= allowUser.birthdate %>"><br><br>
+      <input type="date" name="nacimiento" disabled value="<%= allowUser.birthdate %>"><br><br>
     </div>
   </div>
   <div class="row">
