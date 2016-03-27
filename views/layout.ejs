@@ -38,6 +38,13 @@
             <li><a href="/">Home</a></li>
             <li><a href="/users/new">Registrarse</a></li>
             <li><a href="/login">Iniciar Sesión</a></li>
+            <li class="logout">
+              <form action="/logout?_method=delete" method="post">
+                <div class="center">
+                  <input type="submit" class="link" value="Cerrar Sesión">
+                </div>
+              </form>
+            </li>
           <% } else { %>
             <li><a href="/users/<%= session.user.id %>">Home</a></li>
             <li class="logout">
