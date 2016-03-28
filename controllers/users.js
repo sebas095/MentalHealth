@@ -54,7 +54,7 @@ exports.home = function(req, res) {
 
 exports.pending = function(req, res) {
   if (req.params.rol == 'root') {
-    Eps.find({accept: false}, function(err, data) {
+    Eps.find({accept: 0}, function(err, data) {
       if (err) {
         console.log('Error: ', err);
         return res.send(500, err);
@@ -68,7 +68,7 @@ exports.pending = function(req, res) {
     });
   }
   else {
-    User.find({accept: false}, function(err, data) {
+    User.find({accept: 0}, function(err, data) {
       if (err) {
         console.log('Error: ', err);
         return res.send(500, err);
