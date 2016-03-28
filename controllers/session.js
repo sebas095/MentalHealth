@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const Eps = require('../models/eps');
 const Root = require('../models/root');
+const nodemailer = require('nodemailer');
+const Email = nodemailer.createTransport();
 
 // MW de autorizacion de accesos HTTP retringidos
 exports.loginRequired = function(req, res, next) {
@@ -80,6 +82,133 @@ exports.create = function(req, res) {
 
 exports.newPassword = function(req, res) {
   res.render('session/newPassword');
+}
+
+exports.recovery = function(req, res) {
+  res.render('session/recovery');
+}
+
+exports.changePassword = function(req, res) {
+  var user = undefined;
+  
+  User.find({documentNumber: req.body.user}, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    if (data.length > 0) {
+      user = data[0];
+      User.update(user.id, {password: req.body.pwd}, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+        res.redirect('/login');
+      });
+    }
+    else {
+      Eps.find({documentNumber: req.body.user}, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+        if (data.length > 0) {
+          user = data[0];
+          Eps.update(user.id, {password: req.body.pwd}, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              res.send(500, err);
+            }
+            res.redirect('/login');
+          });
+        }
+        else {
+          Root.find({documentNumber: req.body.user}, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              res.send(500, err);
+            }
+            if (data.length == 0) {
+              res.redirect('/');
+            }
+            else {
+              user = data[0];
+              Root.update(user.id, {password: req.body.pwd}, function(err, data) {
+                if (err) {
+                  console.log('Error: ', err);
+                  res.send(500, err);
+                }
+                res.redirect('/');
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
+exports.request = function(req, res) {
+  var user = req.query.user;
+
+  User.find({documentNumber: user}, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    if (data.length > 0) {
+      Email.sendMail({
+        from: req.session.admin,
+        to: data[0].email,
+        subject: "Recuperación de contraseña en MENTALHEALTH",
+        text: `Estimado Usuario ${data[0].names},\n\n Para una nueva contraseña en su cuenta de MentalHealth` +
+              ` deberas acceder a la siguiente dirección: ${req.session.url}account/newPassword` +
+              `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+      });
+      res.redirect('/');
+    }
+    else {
+      Eps.find({documentNumber: user}, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+        if (data.length > 0) {
+          Email.sendMail({
+            from: req.session.admin,
+            to: data[0].email,
+            subject: "Recuperación de contraseña en MENTALHEALTH",
+            text: `Estimado Usuario ${data[0].names},\n\n Para una nueva contraseña en su cuenta de MentalHealth` +
+                  ` deberas acceder a la siguiente dirección: ${req.session.url}account/newPassword` +
+                  `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+          });
+          res.redirect('/');
+        }
+        else {
+          Root.find({documentNumber: user}, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              res.send(500, err);
+            }
+            if (data.length == 0) {
+              res.redirect('/');
+            }
+            else {
+              Email.sendMail({
+                from: req.session.admin,
+                to: data[0].email,
+                subject: "Recuperación de contraseña en MENTALHEALTH",
+                text: `Estimado Usuario ${data[0].names},\n\n Para una nueva contraseña en su cuenta de MentalHealth` +
+                      ` deberas acceder a la siguiente dirección: ${req.session.url}account/newPassword` +
+                      `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+              });
+              res.redirect('/');
+            }
+          });
+        }
+      });
+    }
+  });
 }
 
 // DELETE /logout  -- Destruir sesion

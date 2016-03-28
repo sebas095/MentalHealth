@@ -65,7 +65,7 @@ exports.allowUsers = function(req, res) {
           }
 
           Email.sendMail({
-            from: req.session.user.email,
+            from: req.session.admin,
             to: userMail,
             subject: "Estado de Aprobación de cuenta en MENTALHEALTH",
             text: `Estimado Usuario ${user.names},\n\nSu cuenta de MentalHealth ha sido rechazada.` +
@@ -84,7 +84,7 @@ exports.allowUsers = function(req, res) {
           }
 
           Email.sendMail({
-            from: req.session.user.email,
+            from: req.session.admin,
             to: userMail,
             subject: "Estado de Aprobación de cuenta en MENTALHEALTH",
             text: `Estimado Usuario ${user.names},\n\nSu cuenta de MentalHealth` +
