@@ -21,7 +21,7 @@
   </div>
 </div>
 <div id="rootForm">
-  <form action="/users/create/root" class="rootValidate" method="post" onsubmit="return compare(this, false);" autocomplete="off" novalidate>
+  <form action="/users/create/root" class="rootValidate" method="post" onsubmit="return (checkDate(this, 'root') == true)? compare(this, false) : false;" autocomplete="off" novalidate>
     <% include _rootForm.ejs %>
     <div class="row center">
       <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
@@ -37,7 +37,7 @@
   </form>
 </div>
 <div id="userForm">
-  <form action="/users/create/user" class="userValidate" method="post" onsubmit="return checkForm(this);" autocomplete="off" novalidate>
+  <form action="/users/create/user" class="userValidate" method="post" onsubmit="return (checkDate(this, 'user') == true)? checkForm(this) : false;" autocomplete="off" novalidate>
     <% include _userForm.ejs %>
     <div class="row center">
       <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">

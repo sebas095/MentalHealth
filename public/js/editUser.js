@@ -12,3 +12,33 @@ function comparePwd(form) {
   }
   return true;
 }
+
+function checkDate(form, rol) {
+  if (form.birthdate.value) {
+    if (rol == 'user') {
+      var currentYear = new Date(Date.now()).getFullYear();
+      var birthdate = Number((form.birthdate.value).split('-')[0]);
+
+      if (currentYear - birthdate >= 3) return true;
+      else {
+        alert('Por favor ingresa una fecha válida');
+        return false;
+      }
+    }
+    else {
+      if (rol.name == 'eps') return true;
+      else {
+        var currentYear = new Date(Date.now()).getFullYear();
+        var birthdate = Number((form.birthdate.value).split('-')[0]);
+        console.log("curr: ", currentYear);
+        console.log("birth: ", birthdate);
+        if (currentYear - birthdate >= 18) return true;
+        else {
+          alert('Por favor ingresa una fecha válida');
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}
