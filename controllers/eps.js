@@ -13,7 +13,7 @@ exports.create = function(req, res) {
     epsPhone: req.body.phoneEps,
     address: req.body.addressEps,
     rol: {'name': 'eps', 'photo': null},
-    accept: false,
+    accept: 0,
     password: req.body.pwd,
     documentType: req.body.typeDocument,
     documentNumberPerson: req.body.numDocument,
@@ -77,7 +77,7 @@ exports.allowUsers = function(req, res) {
       }
 
       else if (user.rol.length > 0) {
-        User.update(user.id, {accept: true, rol: user.rol}, function(err, data) {
+        User.update(user.id, {accept: 1, rol: user.rol}, function(err, data) {
           if (err) {
             console.log('Error: ', err);
             return res.send(500, err);

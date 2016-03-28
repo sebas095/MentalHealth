@@ -8,7 +8,7 @@ const resourceful = require('resourceful');
   this.string('epsPhone');
   this.string('address');
   this.object('rol');
-  this.bool('accept');
+  this.number('accept');
   this.string('password');
 
   // Persona Encargada de la EPS

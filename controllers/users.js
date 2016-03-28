@@ -38,7 +38,7 @@ exports.create = function(req, res) {
     epsRelated: req.body.epsRelated,
     rol: roles,
     password: req.body.pwd,
-    accept: false
+    accept: 0
   }, function(err, data) {
     if (err) {
       console.log('Error: ', err);
@@ -46,6 +46,10 @@ exports.create = function(req, res) {
     }
     res.redirect('/');
   });
+}
+
+exports.home = function(req, res) {
+  res.render('index');
 }
 
 exports.pending = function(req, res) {
@@ -161,6 +165,32 @@ exports.saveChanges = function(req, res) {
         return res.send(500, err);
       }
       res.redirect('/users/' + req.session.user.id);
+    });
+  }
+}
+
+exports.deleteAccount = function(req, res) {
+  if (!Array.isArray(req.session.user.rol)) {
+    if (req.session.user.rol.name == 'eps') {
+      Eps.update(req.session.user.id, {accept: 2}, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          return res.send(500, err);
+        }
+        delete req.session.user;
+        res.redirect('/');
+      });
+      res.redirect('/');
+    }
+  }
+  else {
+    User.update(req.session.user.id, {accept: 2}, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+      delete req.session.user;
+      res.redirect('/');
     });
   }
 }

@@ -14,7 +14,7 @@ var User = resourceful.define('user', function() {
   this.string('epsRelated');
   this.array('rol');
   this.string('password');
-  this.bool('accept');
+  this.number('accept');
 
   this.timestamps(); //Time marks
 });

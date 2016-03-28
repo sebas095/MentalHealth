@@ -22,7 +22,7 @@ exports.create = function(req, res) {
   User.find({
     documentNumber: req.body.user,
     password: req.body.pwd,
-    accept: true
+    accept: 1
   }, function(err, data) {
     if (err) {
       req.session.errors = [{"message": 'Se ha producido un error: ' + err}];
@@ -38,7 +38,7 @@ exports.create = function(req, res) {
       Eps.find({
         documentNumber: req.body.user,
         password: req.body.pwd,
-        accept: true
+        accept: 1
       }, function(err, data) {
         if (err) {
           req.session.errors = [{"message": 'Se ha producido un error: ' + err}];
@@ -54,7 +54,7 @@ exports.create = function(req, res) {
           Root.find({
             documentNumber: req.body.user,
             password: req.body.pwd,
-            accept: true
+            accept: 1
           }, function(err, data) {
             if (err) {
               req.session.errors = [{"message": 'Se ha producido un error: ' + err}];

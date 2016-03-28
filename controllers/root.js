@@ -18,7 +18,7 @@ exports.create = function(req, res) {
     address: req.body.address,
     rol: {'name': 'root', 'photo': null},
     password: req.body.pwd,
-    accept: true
+    accept: 1
   }, function(err, data) {
     if (err) {
       console.log('Error: ', err);
@@ -45,7 +45,7 @@ exports.allowEps = function(req, res) {
       userMail = user.email;
 
       if (req.body.aprobarEps) {
-        Eps.update(user.id, {accept: true}, function(err, data) {
+        Eps.update(user.id, {accept: 1}, function(err, data) {
           if (err) {
             console.log('Error: ', err);
             return res.send(500, err);

@@ -17,7 +17,13 @@
     <% } %>
   <% } %>
   <div class="row center">
-    <a href="#" class="btn waves-effect waves-light #cddc39 lime" onclick="return checkedDeleted();">Eliminar Cuenta</a>
     <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
   </div>
 </form>
+<% if (Array.isArray(session.user.rol) || session.user.rol.name == 'eps') { %>
+  <div class="center">
+    <form action="/users/<%= session.user.id %>/edit?_method=delete" method="post">
+      <input type="submit" class="btn waves-effect waves-light #cddc39 lime" onclick="return checkedDeleted();" value="ELIMINAR CUENTA">
+    </form>
+  </div>
+<% } %>
