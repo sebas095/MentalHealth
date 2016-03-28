@@ -30,8 +30,6 @@ function checkDate(form, rol) {
       else {
         var currentYear = new Date(Date.now()).getFullYear();
         var birthdate = Number((form.birthdate.value).split('-')[0]);
-        console.log("curr: ", currentYear);
-        console.log("birth: ", birthdate);
         if (currentYear - birthdate >= 18) return true;
         else {
           alert('Por favor ingresa una fecha válida');
