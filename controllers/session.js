@@ -78,6 +78,10 @@ exports.create = function(req, res) {
   });
 }
 
+exports.newPassword = function(req, res) {
+  res.render('session/newPassword');
+}
+
 // DELETE /logout  -- Destruir sesion
 exports.destroy = function(req, res){
 	delete req.session.user;

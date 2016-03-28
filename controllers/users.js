@@ -84,7 +84,7 @@ exports.pending = function(req, res) {
 }
 
 exports.new = function(req, res) {
-  Root.find({accept: true}, function(err, data) {
+  Root.find({accept: 1}, function(err, data) {
     if (err) {
       console.log('Error: ', err);
       return res.send(500, err);

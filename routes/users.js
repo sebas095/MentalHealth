@@ -30,10 +30,6 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/:rol(\\eps|root)/allow', sessionController.loginRequired, userController.allow);
 
-  router.get('/:id/recovery', function(req, res) {
-    res.render('users/recovery');
-  });
-
   // POST
   router.post('/create/root', rootController.create);
 
@@ -44,10 +40,6 @@ module.exports = function(app, mountPoint) {
   router.post('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.allowUser);
 
   router.post('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
-    res.render('index');
-  });
-
-  router.post('/:id/recovery', function(req, res) {
     res.render('index');
   });
 
