@@ -18,6 +18,7 @@ exports.new = function(req, res) {
   var errors = req.session.errors || {};
   req.session.errors = {};
   delete req.session.user;
+  req.session.rolEdit = undefined;
   res.render('session/new', {errors: errors});
 }
 
