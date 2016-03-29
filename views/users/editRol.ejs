@@ -1,62 +1,84 @@
-<div class="row center">
-  <% if (!Array.isArray(session.user.rol)) { %>
-    <h3><%= (session.user.rol.name).toUpperCase() %></h3>
-    <img src="/images/default/<%= session.user.rol.name %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
-  <% } else {%>
-    <h3>ROOT</h3>
-    <img src="/images/default/root.jpg" alt="Paciente" class="responsive-img"/>
-  <% } %>
-</div>
-<div class="row">
-  <div class="col l3 offset-l3 col s12"><br><br>
-    <label><h6>Subir Foto de Perfil </h6></label>
+<% var rol = undefined; %>
+<% if (!Array.isArray(session.user.rol)) { %>
+  <% rol = session.user.rol.name %>
+<% } %>
+<form action="/users/<%= session.user.id %>/<%= rol %>/edit?_method=put" method="post">
+  <div class="row center">
+    <% if (!Array.isArray(session.user.rol)) { %>
+      <h3><%= (session.user.rol.name).toUpperCase() %></h3>
+      <img src="/images/default/<%= session.user.rol.name %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
+    <% } else {%>
+      <h3>ROOT</h3>
+      <img src="/images/default/root.jpg" alt="Paciente" class="responsive-img"/>
+    <% } %>
   </div>
-  <div class="col l6 col s12">
-    <div>
-      <div class="file-field input-field">
-        <div class="btn">
-          <div class="file-path-wrapper">
-            <span>Seleccionar</span>
-            <input type="file" name="photo" accept="image/*">
+  <div class="row">
+    <div class="col l3 offset-l3 col s12"><br><br>
+      <label><h6>Subir Foto de Perfil </h6></label>
+    </div>
+    <div class="col l6 col s12">
+      <div>
+        <div class="file-field input-field">
+          <div class="btn">
+            <div class="file-path-wrapper">
+              <span>Seleccionar</span>
+              <input type="file" name="photo" accept="image/*">
+            </div>
           </div>
-        </div>
-        <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="input-field col l6 col s12">
-    <label>Tipo de Identificación </label>
-    <input disabled value="I am not editable" type="text" name="tipoIdentificacion">
+  <div class="row">
+    <div class="input-field col l6 col s12">
+      <label>Tipo de Identificación </label>
+      <% var typeDocument = undefined %>
+      <% if (!Array.isArray(session.user.rol) && session.user.rol.name == 'eps') { %>
+        <% typeDocument = "Nit"; %>
+      <% } else { %>
+        <% typeDocument = session.user.documentType.split('-'); %>
+        <% for (var i in typeDocument) { %>
+          <% typeDocument[i] = (typeDocument[i][0]).toUpperCase() + typeDocument[i].slice(1); %>
+        <% } %>
+        <% typeDocument = typeDocument.join(' '); %>
+      <% } %>
+      <input disabled value="<%= typeDocument %>" type="text" name="typeDocument">
+    </div>
+    <div class="input-field col l6 col s12">
+      <label>Número de Identificacón </label>
+      <input disabled value="<%= session.user.documentNumber %>" type="text" name="numDocument">
+    </div>
   </div>
-  <div class="input-field col l6 col s12">
-    <label>Número de Identificacón </label>
-    <input disabled value="I am not editable" type="text" name="numDocument">
+  <div class="row">
+    <div class="input-field col l6 col s12">
+      <label>Nombre </label>
+      <input disabled value="<%= session.user.names %>" type="text" name="names">
+    </div>
+    <div class="input-field col l6 col s12">
+      <label>Correo </label>
+      <input disabled value="<%= session.user.email %>" type="text" name="mail">
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="input-field col l6 col s12">
-    <label>Nombre </label>
-    <input disabled value="I am not editable" type="text" name="names">
+  <div class="row">
+    <div class="input-field col l6 col s12">
+      <label>Telefono </label>
+      <% var phone = undefined; %>
+      <% if (!Array.isArray(session.user.rol) && session.user.rol.name == 'eps') { %>
+        <% phone = session.user.epsPhone; %>
+      <% } else {%>
+        <% phone = session.user.phone %>
+      <% } %>
+      <input disabled value="<%= phone %>" type="text" name="phone">
+    </div>
+    <div class="input-field col l6 col s12">
+      <label>Dirección </label>
+      <input disabled value="<%= session.user.address %>" type="text" name="address">
+    </div>
   </div>
-  <div class="input-field col l6 col s12">
-    <label>Correo </label>
-    <input disabled value="I am not editable" type="text" name="mail">
+  <div class="row center">
+    <input class="btn waves-effect waves-light" type="submit" name="save" value="GUARDAR">
   </div>
-</div>
-<div class="row">
-  <div class="input-field col l6 col s12">
-    <label>Telefono </label>
-    <input disabled value="I am not editable" type="text" name="phone">
-  </div>
-  <div class="input-field col l6 col s12">
-    <label>Dirección </label>
-    <input disabled value="I am not editable" type="text" name="address">
-  </div>
-</div>
-<div class="row center">
-  <input class="btn waves-effect waves-light" type="submit" name="save" value="GUARDAR">
-</div>
+</form>

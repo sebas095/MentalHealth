@@ -37,6 +37,8 @@ module.exports = function(app, mountPoint) {
 
   router.post('/create/user', userController.create);
 
+  router.post('/:id/data', sessionController.loginRequired, userController.dataRol);
+
   router.post('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.allowUser);
 
   router.post('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
@@ -46,9 +48,7 @@ module.exports = function(app, mountPoint) {
   // PUT
   router.put('/:id/edit', sessionController.loginRequired, userController.saveChanges);
 
-  router.put('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', function(req, res) {
-    //res.render();
-  });
+  router.put('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.editRol);
 
   router.put('/:id/eps/allow', sessionController.loginRequired, epsController.allowUsers);
 

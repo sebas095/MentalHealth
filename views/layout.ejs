@@ -21,13 +21,13 @@
 
       <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="mdi-navigation-menu"></i></a></div>
       <ul id="nav-mobile" class="side-nav fixed">
+        <% var rolCurr = undefined; %>
         <% if (!session.user) { %>
           <li class="bold"><a href="/" class="waves-effect waves-teal">Home</a></li>
           <li class="bold"><a href="/users/new" class="waves-effect waves-teal">Registrarse</a></li>
           <li class="bold"><a href="/login" class="waves-effect waves-teal">Iniciar Sesión</a></li>
         <% } else { %>
           <li class="bold"><a href="/users/<%= session.user.id %>" class="waves-effect waves-teal">Home</a></li>
-          <% var rolCurr = undefined; %>
           <% if (Array.isArray(session.user.rol)) { %>
               <% rolCurr = session.user.rol[0].name %>
           <% } else {%>
@@ -35,23 +35,28 @@
           <% } %>
           <img src="/images/default/<%= rolCurr %>.jpg" alt="<%= rolCurr %>" class="responsive-img">
             <% if (Array.isArray(session.user.rol)) { %>
-              <hr><br><h6><b>Roles: </b></h6><br><br>
-              <select class="roles" name="roles">
-                <% for (var rol in session.user.rol) { %>
-                  <% var user = "" %>
-                  <% if (session.user.rol[rol].name.toLowerCase() == 'paciente') { %>
-                    <% user = 'Paciente' %>
-                  <% } else { %>
-                    <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
+              <form action="/users/<%= session.user.id %>/data" method="post">
+                <hr><br><h6><b>Roles: </b></h6><br><br>
+                <select class="roles" name="roles">
+                  <% for (var rol in session.user.rol) { %>
+                    <% var user = "" %>
+                    <% if (session.user.rol[rol].name.toLowerCase() == 'paciente') { %>
+                      <% user = 'Paciente' %>
+                    <% } else { %>
+                      <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
+                    <% } %>
+                    <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>"
+                      <% if (session.user.rol[rol].name == rolCurr) {%> selected <% } %> >
+                      <%= user %>
+                    </option>
                   <% } %>
-                  <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>"
-                    <% if (session.user.rol[rol].name == rolCurr) {%> selected <% } %> >
-                    <%= user %>
-                  </option>
                 </select><br>
-              <% } %>
+                <li class="bold"><input type="submit" class="waves-effect waves-teal" name="changes" value="Cambiar Rol"></li>
+                <li class="bold"><input type="submit" class="waves-effect waves-teal" name="edit" value="Editar Rol"></li>
+              </form>
             <% } else {%>
               <hr><br>
+
               <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
               <li class="bold">
                 <h6>&nbsp;&nbsp;<b>Rol: </b></h6>
@@ -61,10 +66,8 @@
 
           <% if (rolCurr == 'root' || rolCurr == 'eps') { %>
             <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>/edit" class="waves-effect waves-teal">Editar Rol</a></li>
-          <% } else { %>
-            <li class="bold"><a href="#" class="waves-effect waves-teal ">Cambiar Rol</a></li>
-            <li class="bold"><a href="/users/<%= session.user.id %>" class="waves-effect waves-teal">Editar Rol</a></li>
-          <% }%>
+          <% } %>
+
           <li class="bold"><a href="/users/<%= session.user.id %>/edit" class="waves-effect waves-teal">Editar Perfil</a></li>
           <li class="bold logout">
             <form action="/logout?_method=delete" method="post">

@@ -7,9 +7,9 @@
       <label>Tipo de Documento</label>
       <% var dt = (allowUser.documentType).split('-') %>
       <% for (var i in dt) { %>
-        <% dt[i] = (dt[i][0]).toUpperCase() + dt[i].slice(1) %>
+        <% dt[i] = (dt[i][0]).toUpperCase() + dt[i].slice(1); %>
       <% } %>
-      <% allowUser.documentType = dt.join(" ") %>
+      <% allowUser.documentType = dt.join(" "); %>
       <input type="text" name="numDocument" disabled value="<%= allowUser.documentType %>">
     </div>
     <div class="input-field col l6">

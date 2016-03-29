@@ -52,6 +52,23 @@ exports.home = function(req, res) {
   res.render('index');
 }
 
+exports.dataRol = function(req, res) {
+  var edit = {};
+  edit.rol = req.body.roles;
+
+  if (req.body.edit) edit.state = 'edit';
+  if (req.body.changes) edit.state = 'change';
+
+  req.session.rolEdit = edit;
+  // Falta mostrar el formulario del rol actual
+  res.redirect('/users/' + req.session.user.id);
+}
+
+exports.editRol = function(req, res) {
+  // Falta leer la imagen
+  res.redirect('/users/' + req.session.user.id);
+}
+
 exports.pending = function(req, res) {
   if (req.params.rol == 'root') {
     Eps.find({accept: 0}, function(err, data) {
