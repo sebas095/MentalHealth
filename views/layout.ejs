@@ -34,34 +34,41 @@
             <% rolCurr = session.user.rol.name %>
           <% } %>
           <img src="/images/default/<%= rolCurr %>.jpg" alt="<%= rolCurr %>" class="responsive-img">
-          <hr><br><h6><b>Roles: </b></h6><br><br>
-          <select class="roles" name="roles">
             <% if (Array.isArray(session.user.rol)) { %>
-              <% for (var rol in session.user.rol) { %>
-                <% var user = "" %>
-                <% if (session.user.rol[rol].name.toLowerCase() == 'paciente') { %>
-                  <% user = 'Paciente' %>
-                <% } else {%>
-                  <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
-                <% } %>
-                <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>"
-                  <% if (session.user.rol[rol].name == rolCurr) {%> selected <% } %> >
-                  <%= user %>
-                </option>
+              <hr><br><h6><b>Roles: </b></h6><br><br>
+              <select class="roles" name="roles">
+                <% for (var rol in session.user.rol) { %>
+                  <% var user = "" %>
+                  <% if (session.user.rol[rol].name.toLowerCase() == 'paciente') { %>
+                    <% user = 'Paciente' %>
+                  <% } else { %>
+                    <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
+                  <% } %>
+                  <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>"
+                    <% if (session.user.rol[rol].name == rolCurr) {%> selected <% } %> >
+                    <%= user %>
+                  </option>
+                </select><br>
               <% } %>
             <% } else {%>
-              <option name="<%= session.user.rol.name %>" value="<%= session.user.rol.name %>">
-                <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
-                <%= name %>
-              </option>
+              <hr><br>
+              <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
+              <li class="bold">
+                <h6>&nbsp;&nbsp;<b>Rol: </b></h6>
+                <a class="waves-effect waves-teal "><%= name %></a>
+              </li>
             <% } %>
-          </select><br>
-          <li class="bold"><a href="#" class="waves-effect waves-teal">Cambiar Rol</a></li>
-          <li class="bold"><a href="#" class="waves-effect waves-teal">Editar Rol</a></li>
+
+          <% if (rolCurr == 'root' || rolCurr == 'eps') { %>
+            <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>/edit" class="waves-effect waves-teal">Editar Rol</a></li>
+          <% } else { %>
+            <li class="bold"><a href="#" class="waves-effect waves-teal ">Cambiar Rol</a></li>
+            <li class="bold"><a href="/users/<%= session.user.id %>" class="waves-effect waves-teal">Editar Rol</a></li>
+          <% }%>
           <li class="bold"><a href="/users/<%= session.user.id %>/edit" class="waves-effect waves-teal">Editar Perfil</a></li>
           <li class="bold logout">
             <form action="/logout?_method=delete" method="post">
-              <div class="center">
+              <div class="">
                 <input type="submit" class="waves-effect waves-teal" value="Cerrar Sesión">
               </div>
             </form>

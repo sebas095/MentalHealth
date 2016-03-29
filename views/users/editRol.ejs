@@ -1,6 +1,11 @@
 <div class="row center">
-  <h3>ROOT</h3>
-  <img src="/images/default/root.jpg" alt="Paciente" height="140" width="100"/>
+  <% if (!Array.isArray(session.user.rol)) { %>
+    <h3><%= (session.user.rol.name).toUpperCase() %></h3>
+    <img src="/images/default/<%= session.user.rol.name %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
+  <% } else {%>
+    <h3>ROOT</h3>
+    <img src="/images/default/root.jpg" alt="Paciente" class="responsive-img"/>
+  <% } %>
 </div>
 <div class="row">
   <div class="col l3 offset-l3 col s12"><br><br>
