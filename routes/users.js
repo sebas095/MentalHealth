@@ -30,14 +30,14 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/:rol(\\eps|root)/allow', sessionController.loginRequired, userController.allow);
 
+  router.get('/:id/data', sessionController.loginRequired, userController.dataRol);
+
   // POST
   router.post('/create/root', rootController.create);
 
   router.post('/create/eps', epsController.create);
 
   router.post('/create/user', userController.create);
-
-  router.get('/:id/data', sessionController.loginRequired, userController.dataRol);
 
   router.post('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.allowUser);
 
