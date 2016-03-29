@@ -14,7 +14,7 @@
       <nav class="top-nav">
         <div class="container">
           <div class="nav-wrapper center">
-            <a class="page-title">&nbsp;&nbsp;&nbsp;&nbsp;MENTALHEALTH</a>
+            <a class="page-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MENTALHEALTH</a>
             </div>
         </div>
       </nav>
@@ -27,7 +27,14 @@
           <li class="bold"><a href="/login" class="waves-effect waves-teal">Iniciar Sesión</a></li>
         <% } else { %>
           <li class="bold"><a href="/users/<%= session.user.id %>" class="waves-effect waves-teal">Home</a></li>
-          <hr><br><h6><b>Cambiar de Rol: </b></h6><br><br>
+          <% var rolCurr = undefined; %>
+          <% if (Array.isArray(session.user.rol)) { %>
+              <% rolCurr = session.user.rol[0].name %>
+          <% } else {%>
+            <% rolCurr = session.user.rol.name %>
+          <% } %>
+          <img src="/images/default/<%= rolCurr %>.jpg" alt="<%= rolCurr %>" class="responsive-img">
+          <hr><br><h6><b>Roles: </b></h6><br><br>
           <select class="roles" name="roles">
             <% if (Array.isArray(session.user.rol)) { %>
               <% for (var rol in session.user.rol) { %>
@@ -37,7 +44,8 @@
                 <% } else {%>
                   <% user = "Médico " + (session.user.rol[rol].name).split('medico')[1]; %>
                 <% } %>
-                <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>">
+                <option name="<%= session.user.rol[rol].name %>" value="<%= session.user.rol[rol].name %>"
+                  <% if (session.user.rol[rol].name == rolCurr) {%> selected <% } %> >
                   <%= user %>
                 </option>
               <% } %>
@@ -48,6 +56,7 @@
               </option>
             <% } %>
           </select><br>
+          <li class="bold"><a href="#" class="waves-effect waves-teal">Cambiar Rol</a></li>
           <li class="bold"><a href="#" class="waves-effect waves-teal">Editar Rol</a></li>
           <li class="bold"><a href="/users/<%= session.user.id %>/edit" class="waves-effect waves-teal">Editar Perfil</a></li>
           <li class="bold logout">
