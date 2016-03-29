@@ -139,6 +139,7 @@ exports.saveChanges = function(req, res) {
           console.log('Error: ', err);
           return res.send(500, err);
         }
+        req.session.user = data;
         res.redirect('/users/' + req.session.user.id);
       });
     }
@@ -159,6 +160,7 @@ exports.saveChanges = function(req, res) {
           console.log('Error: ', err);
           return res.send(500, err);
         }
+        req.session.user = data;
         res.redirect('/users/' + req.session.user.id);
       });
     }
@@ -181,6 +183,7 @@ exports.saveChanges = function(req, res) {
         console.log('Error: ', err);
         return res.send(500, err);
       }
+      req.session.user = data;
       res.redirect('/users/' + req.session.user.id);
     });
   }
