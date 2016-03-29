@@ -217,5 +217,6 @@ exports.request = function(req, res) {
 // DELETE /logout  -- Destruir sesion
 exports.destroy = function(req, res){
 	delete req.session.user;
+	req.session.rolEdit = undefined;
 	res.redirect('/');
 };
