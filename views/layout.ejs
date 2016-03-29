@@ -35,7 +35,7 @@
           <% } %>
           <img src="/images/default/<%= rolCurr %>.jpg" alt="<%= rolCurr %>" class="responsive-img">
             <% if (Array.isArray(session.user.rol)) { %>
-              <form action="/users/<%= session.user.id %>/data" method="post">
+              <form action="/users/<%= session.user.id %>/data" method="get">
                 <hr><br><h6><b>Roles: </b></h6><br><br>
                 <select class="roles" name="roles">
                   <% for (var rol in session.user.rol) { %>

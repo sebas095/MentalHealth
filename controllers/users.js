@@ -54,10 +54,10 @@ exports.home = function(req, res) {
 
 exports.dataRol = function(req, res) {
   var edit = {};
-  edit.rol = req.body.roles;
+  edit.rol = req.query.roles;
 
-  if (req.body.edit) edit.state = 'edit';
-  if (req.body.changes) edit.state = 'change';
+  if (req.query.edit) edit.state = 'edit';
+  if (req.query.changes) edit.state = 'change';
 
   req.session.rolEdit = edit;
   // Falta mostrar el formulario del rol actual
