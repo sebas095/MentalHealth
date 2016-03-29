@@ -2,7 +2,8 @@ const User = require('../models/user');
 const Eps = require('../models/eps');
 const Root = require('../models/root');
 const nodemailer = require('nodemailer');
-const Email = nodemailer.createTransport();
+const config = require('../config/email');
+const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 
 // MW de autorizacion de accesos HTTP retringidos
 exports.loginRequired = function(req, res, next) {
@@ -16,6 +17,7 @@ exports.loginRequired = function(req, res, next) {
 exports.new = function(req, res) {
   var errors = req.session.errors || {};
   req.session.errors = {};
+  delete req.session.user;
   res.render('session/new', {errors: errors});
 }
 
@@ -90,7 +92,7 @@ exports.recovery = function(req, res) {
 
 exports.changePassword = function(req, res) {
   var user = undefined;
-  
+
   User.find({documentNumber: req.body.user}, function(err, data) {
     if (err) {
       console.log('Error: ', err);
@@ -161,9 +163,9 @@ exports.request = function(req, res) {
         from: req.session.admin,
         to: data[0].email,
         subject: "Recuperación de contraseña en MENTALHEALTH",
-        text: `Estimado Usuario ${data[0].names},\n\n Para una nueva contraseña en su cuenta de MentalHealth` +
-              ` deberas acceder a la siguiente dirección: ${req.session.url}account/newPassword` +
-              `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+        html: `<p>Estimado Usuario ${data[0].names},</p><br><br>Para una nueva contraseña en su cuenta de MentalHealth` +
+              ` deberas acceder a la siguiente dirección: <a href="${req.session.url}account/newPassword">Recuperar Contraseña</a>` +
+              `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
       });
       res.redirect('/');
     }
@@ -178,9 +180,9 @@ exports.request = function(req, res) {
             from: req.session.admin,
             to: data[0].email,
             subject: "Recuperación de contraseña en MENTALHEALTH",
-            text: `Estimado Usuario ${data[0].names},\n\n Para una nueva contraseña en su cuenta de MentalHealth` +
-                  ` deberas acceder a la siguiente dirección: ${req.session.url}account/newPassword` +
-                  `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+            html: `<p>Estimado Usuario ${data[0].names},</p><br><br>Para una nueva contraseña en su cuenta de MentalHealth` +
+                  ` deberas acceder a la siguiente dirección: <a href="${req.session.url}account/newPassword">Recuperar Contraseña</a>` +
+                  `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
           });
           res.redirect('/');
         }
@@ -198,9 +200,9 @@ exports.request = function(req, res) {
                 from: req.session.admin,
                 to: data[0].email,
                 subject: "Recuperación de contraseña en MENTALHEALTH",
-                text: `Estimado Usuario ${data[0].names},\n\n Para una nueva contraseña en su cuenta de MentalHealth` +
-                      ` deberas acceder a la siguiente dirección: ${req.session.url}account/newPassword` +
-                      `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+                html: `<p>Estimado Usuario ${data[0].names},</p><br><br> Para una nueva contraseña en su cuenta de MentalHealth` +
+                      ` deberas acceder a la siguiente dirección: <a href="${req.session.url}account/newPassword">Recuperar Contraseña</a>` +
+                      `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
               });
               res.redirect('/');
             }

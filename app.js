@@ -9,7 +9,8 @@ const express = require('express'),
       session = require('express-session'),
       methodOverride = require('method-override'),
       resourceful = require('resourceful'),
-      flash = require('connect-flash');
+      flash = require('connect-flash'),
+      config = require('./config/email');
 
 var app = express();
 var urlApp = undefined;
@@ -43,7 +44,7 @@ app.use(function(req, res, next){
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
   res.locals.session.url = urlApp || 'http://localhost:8080/';
-  res.locals.session.admin = "mentalhealth@gmail.com"
+  res.locals.session.admin = config.auth.user;
   next();
 });
 

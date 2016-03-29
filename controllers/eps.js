@@ -1,7 +1,8 @@
 const Eps = require('../models/eps');
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
-const Email = nodemailer.createTransport();
+const config = require('../config/email');
+const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 const uuid = require('uuid');
 
 exports.create = function(req, res) {
@@ -68,8 +69,8 @@ exports.allowUsers = function(req, res) {
             from: req.session.admin,
             to: userMail,
             subject: "Estado de Aprobación de cuenta en MENTALHEALTH",
-            text: `Estimado Usuario ${user.names},\n\nSu cuenta de MentalHealth ha sido rechazada.` +
-                  `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+            html: `<p>Estimado Usuario ${user.names},</p><br><br>Su cuenta de MentalHealth ha sido rechazada.` +
+                  `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
           });
 
           res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
@@ -87,9 +88,9 @@ exports.allowUsers = function(req, res) {
             from: req.session.admin,
             to: userMail,
             subject: "Estado de Aprobación de cuenta en MENTALHEALTH",
-            text: `Estimado Usuario ${user.names},\n\nSu cuenta de MentalHealth` +
-                  ` ha sido aprobada si deseas ingresar ve a la siguiente dirección: ${req.session.url}login` +
-                  `\n\n\n\n Att,\n\n Equipo Administrativo de MENTALHEALTH`
+            html: `<p>Estimado Usuario ${user.names},</p><br><br>Su cuenta de MentalHealth` +
+                  ` ha sido aprobada si deseas ingresar ve a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
+                  `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
           });
 
           res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
