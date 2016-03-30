@@ -27,11 +27,11 @@
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <input type="text" name="names" id="nombre" pattern="[a-zA-Z ]+" value="<%= session.user.names %>" class="validate">
+      <input type="text" name="names" id="nombre" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= session.user.names %>" class="validate">
       <label for="nombre">Nombres </label>
     </div>
     <div class="input-field col l6">
-      <input type="text" name="lastnames" id="apellidos" pattern="[a-zA-Z ]+" value="<%= session.user.lastnames %>" class="validate">
+      <input type="text" name="lastnames" id="apellidos" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= session.user.lastnames %>" class="validate">
       <label for="apellidos">Apellidos </label>
     </div>
   </div>
