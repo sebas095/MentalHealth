@@ -60,8 +60,12 @@ exports.dataRol = function(req, res) {
   if (req.query.changes) edit.state = 'change';
 
   req.session.rolEdit = edit;
-  // Falta mostrar el formulario del rol actual
-  res.redirect('/users/' + req.session.user.id + '/' + edit.rol);
+  if (edit.state == 'edit') {
+    res.redirect('/users/' + req.session.user.id + '/' + edit.rol + '/edit');
+  }
+  if (edit.state == 'change') {
+    res.redirect('/users/' + req.session.user.id + '/' + edit.rol);
+  }
 }
 
 exports.editRol = function(req, res) {

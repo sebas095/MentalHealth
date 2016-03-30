@@ -10,8 +10,10 @@
       <h3><%= (session.user.rol.name).toUpperCase() %></h3>
       <img src="/images/default/<%= session.user.rol.name %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
     <% } else {%>
-      <h3>MÉDICO <%= (rol.split('medico')[1]).toUpperCase() %></h3>
-      <img src="/images/default/<%= rol %>.jpg" alt="Paciente" class="responsive-img"/>
+      <% var aux = rol %>
+      <% aux = (aux == 'paciente')? "PACIENTE" : ("MÉDICO " + (rol.split('medico')[1]).toUpperCase()) %>
+      <h3><%= aux %></h3>
+      <img src="/images/default/<%= rol %>.jpg" alt="<%= rol %>" class="responsive-img"/>
     <% } %>
   </div>
   <div class="row">

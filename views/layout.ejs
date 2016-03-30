@@ -28,7 +28,7 @@
           <li class="bold"><a href="/login" class="waves-effect waves-teal">Iniciar Sesión</a></li>
         <% } else { %>
           <% if (Array.isArray(session.user.rol)) { %>
-              <% rolCurr = session.rolEdit.rol || session.user.rol[0].name %>
+              <% rolCurr = (session.rolEdit)? session.rolEdit.rol : session.user.rol[0].name %>
           <% } else {%>
             <% rolCurr = session.user.rol.name %>
           <% } %>
