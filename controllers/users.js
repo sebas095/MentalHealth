@@ -52,6 +52,10 @@ exports.home = function(req, res) {
   res.render('index');
 }
 
+exports.rolForm = function(req, res) {
+  res.render('users/editRol');
+}
+
 exports.dataRol = function(req, res) {
   var edit = {};
   edit.rol = req.query.roles;

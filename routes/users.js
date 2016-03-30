@@ -14,9 +14,7 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/edit', sessionController.loginRequired, userController.edit);
 
-  router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', function(req, res) {
-    res.render('users/editRol');
-  });
+  router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.rolForm);
 
   router.get('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');

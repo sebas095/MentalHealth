@@ -1,6 +1,8 @@
 $(function() {
   var path = (window.location.pathname).split('/');
-  if (path.length == 3 && path[1] == 'users') {
+  var ok = (path[3] == 'eps' || path[3] == 'root' || path[3] == 'medicoGeneral' || path[3] || 'medicoEspecialista');
+
+  if (path.length == 4 && path[1] == 'users' && ok) {
     $('#pending').show();
   }
   else {
