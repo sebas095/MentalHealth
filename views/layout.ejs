@@ -27,12 +27,12 @@
           <li class="bold"><a href="/users/new" class="waves-effect waves-teal">Registrarse</a></li>
           <li class="bold"><a href="/login" class="waves-effect waves-teal">Iniciar Sesión</a></li>
         <% } else { %>
-          <li class="bold"><a href="/users/<%= session.user.id %>" class="waves-effect waves-teal">Home</a></li>
           <% if (Array.isArray(session.user.rol)) { %>
-              <% rolCurr = session.user.rol[0].name %>
+              <% rolCurr = session.rolEdit.rol || session.user.rol[0].name %>
           <% } else {%>
             <% rolCurr = session.user.rol.name %>
           <% } %>
+          <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>
           <img src="/images/default/<%= rolCurr %>.jpg" alt="<%= rolCurr %>" class="responsive-img">
             <% if (Array.isArray(session.user.rol)) { %>
               <form action="/users/<%= session.user.id %>/data" method="get">
@@ -56,7 +56,6 @@
               </form>
             <% } else {%>
               <hr><br>
-
               <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
               <li class="bold">
                 <h6>&nbsp;&nbsp;<b>Rol: </b></h6>

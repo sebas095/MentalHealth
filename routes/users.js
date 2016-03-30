@@ -10,11 +10,7 @@ module.exports = function(app, mountPoint) {
   // GET
   router.get('/new', userController.new);
 
-  router.get('/:id', sessionController.loginRequired, userController.home);
-
-  router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))', function(req, res) {
-    res.render('index');
-  });
+  router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))', sessionController.loginRequired, userController.home);
 
   router.get('/:id/edit', sessionController.loginRequired, userController.edit);
 

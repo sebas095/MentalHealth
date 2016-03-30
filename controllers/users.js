@@ -61,7 +61,7 @@ exports.dataRol = function(req, res) {
 
   req.session.rolEdit = edit;
   // Falta mostrar el formulario del rol actual
-  res.redirect('/users/' + req.session.user.id);
+  res.redirect('/users/' + req.session.user.id + '/' + edit.rol);
 }
 
 exports.editRol = function(req, res) {
@@ -140,7 +140,7 @@ exports.saveChanges = function(req, res) {
           return res.send(500, err);
         }
         req.session.user = data;
-        res.redirect('/users/' + req.session.user.id);
+        res.redirect('/users/' + req.session.user.id + '/eps');
       });
     }
     else {
@@ -161,7 +161,7 @@ exports.saveChanges = function(req, res) {
           return res.send(500, err);
         }
         req.session.user = data;
-        res.redirect('/users/' + req.session.user.id);
+        res.redirect('/users/' + req.session.user.id + '/root');
       });
     }
   }
@@ -183,8 +183,9 @@ exports.saveChanges = function(req, res) {
         console.log('Error: ', err);
         return res.send(500, err);
       }
+      var rol = req.session.rolEdit.rol || req.session.user.rol[0].name;
       req.session.user = data;
-      res.redirect('/users/' + req.session.user.id);
+      res.redirect('/users/' + req.session.user.id + '/' + rol);
     });
   }
 }

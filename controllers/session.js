@@ -35,9 +35,10 @@ exports.create = function(req, res) {
       return;
     }
     if (data.length > 0) {
+      var rol = (Array.isArray(data[0].rol))?  data[0].rol[0].name : data[0].rol.name;
       req.session.user = data[0];
       req.flash('message', 'Bienvenido a MentalHealth');
-      res.redirect('/users/' + req.session.user.id);
+      res.redirect('/users/' + req.session.user.id + '/' + rol);
     }
     else {
       Eps.find({
@@ -51,9 +52,10 @@ exports.create = function(req, res) {
           return;
         }
         if (data.length > 0) {
+          var rol = (Array.isArray(data[0].rol))?  data[0].rol[0].name : data[0].rol.name;
           req.session.user = data[0];
           req.flash('message', 'Bienvenido a MentalHealth');
-          res.redirect('/users/' + req.session.user.id);
+          res.redirect('/users/' + req.session.user.id + '/' + rol);
         }
         else {
           Root.find({
@@ -72,9 +74,10 @@ exports.create = function(req, res) {
               res.redirect('/login');
             }
             else {
+              var rol = (Array.isArray(data[0].rol))?  data[0].rol[0].name : data[0].rol.name;
               req.session.user = data[0];
               req.flash('message', 'Bienvenido a MentalHealth');
-              res.redirect('/users/' + req.session.user.id);
+              res.redirect('/users/' + req.session.user.id + '/' + rol);
             }
           });
         }

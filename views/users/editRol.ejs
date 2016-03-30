@@ -1,6 +1,8 @@
 <% var rol = undefined; %>
 <% if (!Array.isArray(session.user.rol)) { %>
   <% rol = session.user.rol.name %>
+<% } else {%>
+  <% rol = (session.rolEdit)? session.rolEdit.rol : session.user.rol[0].name %>
 <% } %>
 <form action="/users/<%= session.user.id %>/<%= rol %>/edit?_method=put" method="post">
   <div class="row center">
@@ -8,8 +10,8 @@
       <h3><%= (session.user.rol.name).toUpperCase() %></h3>
       <img src="/images/default/<%= session.user.rol.name %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
     <% } else {%>
-      <h3>ROOT</h3>
-      <img src="/images/default/root.jpg" alt="Paciente" class="responsive-img"/>
+      <h3>MÉDICO <%= (rol.split('medico')[1]).toUpperCase() %></h3>
+      <img src="/images/default/<%= rol %>.jpg" alt="Paciente" class="responsive-img"/>
     <% } %>
   </div>
   <div class="row">
