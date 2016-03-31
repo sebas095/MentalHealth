@@ -125,7 +125,6 @@ exports.editRol = function(req, res) {
           });
         }
         else {
-          //nsole.log('path: ', req.session.user.rol.photo);
           deleteImage({
             path: req.session.user.rol.photo,
             done: function() {
