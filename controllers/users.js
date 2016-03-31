@@ -1,7 +1,11 @@
+const fs = require('fs');
 const User = require('../models/user');
 const Eps = require('../models/eps');
 const Root = require('../models/root');
 const uuid = require('uuid');
+const multer = require('multer');
+const path = require('path');
+var upload = multer({dest: 'data/'}).single('photo');
 
 exports.create = function(req, res) {
   var roles = [];
@@ -73,8 +77,63 @@ exports.dataRol = function(req, res) {
 }
 
 exports.editRol = function(req, res) {
-  // Falta leer la imagen
-  res.redirect('/users/' + req.session.user.id);
+  upload(req, res, function(err) {
+    if (err) console.log('Error: ', err);
+    var ext = path.extname(req.file.originalname);
+
+    if (ext === '.jpg' || ext === '.png' || ext === '.gif' || ext === '.bmp') {
+      if (req.params.rol == 'eps') {
+        if (req.session.user.rol.photo === null) {
+
+        }
+        else {
+
+        }
+      }
+      if (req.params.rol == 'root') {
+        if (req.session.user.rol.photo === null) {
+
+        }
+        else {
+
+        }
+      }
+      else {
+        var index = getIndex(session.user.rol, req.params.rol);
+        if (req.session.user.rol[index].photo == null) {
+
+        }
+        else {
+          
+        }
+      }
+      res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+    }
+    else {
+      deleteImage({
+        path: req.file.path,
+        done: function() {
+          res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+        }
+      });
+    }
+  });
+}
+
+function deleteImage(options) {
+  fs.unlink(options.path, function(err) {
+    if (err) console.log('Error: ', err);
+    if (options.done) {
+      options.done();
+    }
+  });
+}
+
+function getIndex(array, match) {
+  for (var i in array) {
+    if (array[i].name == match) return i;
+  }
+  return -1;
 }
 
 exports.pending = function(req, res) {

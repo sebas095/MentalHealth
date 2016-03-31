@@ -4,11 +4,11 @@
 <% } else {%>
   <% rol = (session.rolEdit)? session.rolEdit.rol : session.user.rol[0].name %>
 <% } %>
-<form action="/users/<%= session.user.id %>/<%= rol %>/edit?_method=put" method="post">
+<form action="/users/<%= session.user.id %>/<%= rol %>/edit?_method=put" enctype="multipart/form-data" method="post">
   <div class="row center">
     <% if (!Array.isArray(session.user.rol)) { %>
       <h3><%= (session.user.rol.name).toUpperCase() %></h3>
-      <img src="/images/default/<%= session.user.rol.name %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
+      <img src="../../data/c444cc5c57c1db830c26cf14425f0875" alt="<%= session.user.rol.name %>" class="responsive-img"/>
     <% } else {%>
       <% var aux = rol %>
       <% aux = (aux == 'paciente')? "PACIENTE" : ("MÉDICO " + (rol.split('medico')[1]).toUpperCase()) %>
