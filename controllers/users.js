@@ -84,31 +84,98 @@ exports.editRol = function(req, res) {
     if (ext === '.jpg' || ext === '.png' || ext === '.gif' || ext === '.bmp') {
       if (req.params.rol == 'eps') {
         if (req.session.user.rol.photo === null) {
-
+          req.session.user.rol.photo = req.file.path;
+          
+          Eps.update(req.params.id, req.session.user, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              return res.send(500, err);
+            }
+            res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+          });
         }
         else {
-
+          deleteImage({
+            path: req.session.user.rol.photo,
+            done: function() {
+              req.session.user.rol.photo = req.file.path;
+              
+              Eps.update(req.params.id, req.session.user, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                return res.send(500, err);
+              }
+              res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+            });
+            }
+          });
         }
       }
+      
       if (req.params.rol == 'root') {
         if (req.session.user.rol.photo === null) {
-
-        }
-        else {
-
-        }
-      }
-      else {
-        var index = getIndex(session.user.rol, req.params.rol);
-        if (req.session.user.rol[index].photo == null) {
-
-        }
-        else {
+          req.session.user.rol.photo = req.file.path;
           
+          Root.update(req.params.id, req.session.user, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              return res.send(500, err);
+            }
+            res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+          });
+        }
+        else {
+          //nsole.log('path: ', req.session.user.rol.photo);
+          deleteImage({
+            path: req.session.user.rol.photo,
+            done: function() {
+              console.log('photo: ', req.session.user.rol.photo);
+              req.session.user.rol.photo = req.file.path;
+              
+              Root.update(req.params.id, req.session.user, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                return res.send(500, err);
+              }
+              res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+            });
+            }
+          });
         }
       }
-      res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+      
+      else {
+        var index = getIndex(req.session.user.rol, req.params.rol);
+        if (req.session.user.rol[index].photo == null) {
+          req.session.user.rol[index].photo = req.file.path;
+          
+          User.update(req.params.id, req.session.user, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              return res.send(500, err);
+            }
+            res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+          });
+        }
+        else {
+          deleteImage({
+            path: req.session.user.rol[index].photo,
+            done: function() {
+              req.session.user.rol[index].photo = req.file.path;
+              
+              User.update(req.params.id, req.session.user, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                return res.send(500, err);
+              }
+              res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+            });
+            }
+          });
+        }
+      }
     }
+    
     else {
       deleteImage({
         path: req.file.path,
