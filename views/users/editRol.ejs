@@ -45,9 +45,22 @@
     <% } %>
   </div>
   <div class="row">
-    <div class="col l3 offset-l3 col s12"><br><br>
+    <% if (ok) { %>
+    <div class="col l4 col s12">
+      <form class="" action="#" method="post">
+        <div class="row center">
+          <br><input class="btn waves-effect waves-light" type="submit" name="save" value="BORRAR FOTO DE PERFIl">
+        </div>
+      </form>
+    </div>
+    <div class="col l2 col s12"><br><br>
       <label><h6>Subir Foto de Perfil </h6></label>
     </div>
+    <% } else { %>
+      <div class="col l3 offset-l3 col s12"><br><br>
+        <label><h6>Subir Foto de Perfil </h6></label>
+      </div>
+    <% } %>
     <div class="col l6 col s12">
       <div>
         <div class="file-field input-field">
