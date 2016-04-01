@@ -12,19 +12,22 @@ exports.create = function(req, res) {
   if (req.body.paciente) {
     roles.push({
       name: req.body.paciente,
-      photo: null
+      photo: null,
+      ext: null
     });
   }
   if (req.body.medicoGeneral) {
     roles.push({
       name: req.body.medicoGeneral,
-      photo: null
+      photo: null,
+      ext: null
     });
   }
   if (req.body.medicoEspecialista) {
     roles.push({
       name: req.body.medicoEspecialista,
-      photo: null
+      photo: null,
+      ext: null
     });
   }
 
@@ -85,13 +88,22 @@ exports.editRol = function(req, res) {
       if (req.params.rol == 'eps') {
         if (req.session.user.rol.photo === null) {
           req.session.user.rol.photo = req.file.path;
-          
-          Eps.update(req.params.id, req.session.user, function(err, data) {
+          req.session.user.rol.ext = ext;
+
+          Eps.update(req.params.id, {rol: req.session.user.rol}, function(err, data) {
             if (err) {
               console.log('Error: ', err);
               return res.send(500, err);
             }
-            res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+
+            translateImage({
+              path: req.file.path,
+              targetName:req.params.id + '-' + req.params.rol + ext,
+              targetPath: path.resolve(__dirname, '..', 'public/images'),
+              done: function() {
+                res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+              }
+            });
           });
         }
         else {
@@ -99,61 +111,108 @@ exports.editRol = function(req, res) {
             path: req.session.user.rol.photo,
             done: function() {
               req.session.user.rol.photo = req.file.path;
-              
-              Eps.update(req.params.id, req.session.user, function(err, data) {
+              var tmpExt = req.session.user.rol.ext;
+              req.session.user.rol.ext = ext;
+
+              Eps.update(req.params.id, {rol: req.session.user.rol}, function(err, data) {
               if (err) {
                 console.log('Error: ', err);
                 return res.send(500, err);
               }
-              res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+
+              deleteImage({
+                path: path.join(path.resolve(__dirname, '..', 'public/images'), req.params.id + '-' + req.params.rol + tmpExt),
+                done: function() {
+                  translateImage({
+                    path: req.file.path,
+                    targetName: req.params.id + '-' + req.params.rol + ext,
+                    targetPath: path.resolve(__dirname, '..', 'public/images'),
+                    done: function() {
+                      res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+                    }
+                  });
+                }
+              });
             });
             }
           });
         }
       }
-      
+
       if (req.params.rol == 'root') {
         if (req.session.user.rol.photo === null) {
           req.session.user.rol.photo = req.file.path;
-          
-          Root.update(req.params.id, req.session.user, function(err, data) {
+          req.session.user.rol.ext = ext;
+
+          Root.update(req.params.id, {rol: req.session.user.rol}, function(err, data)   {
             if (err) {
               console.log('Error: ', err);
               return res.send(500, err);
             }
-            res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+
+            translateImage({
+              path: req.file.path,
+              targetName: req.params.id + '-' + req.params.rol + ext,
+              targetPath: path.resolve(__dirname, '..', 'public/images'),
+              done: function() {
+                res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+              }
+            });
           });
         }
         else {
           deleteImage({
             path: req.session.user.rol.photo,
             done: function() {
-              console.log('photo: ', req.session.user.rol.photo);
               req.session.user.rol.photo = req.file.path;
-              
-              Root.update(req.params.id, req.session.user, function(err, data) {
+              var tmpExt = req.session.user.rol.ext;
+              req.session.user.rol.ext = ext;
+
+              Root.update(req.params.id, {rol: req.session.user.rol}, function(err, data) {
               if (err) {
                 console.log('Error: ', err);
                 return res.send(500, err);
               }
-              res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+
+              deleteImage({
+                path: path.join(path.resolve(__dirname, '..', 'public/images'), req.params.id + '-' + req.params.rol + tmpExt),
+                done: function() {
+                  translateImage({
+                    path: req.file.path,
+                    targetName: req.params.id + '-' + req.params.rol + ext,
+                    targetPath: path.resolve(__dirname, '..', 'public/images'),
+                    done: function() {
+                      res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+                    }
+                  });
+                }
+              });
             });
             }
           });
         }
       }
-      
-      else {
+
+      else if (Array.isArray(req.session.user.rol)) {
         var index = getIndex(req.session.user.rol, req.params.rol);
-        if (req.session.user.rol[index].photo == null) {
+        if (req.session.user.rol[index].photo === null) {
           req.session.user.rol[index].photo = req.file.path;
-          
-          User.update(req.params.id, req.session.user, function(err, data) {
+          req.session.user.rol[index].ext = ext;
+
+          User.update(req.params.id, {rol: req.session.user.rol}, function(err, data) {
             if (err) {
               console.log('Error: ', err);
               return res.send(500, err);
             }
-            res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+
+            translateImage({
+              path: req.file.path,
+              targetName: req.params.id + '-' + req.params.rol + ext,
+              targetPath: path.resolve(__dirname, '..', 'public/images'),
+              done: function() {
+                res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+              }
+            });
           });
         }
         else {
@@ -161,20 +220,35 @@ exports.editRol = function(req, res) {
             path: req.session.user.rol[index].photo,
             done: function() {
               req.session.user.rol[index].photo = req.file.path;
-              
-              User.update(req.params.id, req.session.user, function(err, data) {
+              var tmpExt = req.session.user.rol[index].ext;
+              req.session.user.rol[index].ext = ext;
+
+              User.update(req.params.id, {rol: req.session.user.rol}, function(err, data) {
               if (err) {
                 console.log('Error: ', err);
                 return res.send(500, err);
               }
-              res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+
+              deleteImage({
+                path: path.join(path.resolve(__dirname, '..', 'public/images'), req.params.id + '-' + req.params.rol + tmpExt),
+                done: function() {
+                  translateImage({
+                    path: req.file.path,
+                    targetName: req.params.id + '-' + req.params.rol + ext,
+                    targetPath: path.resolve(__dirname, '..', 'public/images'),
+                    done: function() {
+                      res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+                    }
+                  });
+                }
+              });
             });
             }
           });
         }
       }
     }
-    
+
     else {
       deleteImage({
         path: req.file.path,
@@ -193,6 +267,19 @@ function deleteImage(options) {
       options.done();
     }
   });
+}
+
+function translateImage(option) {
+  var tmpPath = option.path;
+  var targetPath = option.targetPath;
+  var targetName = option.targetName;
+  targetPath = path.join(targetPath, targetName);
+
+  var is = fs.createReadStream(tmpPath);
+  var os = fs.createWriteStream(targetPath);
+
+  is.pipe(os);
+  is.on('end', option.done);
 }
 
 function getIndex(array, match) {

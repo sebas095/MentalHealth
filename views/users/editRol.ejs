@@ -8,7 +8,7 @@
   <div class="row center">
     <% if (!Array.isArray(session.user.rol)) { %>
       <h3><%= (session.user.rol.name).toUpperCase() %></h3>
-      <img src="../../data/c444cc5c57c1db830c26cf14425f0875" alt="<%= session.user.rol.name %>" class="responsive-img"/>
+      <img src="/images/default/<%= rol %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
     <% } else {%>
       <% var aux = rol %>
       <% aux = (aux == 'paciente')? "PACIENTE" : ("MÉDICO " + (rol.split('medico')[1]).toUpperCase()) %>

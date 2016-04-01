@@ -17,7 +17,7 @@ exports.create = function(req, res) {
     email: req.body.mail,
     phone: req.body.phone,
     address: req.body.address,
-    rol: {'name': 'root', 'photo': null},
+    rol: {'name': 'root', 'photo': null, 'ext': null},
     password: req.body.pwd,
     accept: 1
   }, function(err, data) {

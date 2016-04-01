@@ -13,7 +13,7 @@ exports.create = function(req, res) {
     email: req.body.mailEps,
     epsPhone: req.body.phoneEps,
     address: req.body.addressEps,
-    rol: {'name': 'eps', 'photo': null},
+    rol: {'name': 'eps', 'photo': null, 'ext': null},
     accept: 0,
     password: req.body.pwd,
     documentType: req.body.typeDocument,
