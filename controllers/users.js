@@ -66,6 +66,8 @@ exports.rolForm = function(req, res) {
 exports.dataRol = function(req, res) {
   var edit = {};
   edit.rol = req.query.roles;
+  var index = getIndex(req.session.user.rol, edit.rol);
+  edit.ext = req.session.user.rol[index].ext;
 
   if (req.query.edit) edit.state = 'edit';
   if (req.query.changes) edit.state = 'change';

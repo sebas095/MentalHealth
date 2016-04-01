@@ -1,19 +1,47 @@
-<% var rol = undefined; %>
-<% if (!Array.isArray(session.user.rol)) { %>
-  <% rol = session.user.rol.name %>
-<% } else {%>
-  <% rol = (session.rolEdit)? session.rolEdit.rol : session.user.rol[0].name %>
+<% function getIndex(array, match) { %>
+  <% for (var i in array) { %>
+    <% if (array[i].name == match) return i; %>
+  <% } %>
 <% } %>
-<form action="/users/<%= session.user.id %>/<%= rol %>/edit?_method=put" enctype="multipart/form-data" method="post">
+
+<% var rol = undefined, ext = undefined, ok = undefined; %>
+<% if (!Array.isArray(session.user.rol)) { %>
+  <% if (session.user.rol.photo == null) { %>
+    <% rol = "default/" + session.user.rol.name; %>
+    <% ext = ".jpg" %>
+    <% ok = false; %>
+  <% } else { %>
+    <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol.name); %>
+    <% rol = session.user.id + rol; %>
+    <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol.ext; %>
+    <% ok = true; %>
+  <% } %>
+<% } else {%>
+  <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol[0].name); %>
+  <% var index = getIndex(session.user.rol, rol.slice(1)); %>
+  <% if (session.user.rol[index].photo == null) { %>
+    <% rol = "default/" + rol.slice(1) %>
+    <% ext = ".jpg" %>
+    <% ok = false; %>
+  <% } else { %>
+    <% rol = session.user.id + rol; %>
+    <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol[0].ext; %>
+    <% ok  = true; %>
+  <% } %>
+<% } %>
+<% var tmp = rol.split('-'); %>
+<% var urlRol = (ok == true)? tmp[tmp.length - 1] : rol.slice(8); %>
+
+<form action="/users/<%= session.user.id %>/<%= urlRol %>/edit?_method=put" enctype="multipart/form-data" method="post">
   <div class="row center">
     <% if (!Array.isArray(session.user.rol)) { %>
       <h3><%= (session.user.rol.name).toUpperCase() %></h3>
-      <img src="/images/default/<%= rol %>.jpg" alt="<%= session.user.rol.name %>" class="responsive-img"/>
+      <img src="/images/<%= rol %><%= ext %>" alt="<%= session.user.rol.name %>" class="responsive-img"/>
     <% } else {%>
-      <% var aux = rol %>
+      <% var aux = (ok == true)? rol.slice(session.user.id.length + 1) : rol.slice(8) %>
       <% aux = (aux == 'paciente')? "PACIENTE" : ("MÉDICO " + (rol.split('medico')[1]).toUpperCase()) %>
       <h3><%= aux %></h3>
-      <img src="/images/default/<%= rol %>.jpg" alt="<%= rol %>" class="responsive-img"/>
+      <img src="/images/<%= rol %><%= ext %>" alt="<%= aux %>" class="responsive-img"/>
     <% } %>
   </div>
   <div class="row">
