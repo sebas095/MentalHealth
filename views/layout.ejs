@@ -43,7 +43,7 @@
               <% rol = session.user.id + rol; %>
               <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol.ext; %>
             <% } %>
-          <% } else {%>
+          <% } else { %>
             <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol[0].name); %>
             <% rolCurr = rol.slice(1); %>
             <% var index = getIndex(session.user.rol, rol.slice(1)); %>
@@ -55,7 +55,8 @@
               <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol[0].ext; %>
             <% } %>
           <% } %>
-
+          <% ext = ext || tmpExt %>
+        
           <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>
           <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img">
             <% if (Array.isArray(session.user.rol)) { %>

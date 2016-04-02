@@ -56,7 +56,16 @@ exports.create = function(req, res) {
 }
 
 exports.home = function(req, res) {
-  res.render('index');
+  var tmpExt = undefined;
+  if (Array.isArray(req.session.user.rol)) {
+    var index = getIndex(req.session.user.rol, req.params.rol);
+    tmpExt = req.session.user.rol[index].ext;
+    res.render('index', {tmpExt: tmpExt});
+  }
+  else {
+    tmpExt = req.session.user.rol.ext;
+    res.render('index', {tmpExt: tmpExt});
+  }
 }
 
 exports.rolForm = function(req, res) {
@@ -100,7 +109,7 @@ exports.editRol = function(req, res) {
 
             imageHelper.translateImage({
               path: req.file.path,
-              targetName:req.params.id + '-' + req.params.rol + ext,
+              targetName: req.params.id + '-' + req.params.rol + ext,
               targetPath: path.resolve(__dirname, '..', 'public/images')
             }, function() {
               res.redirect('/users/' + req.params.id + '/' + req.params.rol);
@@ -185,6 +194,8 @@ exports.editRol = function(req, res) {
 
       else if (Array.isArray(req.session.user.rol)) {
         var index = getIndex(req.session.user.rol, req.params.rol);
+        console.log('index: ', index);
+        console.log('rol: ', req.session.user.rol[index]);
         if (req.session.user.rol[index].photo === null) {
           req.session.user.rol[index].photo = req.file.path;
           req.session.user.rol[index].ext = ext;
