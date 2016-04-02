@@ -4,13 +4,13 @@
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <label>Tipo de Documento</label>
+      <label for="numDocument">Tipo de Documento</label>
       <% var dt = (allowUser.documentType).split('-') %>
       <% for (var i in dt) { %>
         <% dt[i] = (dt[i][0]).toUpperCase() + dt[i].slice(1); %>
       <% } %>
       <% allowUser.documentType = dt.join(" "); %>
-      <input type="text" name="numDocument" disabled value="<%= allowUser.documentType %>">
+      <input type="text" id="numDocument" name="numDocument" disabled value="<%= allowUser.documentType %>">
     </div>
     <div class="input-field col l6">
       <label>N° de Documento </label>
