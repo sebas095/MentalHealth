@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <nav class="top-nav">
+      <nav class="top-nav cyan darken-1">
         <div class="container">
           <div class="nav-wrapper center">
             <a class="page-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MENTALHEALTH</a>
@@ -24,8 +24,8 @@
         <% } %>
       <% } %>
 
-      <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="mdi-navigation-menu"></i></a></div>
-      <ul id="nav-mobile" class="side-nav fixed">
+      <div class="container "><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only "><i class="mdi-navigation-menu"></i></a></div>
+      <ul id="nav-mobile" class="side-nav fixed blue lighten-5">
         <% var rolCurr = undefined, rol = undefined, ext = undefined; %>
         <% if (!session.user) { %>
           <li class="bold"><a href="/" class="waves-effect waves-teal">Home</a></li>
@@ -56,7 +56,7 @@
             <% } %>
           <% } %>
           <% ext = ext || tmpExt %>
-        
+
           <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>
           <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img">
             <% if (Array.isArray(session.user.rol)) { %>
@@ -110,11 +110,11 @@
         <% if (session.user && !Array.isArray(session.user.rol)) {%>
           <div class="col l2"><br></div>
           <div class="col l8 center" id="pending">
-            <div class="menuUser">
+            <div class="cyan lighten-5">
               <br><br>
                 <p><b><h5>MENÚ</h5></b></p>
               <br>
-              <a href="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" class="btn">Aprobación de Cuentas</a>
+              <a href="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" class="btn waves-effect waves-light cyan darken-2">Aprobación de Cuentas</a>
               <br><br><br>
             </div>
           </div>
@@ -123,7 +123,7 @@
       </div>
     </main>
 
-    <footer class="page-footer">
+    <footer class="page-footer cyan darken-1">
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
@@ -141,7 +141,7 @@
           </div>
         </div>
       </div>
-      <div class="footer-copyright">
+      <div class="footer-copyright cyan darken-3">
         <div class="container">
         © 2016 Grupo Fashion. Copyright Text
         <a class="grey-text text-lighten-4 right" href="#!">More Links</a>

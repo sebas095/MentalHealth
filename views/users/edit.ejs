@@ -27,13 +27,13 @@
     <% } %>
   <% } %>
   <div class="row center">
-    <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
+    <input class="btn waves-effect waves-light cyan darken-2" type="submit" value="ENVIAR">
   </div>
 </form>
 <% if (Array.isArray(session.user.rol) || session.user.rol.name == 'eps') { %>
   <div class="center">
     <form action="/users/<%= session.user.id %>/edit?_method=delete" method="post">
-      <input type="submit" class="btn waves-effect waves-light #cddc39 lime" onclick="return checkedDeleted();" value="ELIMINAR CUENTA">
+      <input type="submit" class="btn waves-effect waves-light red lighten-1" onclick="return checkedDeleted();" value="ELIMINAR CUENTA">
     </form>
   </div>
 <% } %>

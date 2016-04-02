@@ -46,3 +46,8 @@
  .menuUser {
    background: #A1C3EB;
  }
+
+li > a:hover{
+  background-color: #26c6da;
+  color: white;
+}

@@ -4,18 +4,18 @@
   </div>
   <% if (hasRoot == false) {%>
     <div class="row center">
-      <button class="waves-effect waves-light btn" type="button" name="button" id="root">
+      <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="root">
         ROOT DEL SISTEMA
       </button>
     </div>
   <% } %>
   <div class="row center">
-    <button class="waves-effect waves-light btn" type="button" name="button" id="users">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="users">
       PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS
     </butto>
   </div>
   <div class="row center">
-    <button class="waves-effect waves-light btn" type="button" name="button" id="eps">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="eps">
       EPS
     </button>
   </div>
@@ -24,7 +24,7 @@
   <form action="/users/create/root" class="rootValidate" method="post" onsubmit="return (checkDate(this, 'root') == true)? compare(this, false) : false;" autocomplete="off" novalidate>
     <% include _rootForm.ejs %>
     <div class="row center">
-      <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
+      <input class="btn waves-effect waves-light cyan darken-2" type="submit" value="ENVIAR">
     </div>
   </form>
 </div>
@@ -32,7 +32,7 @@
   <form action="/users/create/eps" class="epsValidate" method="post" onsubmit="return compare(this, true);" autocomplete="off" novalidate>
     <% include _epsForm.ejs %>
     <div class="row center">
-      <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
+      <input class="btn waves-effect waves-light cyan darken-2" type="submit" value="ENVIAR">
     </div>
   </form>
 </div>
@@ -40,7 +40,7 @@
   <form action="/users/create/user" class="userValidate" method="post" onsubmit="return (checkDate(this, 'user') == true)? checkForm(this) : false;" autocomplete="off" novalidate>
     <% include _userForm.ejs %>
     <div class="row center">
-      <input class="btn waves-effect waves-light" type="submit" value="ENVIAR">
+      <input class="btn waves-effect waves-light cyan darken-2" type="submit" value="ENVIAR">
     </div>
   </form>
 </div>
