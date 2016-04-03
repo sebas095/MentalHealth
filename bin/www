@@ -5,7 +5,7 @@ var os = require('os');
 var app = require('../app');
 
 var server = http.createServer(app);
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 4000;
 
 server.listen(port, function(err) {
   if (err) throw err;

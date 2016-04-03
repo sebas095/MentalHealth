@@ -38,7 +38,7 @@ app.use(flash());
 app.use(function(req, res, next){
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
-  res.locals.session.url = urlApp || 'http://localhost:8080/';
+  res.locals.session.url = urlApp || 'http://localhost:4000/';
   res.locals.session.admin = config.auth.user;
   next();
 });
