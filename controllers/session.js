@@ -22,7 +22,7 @@ exports.new = function(req, res) {
   req.session.errors = {};
 
   if (req.session.user) {
-    destroyUserImages(req, res, function() {
+    destroyUserImages(function() {
       delete req.session.user;
       req.session.rolEdit = undefined;
       res.render('session/new', {errors: errors});
