@@ -7,8 +7,8 @@
 <% var rol = undefined, ext = undefined, ok = undefined; %>
 <% if (!Array.isArray(session.user.rol)) { %>
   <% if (session.user.rol.photo == null) { %>
-    <% rol = "default/" + session.user.rol.name; %>
-    <% ext = ".jpg" %>
+    <% rol = "logo" %>
+    <% ext = ".png" %>
     <% ok = false; %>
   <% } else { %>
     <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol.name); %>
@@ -20,8 +20,8 @@
   <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol[0].name); %>
   <% var index = getIndex(session.user.rol, rol.slice(1)); %>
   <% if (session.user.rol[index].photo == null) { %>
-    <% rol = "default/" + rol.slice(1) %>
-    <% ext = ".jpg" %>
+    <% rol = "logo" %>
+    <% ext = ".png" %>
     <% ok = false; %>
   <% } else { %>
     <% rol = session.user.id + rol; %>
@@ -32,6 +32,7 @@
 <% var tmp = rol.split('-'); %>
 <% var urlRol = (ok == true)? tmp[tmp.length - 1] : rol.slice(8); %>
 <% rol = (ok == true)? ("tmp/" + rol) : rol %>
+<% urlRol = urlRol || rolCurr %>
 
 <form action="/users/<%= session.user.id %>/<%= urlRol %>/edit?_method=put" enctype="multipart/form-data" method="post">
   <div class="row center">
@@ -39,8 +40,8 @@
       <h3><%= (session.user.rol.name).toUpperCase() %></h3>
       <img src="/images/<%= rol %><%= ext %>" alt="<%= session.user.rol.name %>" class="responsive-img"/>
     <% } else {%>
-      <% var aux = (ok == true)? rol.slice(session.user.id.length + 5) : rol.slice(8) %>
-      <% aux = (aux == 'paciente')? "PACIENTE" : ("MÉDICO " + (rol.split('medico')[1]).toUpperCase()) %>
+      <% var tmp = rolCurr.split('medico'); %>
+      <% var aux = (rolCurr == 'paciente')? "PACIENTE" : (tmp[1])? ("MÉDICO " + tmp[1].toUpperCase()) : ("MÉDICO " + tmp[0].toUpperCase()) %>
       <h3><%= aux %></h3>
       <img src="/images/<%= rol %><%= ext %>" alt="<%= aux %>" class="responsive-img"/>
     <% } %>
@@ -49,7 +50,7 @@
     <% if (ok) { %>
     <div class="col l4 col s12">
       <div class="row center"><br>
-        <button type="submit" class="btn waves-effect waves-light cyan darken-2" formaction="/users/<%= session.user.id %>/<%= urlRol %>" formmethod="get" name="button">
+        <button type="submit" class="btn waves-effect waves-light cyan darken-2" formaction="/users/<%= session.user.id %>/<%= urlRol %>/edit?_method=delete" formmethod="post" name="button">
           BORRAR FOTO DE PERFIl
         </button>
       </div>

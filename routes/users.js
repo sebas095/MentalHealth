@@ -55,6 +55,8 @@ module.exports = function(app, mountPoint) {
   // DELETE
   router.delete('/:id/edit', sessionController.loginRequired, userController.deleteAccount);
 
+  router.delete('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.deleteRolImage);
+
   router.delete('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });

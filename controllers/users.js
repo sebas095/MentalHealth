@@ -69,7 +69,75 @@ exports.home = function(req, res) {
 }
 
 exports.rolForm = function(req, res) {
-  res.render('users/editRol');
+  res.render('users/editRol', {rolCurr: req.params.rol});
+}
+
+exports.deleteRolImage = function(req, res) {
+  var rol = req.params.rol;
+
+  if (Array.isArray(req.session.user.rol)) {
+    var index = getIndex(req.session.user.rol, rol);
+
+    imageHelper.deleteImage({path: req.session.user.rol[index].photo}, function() {
+      var curr = req.session.user.id + '-' + req.params.rol + req.session.user.rol[index].ext;
+      var dir = path.join(path.resolve(__dirname, '..', 'public/images/tmp'), curr);
+
+      imageHelper.deleteImage({path: dir}, function() {
+        req.session.user.rol[index].photo = null;
+        req.session.user.rol[index].ext = null;
+
+        User.update(req.session.user.id, {rol: req.session.user.rol}, function(err, data) {
+          if (err) {
+            console.log('Error: ', err);
+            return res.send(500, err);
+          }
+          res.redirect('/users/' + req.session.user.id + '/' + rol);
+        });
+      });
+    });
+  }
+
+  else {
+    if (rol == 'eps') {
+      imageHelper.deleteImage({path: req.session.user.rol.photo}, function() {
+        var curr = req.session.user.id + '-' + req.params.rol + req.session.user.rol.ext;
+        var dir = path.join(path.resolve(__dirname, '..', 'public/images/tmp'), curr);
+
+        imageHelper.deleteImage({path: dir}, function() {
+          req.session.user.rol.photo = null;
+          req.session.user.rol.ext = null;
+
+          Eps.update(req.session.user.id, {rol: req.session.user.rol}, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              return res.send(500, err);
+            }
+            res.redirect('/users/' + req.session.user.id + '/' + rol);
+          });
+        });
+      });
+    }
+
+    else {
+      imageHelper.deleteImage({path: req.session.user.rol.photo}, function() {
+        var curr = req.session.user.id + '-' + req.params.rol + req.session.user.rol.ext;
+        var dir = path.join(path.resolve(__dirname, '..', 'public/images/tmp'), curr);
+
+        imageHelper.deleteImage({path: dir}, function() {
+          req.session.user.rol.photo = null;
+          req.session.user.rol.ext = null;
+
+          Root.update(req.session.user.id, {rol: req.session.user.rol}, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              return res.send(500, err);
+            }
+            res.redirect('/users/' + req.session.user.id + '/' + req.params.rol);
+          });
+        });
+      });
+    }
+  }
 }
 
 exports.dataRol = function(req, res) {
@@ -194,7 +262,7 @@ exports.editRol = function(req, res) {
 
       else if (Array.isArray(req.session.user.rol)) {
         var index = getIndex(req.session.user.rol, req.params.rol);
-      
+
         if (req.session.user.rol[index].photo === null) {
           req.session.user.rol[index].photo = req.file.path;
           req.session.user.rol[index].ext = ext;

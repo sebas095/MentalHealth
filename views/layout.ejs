@@ -34,9 +34,9 @@
         <% } else { %>
           <% if (!Array.isArray(session.user.rol)) { %>
             <% if (session.user.rol.photo == null) { %>
-              <% rol = "default/" + session.user.rol.name; %>
+              <% rol = "logo" %>
+              <% ext = ".png" %>
               <% rolCurr = session.user.rol.name; %>
-              <% ext = ".jpg" %>
               <% ok = false %>
             <% } else { %>
               <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol.name); %>
@@ -50,8 +50,8 @@
             <% rolCurr = rol.slice(1); %>
             <% var index = getIndex(session.user.rol, rol.slice(1)); %>
             <% if (session.user.rol[index].photo == null) { %>
-              <% rol = "default/" + rol.slice(1) %>
-              <% ext = ".jpg" %>
+              <% rol = "logo" %>
+              <% ext = ".png" %>
               <% ok = false %>
             <% } else { %>
               <% rol = session.user.id + rol; %>
@@ -61,10 +61,9 @@
           <% } %>
           <% ext = ext || tmpExt %>
           <% rol = (ok == true)? ("tmp/" + rol) : rol %>
-          
 
+          <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img"><hr>
           <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>
-          <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img">
             <% if (Array.isArray(session.user.rol)) { %>
               <form action="/users/<%= session.user.id %>/data" method="get">
                 <hr><br><h6><b>Roles: </b></h6><br><br>
@@ -86,7 +85,7 @@
                 <li class="bold"><input type="submit" class="waves-effect waves-teal" name="edit" value="Editar Rol"></li>
               </form>
             <% } else {%>
-              <hr><br>
+              <br>
               <% var name = (session.user.rol.name[0]).toUpperCase() + session.user.rol.name.slice(1) %>
               <li class="bold">
                 <h6>&nbsp;&nbsp;<b>Rol: </b></h6>
