@@ -1,4 +1,4 @@
 node_modules
 npm-debug.log
 /data
-/public/images
+/public/images/tmp
