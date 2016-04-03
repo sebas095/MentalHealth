@@ -26,7 +26,7 @@
 
       <div class="container "><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only "><i class="mdi-navigation-menu"></i></a></div>
       <ul id="nav-mobile" class="side-nav fixed blue lighten-5">
-        <% var rolCurr = undefined, rol = undefined, ext = undefined; %>
+        <% var rolCurr = undefined, rol = undefined, ext = undefined, ok = undefined; %>
         <% if (!session.user) { %>
           <li class="bold"><a href="/" class="waves-effect waves-teal">Home</a></li>
           <li class="bold"><a href="/users/new" class="waves-effect waves-teal">Registrarse</a></li>
@@ -37,11 +37,13 @@
               <% rol = "default/" + session.user.rol.name; %>
               <% rolCurr = session.user.rol.name; %>
               <% ext = ".jpg" %>
+              <% ok = false %>
             <% } else { %>
               <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol.name); %>
               <% rolCurr = rol.slice(1); %>
               <% rol = session.user.id + rol; %>
               <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol.ext; %>
+              <% ok = true %>
             <% } %>
           <% } else { %>
             <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol[0].name); %>
@@ -50,12 +52,16 @@
             <% if (session.user.rol[index].photo == null) { %>
               <% rol = "default/" + rol.slice(1) %>
               <% ext = ".jpg" %>
+              <% ok = false %>
             <% } else { %>
               <% rol = session.user.id + rol; %>
               <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol[0].ext; %>
+              <% ok = true %>
             <% } %>
           <% } %>
           <% ext = ext || tmpExt %>
+          <% rol = (ok == true)? ("tmp/" + rol) : rol %>
+          
 
           <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>
           <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img">

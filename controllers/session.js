@@ -5,6 +5,7 @@ const path = require('path');
 const imageHelper = require('../helpers/images');
 const nodemailer = require('nodemailer');
 const config = require('../config/email');
+const fs = require('fs-extra');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 
 // MW de autorizacion de accesos HTTP retringidos
@@ -237,10 +238,10 @@ exports.request = function(req, res) {
 
 // DELETE /logout  -- Destruir sesion
 exports.destroy = function(req, res){
-  destroyUserImages(req, res, function() {
-  	delete req.session.user;
-  	req.session.rolEdit = undefined;
-  	res.redirect('/');
+  destroyUserImages(function() {
+    delete req.session.user;
+    req.session.rolEdit = undefined;
+    res.redirect('/');
   });
 };
 
@@ -252,7 +253,7 @@ function userImages(req, res, callback) {
         imageHelper.translateImage({
           path: req.session.user.rol[0].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, callback);
       }
       else callback();
@@ -263,26 +264,26 @@ function userImages(req, res, callback) {
         imageHelper.translateImage({
           path: req.session.user.rol[1].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, callback);
       }
       if (req.session.user.rol[1].photo == null && req.session.user.rol[0].photo != null) {
         imageHelper.translateImage({
           path: req.session.user.rol[0].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, callback);
       }
       if (req.session.user.rol[0].photo != null && req.session.user.rol[1].photo != null) {
         imageHelper.translateImage({
           path: req.session.user.rol[0].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, function() {
           imageHelper.translateImage({
             path: req.session.user.rol[1].photo,
             targetName: req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext,
-            targetPath: path.resolve(__dirname, '..', 'public/images')
+            targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
           }, callback);
         });
       }
@@ -294,33 +295,33 @@ function userImages(req, res, callback) {
         imageHelper.translateImage({
           path: req.session.user.rol[0].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, callback);
       }
       if (req.session.user.rol[1].photo != null && req.session.user.rol[0].photo == null && req.session.user.rol[2].photo == null) {
         imageHelper.translateImage({
           path: req.session.user.rol[1].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, callback);
       }
       if (req.session.user.rol[2].photo != null && req.session.user.rol[1].photo == null && req.session.user.rol[0].photo == null) {
         imageHelper.translateImage({
           path: req.session.user.rol[2].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, callback);
       }
       if (req.session.user.rol[0].photo != null && req.session.user.rol[1].photo != null && req.session.user.rol[2].photo == null) {
         imageHelper.translateImage({
           path: req.session.user.rol[0].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, function() {
           imageHelper.translateImage({
             path: req.session.user.rol[1].photo,
             targetName: req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext,
-            targetPath: path.resolve(__dirname, '..', 'public/images')
+            targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
           }, callback);
         });
       }
@@ -328,12 +329,12 @@ function userImages(req, res, callback) {
         imageHelper.translateImage({
           path: req.session.user.rol[0].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, function() {
           imageHelper.translateImage({
             path: req.session.user.rol[2].photo,
             targetName: req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext,
-            targetPath: path.resolve(__dirname, '..', 'public/images')
+            targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
           }, callback);
         });
       }
@@ -341,12 +342,12 @@ function userImages(req, res, callback) {
         imageHelper.translateImage({
           path: req.session.user.rol[1].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, function() {
           imageHelper.translateImage({
             path: req.session.user.rol[2].photo,
             targetName: req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext,
-            targetPath: path.resolve(__dirname, '..', 'public/images')
+            targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
           }, callback);
         });
       }
@@ -354,17 +355,17 @@ function userImages(req, res, callback) {
         imageHelper.translateImage({
           path: req.session.user.rol[0].photo,
           targetName: req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext,
-          targetPath: path.resolve(__dirname, '..', 'public/images')
+          targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
         }, function() {
           imageHelper.translateImage({
             path: req.session.user.rol[1].photo,
             targetName: req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext,
-            targetPath: path.resolve(__dirname, '..', 'public/images')
+            targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
           }, function() {
             imageHelper.translateImage({
               path: req.session.user.rol[2].photo,
               targetName: req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext,
-              targetPath: path.resolve(__dirname, '..', 'public/images')
+              targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
             }, callback);
           });
         });
@@ -378,7 +379,7 @@ function userImages(req, res, callback) {
       imageHelper.translateImage({
         path: req.session.user.rol.photo,
         targetName: req.session.user.id + '-' + req.session.user.rol.name + req.session.user.rol.ext,
-        targetPath: path.resolve(__dirname, '..', 'public/images')
+        targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
       }, callback);
     }
     else callback();
@@ -386,104 +387,9 @@ function userImages(req, res, callback) {
 }
 
 // Borrar las imagenes del perfil que estan en la carpeta public al cerrar la sesion
-function destroyUserImages(req, res, callback) {
-  if (Array.isArray(req.session.user.rol)) {
-    if (req.session.user.rol.length == 1) {
-      if (req.session.user.rol[0].photo != null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext)
-        }, callback);
-      }
-      else callback();
-    }
-    if (req.session.user.rol.length == 2) {
-      if (req.user.session.rol[0].photo != null && req.session.user.rol[1].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext)
-        }, callback);
-      }
-      if (req.user.session.rol[1].photo != null && req.session.user.rol[0].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext)
-        }, callback);
-      }
-      if (req.user.session.rol[0].photo != null && req.session.user.rol[1].photo != null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext)
-        }, function() {
-          imageHelper.deleteImage({
-            path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext)
-          }, callback);
-        });
-      }
-      else callback();
-    }
-    if (req.session.user.rol.length == 3) {
-      if (req.session.user.rol[0].photo != null && req.session.user.rol[1].photo == null && req.session.user.rol[2].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext)
-        }, callback);
-      }
-      if (req.session.user.rol[1].photo != null && req.session.user.rol[0].photo == null && req.session.user.rol[2].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext)
-        }, callback);
-      }
-      if (req.session.user.rol[2].photo != null && req.session.user.rol[1].photo == null && req.session.user.rol[0].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext)
-        }, callback);
-      }
-      if (req.session.user.rol[0].photo != null && req.session.user.rol[1].photo != null && req.session.user.rol[2].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext)
-        }, function() {
-          imageHelper.deleteImage({
-            path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext)
-          }, callback);
-        });
-      }
-      if (req.session.user.rol[0].photo != null && req.session.user.rol[2].photo != null && req.session.user.rol[1].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext)
-        }, function() {
-          imageHelper.deleteImage({
-            path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext)
-          }, callback);
-        });
-      }
-      if (req.session.user.rol[1].photo != null && req.session.user.rol[2].photo != null && req.session.user.rol[0].photo == null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext)
-        }, function() {
-          imageHelper.deleteImage({
-            path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext)
-          }, callback);
-        });
-      }
-      if (req.session.user.rol[0].photo != null && req.session.user.rol[1].photo != null && req.session.user.rol[2].photo != null) {
-        imageHelper.deleteImage({
-          path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[0].name + req.session.user.rol[0].ext)
-        }, function() {
-          imageHelper.deleteImage({
-            path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[1].name + req.session.user.rol[1].ext)
-          }, function() {
-            imageHelper.deleteImage({
-              path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol[2].name + req.session.user.rol[2].ext)
-            }, callback);
-          });
-        });
-      }
-      else callback();
-    }
-    else callback();
-  }
-  else {
-    if (req.session.user.rol.photo != null) {
-      imageHelper.deleteImage({
-        path: path.join(path.resolve(__dirname, '..', 'public/images'), req.session.user.id + '-' + req.session.user.rol.name + req.session.user.rol.ext)
-      }, callback);
-    }
-    else callback();
-  }
+function destroyUserImages(callback) {
+  fs.remove(path.resolve(__dirname, '..', 'public/images/tmp'), function(err) {
+    if (err) console.log("Error: ", err);
+    callback();
+  });
 }

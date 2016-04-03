@@ -110,7 +110,7 @@ exports.editRol = function(req, res) {
             imageHelper.translateImage({
               path: req.file.path,
               targetName: req.params.id + '-' + req.params.rol + ext,
-              targetPath: path.resolve(__dirname, '..', 'public/images')
+              targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
             }, function() {
               res.redirect('/users/' + req.params.id + '/' + req.params.rol);
             });
@@ -129,12 +129,12 @@ exports.editRol = function(req, res) {
               }
 
               imageHelper.deleteImage({
-                path: path.join(path.resolve(__dirname, '..', 'public/images'), req.params.id + '-' + req.params.rol + tmpExt)
+                path: path.join(path.resolve(__dirname, '..', 'public/images/tmp'), req.params.id + '-' + req.params.rol + tmpExt)
               }, function() {
                 imageHelper.translateImage({
                   path: req.file.path,
                   targetName: req.params.id + '-' + req.params.rol + ext,
-                  targetPath: path.resolve(__dirname, '..', 'public/images')
+                  targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
                 }, function() {
                   res.redirect('/users/' + req.params.id + '/' + req.params.rol);
                 });
@@ -145,7 +145,7 @@ exports.editRol = function(req, res) {
       }
 
       if (req.params.rol == 'root') {
-        if (req.session.user.rol.photo === null) {
+        if (req.session.user.rol.photo == null) {
           req.session.user.rol.photo = req.file.path;
           req.session.user.rol.ext = ext;
 
@@ -158,13 +158,13 @@ exports.editRol = function(req, res) {
             imageHelper.translateImage({
               path: req.file.path,
               targetName: req.params.id + '-' + req.params.rol + ext,
-              targetPath: path.resolve(__dirname, '..', 'public/images')
+              targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
             }, function() {
               res.redirect('/users/' + req.params.id + '/' + req.params.rol);
             });
           });
         }
-        else {
+        else if (req.session.user.rol.photo != null) {
           imageHelper.deleteImage({path: req.session.user.rol.photo}, function() {
             req.session.user.rol.photo = req.file.path;
             var tmpExt = req.session.user.rol.ext;
@@ -177,12 +177,12 @@ exports.editRol = function(req, res) {
               }
 
               imageHelper.deleteImage({
-                path: path.join(path.resolve(__dirname, '..', 'public/images'), req.params.id + '-' + req.params.rol + tmpExt)
+                path: path.join(path.resolve(__dirname, '..', 'public/images/tmp'), req.params.id + '-' + req.params.rol + tmpExt)
               }, function() {
                 imageHelper.translateImage({
                   path: req.file.path,
                   targetName: req.params.id + '-' + req.params.rol + ext,
-                  targetPath: path.resolve(__dirname, '..', 'public/images')
+                  targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
                 }, function() {
                   res.redirect('/users/' + req.params.id + '/' + req.params.rol);
                 });
@@ -194,8 +194,7 @@ exports.editRol = function(req, res) {
 
       else if (Array.isArray(req.session.user.rol)) {
         var index = getIndex(req.session.user.rol, req.params.rol);
-        console.log('index: ', index);
-        console.log('rol: ', req.session.user.rol[index]);
+      
         if (req.session.user.rol[index].photo === null) {
           req.session.user.rol[index].photo = req.file.path;
           req.session.user.rol[index].ext = ext;
@@ -209,7 +208,7 @@ exports.editRol = function(req, res) {
             imageHelper.translateImage({
               path: req.file.path,
               targetName: req.params.id + '-' + req.params.rol + ext,
-              targetPath: path.resolve(__dirname, '..', 'public/images')
+              targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
             }, function() {
               res.redirect('/users/' + req.params.id + '/' + req.params.rol);
             });
@@ -228,12 +227,12 @@ exports.editRol = function(req, res) {
               }
 
               imageHelper.deleteImage({
-                path: path.join(path.resolve(__dirname, '..', 'public/images'), req.params.id + '-' + req.params.rol + tmpExt)
+                path: path.join(path.resolve(__dirname, '..', 'public/images/tmp'), req.params.id + '-' + req.params.rol + tmpExt)
               }, function() {
-                translateImage({
+                imageHelper.translateImage({
                   path: req.file.path,
                   targetName: req.params.id + '-' + req.params.rol + ext,
-                  targetPath: path.resolve(__dirname, '..', 'public/images')
+                  targetPath: path.resolve(__dirname, '..', 'public/images/tmp')
                 }, function() {
                   res.redirect('/users/' + req.params.id + '/' + req.params.rol);
                 });
