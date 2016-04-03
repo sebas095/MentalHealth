@@ -1,39 +1,39 @@
 <div class="row">
   <hr>
-  <label><h4>REGISTRO EPS</h4></label><br><br>
+  <center><label><h4>REGISTRO EPS</h4></label></center><br><br>
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <input type="text" name="nit" class="validate" required="" aria-required="true">
+    <input type="text" name="nit" id="nit" class="validate" required="" aria-required="true">
     <label for="nit">NIT </label>
   </div>
   <div class="input-field col l6">
-    <input type="text" name="nameEps" id="nombre" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
-    <label for="nombre">Nombre o Razón Social </label>
+    <input type="text" name="nameEps" id="nameEps" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
+    <label for="nameEps">Nombre o Razón Social </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <input type="text" name="mailEps" id="correo" class="validate"
+    <input type="text" name="mailEps" id="mail" class="validate"
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="" aria-required="true">
-    <label for="correo">Correo </label>
+    <label for="mail">Correo </label>
   </div>
   <div class="input-field col l6">
-    <input type="text" name="phoneEps" id="telefono" pattern="[0-9]+" class="validate" required="" aria-required="true">
-    <label for="telefono">Telefono </label>
+    <input type="text" name="phoneEps" id="telefonoEps" pattern="[0-9]+" class="validate" required="" aria-required="true">
+    <label for="telefonoEps">Telefono </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l12">
-    <input type="text" name="addressEps" id="direccion" class="validate" required="" aria-required="true">
-    <label for="direccion">Dirección </label>
+    <input type="text" name="addressEps" id="addressEps" class="validate" required="" aria-required="true">
+    <label for="addressEps">Dirección </label>
   </div>
 </div>
 <div class="row"><h5>Persona Responsable</h5></div>
 <div class="row">
   <div class="col l6">
-    <label >Tipo de Documento </label>
-    <select name="typeDocument" required="" aria-required="true">
+    <label for="td">Tipo de Documento </label>
+    <select name="typeDocument" id="td" required="" aria-required="true">
       <option value="cédula-de-ciudadanía">Cédula de Ciudadanía</option>
       <option value="cédula-de-extranjería">Cédula de Extranjería</option>
       <option value="pasaporte">Pasaporte</option>
@@ -47,36 +47,36 @@
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <input type="text" name="names" id="nombre" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
-    <label for="nombre">Nombres </label>
+    <input type="text" name="names" id="nombres" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
+    <label for="nombres">Nombres </label>
   </div>
   <div class="input-field col l6">
-    <input type="text" name="lastnames" id="apellidos" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
-    <label for="apellidos">Apellidos </label>
+    <input type="text" name="lastnames" id="apellido" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
+    <label for="apellido">Apellidos </label>
   </div>
 </div>
 <div class="row">
   <div class="col l6">
-    <label >Género </label>
-    <select name="gender" required="" aria-required="true">
+    <label for="gen">Género </label>
+    <select name="gender" id="gen" required="" aria-required="true">
       <option value="masculino">Masculino</option>
       <option value="femenino">Femenino</option>
     </select>
   </div>
   <div class="input-field col l6">
-    <input type="text" id="telefono" name="phone" class="validate" pattern="[0-9]+" required="" aria-required="true">
-    <label for="telefono">Telefono </label>
+    <input type="text" id="tel" name="phone" class="validate" pattern="[0-9]+" required="" aria-required="true">
+    <label for="tel">Telefono </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <input type="password" name="pwd" id="pwd" class="validate"
+    <input type="password" name="pwd" id="pwdEps" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
-    <label for="pwd">Contraseña </label>
+    <label for="pwdEps">Contraseña </label>
   </div>
   <div class="input-field col l6">
-    <input type="password" name="cpwd" id="cpwd" class="validate"
+    <input type="password" name="cpwd" id="cpwdEps" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
-    <label for="cpwd">Confirmar Contraseña</label>
+    <label for="cpwdEps">Confirmar Contraseña</label>
   </div>
 </div>
