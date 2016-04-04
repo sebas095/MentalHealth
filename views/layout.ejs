@@ -113,7 +113,7 @@
     <main>
       <div class="col l10">
         <%- body %>
-        <% if (session.user && !Array.isArray(session.user.rol)) {%>
+        <% if (session.user) {%>
           <div class="col l2"><br></div>
           <div class="col l8 center" id="pending">
             <div class="cyan lighten-5">
@@ -121,7 +121,17 @@
                 <p><b><h5>MENÚ</h5></b></p>
               <br>
               <div class="collection">
-                <% include ./users/menu/root.ejs %>
+                <% if (rolCurr == 'root') { %>
+                  <% include ./users/menu/root.ejs %>
+                <% } else if (rolCurr == 'eps') { %>
+                  <% include ./users/menu/eps.ejs %>
+                <% } else if (rolCurr == 'paciente') { %>
+                  <% include ./users/menu/paciente.ejs %>
+                <% } else if (rolCurr == 'medicoGeneral') { %>
+                  <% include ./users/menu/mGeneral.ejs %>
+                <% } else if (rolCurr == 'medicoEspecialista') { %>
+                  <% include ./users/menu/mEspecialista.ejs %>
+                <% } %>
               </div>
               <br><br><br>
             </div>
