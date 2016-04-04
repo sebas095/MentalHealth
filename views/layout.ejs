@@ -61,7 +61,7 @@
             <% } %>
           <% } %>
           <% ext = ext || tmpExt %>
-          <% rol = (ok == true)? ("tmp/" + rol) : rol %>
+          <% rol = (ok == true)? ("users/user-" + session.user.id + '/' + rol) : rol %>
 
           <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img"><hr>
           <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>

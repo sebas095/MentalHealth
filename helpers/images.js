@@ -9,7 +9,7 @@ exports.deleteImage = function (options, callback) {
 }
 
 exports.translateImage =  function (option, callback) {
-  ensureExists(__dirname + '/../public/images/tmp', 0744, function(err) {
+  ensureExists(__dirname + '/../public/images/users/user-' + option.id, 0744, function(err) {
     var tmpPath = option.path;
     var targetPath = option.targetPath;
     var targetName = option.targetName;

@@ -31,7 +31,7 @@
 <% } %>
 <% var tmp = rol.split('-'); %>
 <% var urlRol = (ok == true)? tmp[tmp.length - 1] : rol.slice(8); %>
-<% rol = (ok == true)? ("tmp/" + rol) : rol %>
+<% rol = (ok == true)? ("users/user-" + session.user.id + '/' + rol) : rol %>
 <% urlRol = urlRol || rolCurr %>
 
 <form action="/users/<%= session.user.id %>/<%= urlRol %>/edit?_method=put" enctype="multipart/form-data" method="post">
