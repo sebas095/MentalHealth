@@ -22,6 +22,8 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
 
+  router.get('/:id/:rol(\\eps|root)/manage', sessionController.loginRequired, userController.manage);
+
   router.get('/:id/:rol(\\eps|root)/allow', sessionController.loginRequired, userController.allow);
 
   router.get('/:id/data', sessionController.loginRequired, userController.dataRol);

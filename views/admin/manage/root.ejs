@@ -1,0 +1,21 @@
+<div class="row center">
+  <h3>Listado de Eps Registradas</h3>
+</div>
+<%# if (allUsers.length == 0) {%>
+  <!--form action="#" method="get" onclick="alert('No hay Eps Registradas')">-->
+<%# } else {%>
+  <form action="#" method="post">
+<%# } %>
+  <div class="row">
+    <div class="col l8 offset-l2 col s12">
+      <select name="requests">
+        <%# if (allUsers.length == 0) { %>
+          <option value="none">No hay solicitudes Pendientes</option>
+      </select>
+    </div>
+  </div>
+  <div class="row center col l5 s12">
+    <input type="submit" class="btn waves-effect waves-light cyan darken-2" value="EDITAR ROL">
+    <input type="submit" class="btn waves-effect waves-light cyan darken-2" value="EDITAR PERFIL">
+  </div>
+</form>
