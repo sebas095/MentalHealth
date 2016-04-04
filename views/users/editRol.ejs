@@ -38,12 +38,12 @@
   <div class="row center">
     <% if (!Array.isArray(session.user.rol)) { %>
       <h3><%= (session.user.rol.name).toUpperCase() %></h3>
-      <img src="/images/<%= rol %><%= ext %>" alt="<%= session.user.rol.name %>" class="responsive-img"/>
+      <img src="/images/<%= rol %><%= ext %>" alt="<%= session.user.rol.name %>" class="maxImageRool"/>
     <% } else {%>
       <% var tmp = rolCurr.split('medico'); %>
       <% var aux = (rolCurr == 'paciente')? "PACIENTE" : (tmp[1])? ("MÉDICO " + tmp[1].toUpperCase()) : ("MÉDICO " + tmp[0].toUpperCase()) %>
       <h3><%= aux %></h3>
-      <img src="/images/<%= rol %><%= ext %>" alt="<%= aux %>" class="responsive-img"/>
+      <img src="/images/<%= rol %><%= ext %>" alt="<%= aux %>" class="maxImageRool"/>
     <% } %>
   </div>
   <div class="row">

@@ -75,3 +75,7 @@ li > a:hover {
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+.maxImageRool {
+  max-width: 30%;
+}
