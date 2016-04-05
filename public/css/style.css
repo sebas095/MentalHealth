@@ -92,3 +92,7 @@ li > a:hover {
 .style-title {
   font-family: Berkshire_Swash;
 }
+
+.height-table {
+  height: 10%;
+}
