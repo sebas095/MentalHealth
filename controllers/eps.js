@@ -118,3 +118,61 @@ function deleteRoles(user, name) {
   user.rol = rol;
   return user;
 }
+
+exports.manage = function(req, res) {
+  var allUsers = [];
+
+  User.all(function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    for (var i in data) {
+      if (data[i].accept >= 1) allUsers.push(data[i]);
+    }
+    res.render('admin/manage/eps', {allUsers: allUsers});
+  });
+}
+
+exports.manageProfile = function(req, res) {
+  var user = req.query.requests.split('-');
+
+  User.find({
+    names: user[0],
+    documentNumber: user[1]
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    else res.render('admin/manage/edit', {manageUser: data[0]});
+  });
+}
+
+exports.storeChanges = function(req, res) {
+  var user = {};
+  var id = req.body.ident;
+  //Falta actualizar roles y organizar los checkbox
+
+  if (req.body.typeDocument) user.documentType = req.body.typeDocument;
+  if (req.body.numDocument)  user.documentNumber = req.body.numDocument;
+  if (req.body.names)        user.names = req.body.names;
+  if (req.body.lastnames)    user.lastnames = req.body.lastnames;
+  if (req.body.gender)       user.gender = req.body.gender;
+  if (req.body.birthdate)    user.birthdate = req.body.birthdate;
+  if (req.body.mail)         user.email = req.body.mail;
+  if (req.body.phone)        user.phone = req.body.phone;
+  if (req.body.address)      user.address = req.body.address;
+  if (req.body.epsRelated)   user.epsRelated = req.body.epsRelated;
+  if (req.body.pwd)          user.password = req.body.pwd;
+  if (req.body.state == '1') user.accept = 1;
+  if (req.body.state == '2') user.accept = 2;
+
+  User.update(id, user, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    res.redirect('/users/' + req.session.user.id + '/eps/manage');
+  });
+}

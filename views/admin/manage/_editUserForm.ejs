@@ -1,0 +1,107 @@
+<div class="row">
+  <hr>
+  <center><label><h4>REGISTRO PACIENTES, MÉDICOS GENERALES Y ESPECIALISTAS</label></h4></center>
+</div>
+<div class="row">
+  <div class="col l6">
+    <label >Tipo de Documento </label>
+    <select name="typeDocument">
+      <option value="cédula-de-ciudadanía" <% if (manageUser.documentType == 'cédula-de-ciudadanía') { %> selected <% } %> >
+      Cédula de Ciudadanía
+      </option>
+      <option value="cédula-de-extranjería" <% if (manageUser.documentType == 'cédula-de-extranjería') { %> selected <% } %> >
+      Cédula de Extranjería
+      </option>
+      <option value="pasaporte" <% if (manageUser.documentType == 'pasaporte') { %> selected <% } %> >Pasaporte
+      </option>
+      <option value="id" <% if (manageUser.documentType == 'id') { %> selected <% } %> >
+      Id
+      </option>
+    </select>
+  </div>
+  <div class="input-field col l6">
+    <input type="text" name="numDocument" id="numDocumento" value="<%= manageUser.documentNumber %>" class="validate">
+    <label for="numDocumento">N° de Documento </label>
+    <input type="hidden" name="ident" value="<%= manageUser.id %>">
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col l6">
+    <input type="text" name="names" id="nombre" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.names %>" class="validate">
+    <label for="nombre">Nombres </label>
+  </div>
+  <div class="input-field col l6">
+    <input type="text" name="lastnames" id="apellidos" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.lastnames %>" class="validate">
+    <label for="apellidos">Apellidos </label>
+  </div>
+</div>
+<div class="row">
+  <div class="col l6">
+    <label >Género </label>
+    <select name="gender" class="validate">
+      <option value="masculino" <% if (manageUser.gender == 'masculino') { %> selected <% } %> >Masculino</option>
+      <option value="femenino" <% if (manageUser.gender == 'femenino') { %> selected <% } %> >Femenino</option>
+    </select>
+  </div>
+  <div class="col l6">
+    <label for="nacimiento">Fecha de Nacimiento </label>
+    <input type="date" name="birthdate" value="<%= manageUser.birthdate %>" class="validate"><br><br>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col l6">
+    <input type="text" name="mail" id="correo"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="<%= manageUser.email %>" class="validate">
+    <label for="correo">Correo </label>
+  </div>
+  <div class="input-field col l6">
+    <input type="text" name="phone" id="telefono" pattern="[0-9]+" value="<%= manageUser.phone %>" class="validate">
+    <label for="telefono">Telefono </label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col l6">
+    <input type="text" name="address" id="direccion" value="<%= manageUser.address %>" class="validate">
+    <label for="direccion">Dirección </label>
+  </div>
+  <div class="input-field col l6">
+    <input type="text" name="epsRelated" id="eps-asociada" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.epsRelated %>" class="validate">
+    <label for="eps-asociada">EPS Asociada </label>
+  </div>
+</div>
+<div class="row">
+  <div class="col l12">
+    <label>Roles </label>
+    <div>
+      <% for (var rol in manageUser.rol) { %>
+        <% var name = manageUser.rol[rol].name %>
+        <% name = (name == 'paciente')? 'Paciente' : ('Médico ' + name.split('medico')[1]) %>
+        <p>
+          <input type="checkbox" class="filled-in" name="<%= manageUser.rol[rol].name %>" value="<%= manageUser.rol[rol].name %>" checked disabled>
+          <label><%= name %></label>
+        </p>
+      <% } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col l12">
+    <label >Estado de la Cuenta </label>
+    <select name="state">
+      <option value="1" <% if (manageUser.accept == 1) { %> selected <% } %> >Activada</option>
+      <option value="2" <% if (manageUser.accept == 2) { %> selected <% } %> >Desactivada</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col l6">
+    <input type="password" name="pwd" id="pwdUser"
+      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" class="validate">
+    <label for="pwdUser">Nueva Contraseña </label>
+  </div>
+  <div class="input-field col l6">
+    <input type="password" name="cpwd" id="cpwdUser"
+      pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" class="validate">
+    <label for="cpwdUser">Confirmar Contraseña </label>
+  </div>
+</div>

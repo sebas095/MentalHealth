@@ -22,7 +22,13 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
 
-  router.get('/:id/:rol(\\eps|root)/manage', sessionController.loginRequired, userController.manage);
+  router.get('/:id/root/manage', sessionController.loginRequired, rootController.manage);
+
+  router.get('/:id/eps/manage', sessionController.loginRequired, epsController.manage);
+
+  router.get('/:id/root/manage/edit', sessionController.loginRequired, rootController.manageProfile);
+
+  router.get('/:id/eps/manage/edit', sessionController.loginRequired, epsController.manageProfile);
 
   router.get('/:id/:rol(\\eps|root)/allow', sessionController.loginRequired, userController.allow);
 
@@ -53,6 +59,10 @@ module.exports = function(app, mountPoint) {
   router.put('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });
+
+  router.put('/:id/root/manage/edit', sessionController.loginRequired, rootController.storeChanges);
+
+  router.put('/:id/eps/manage/edit', sessionController.loginRequired, epsController.storeChanges);
 
   // DELETE
   router.delete('/:id/edit', sessionController.loginRequired, userController.deleteAccount);
