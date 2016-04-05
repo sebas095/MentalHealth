@@ -40,7 +40,7 @@
 </div>
 <div class="row">
   <div class="col l6">
-    <i class="material-icons prefix">android</i>
+    <i class="material-icons prefix">wc</i>
     <label >Género </label>
     <select name="gender" class="validate">
       <option value="masculino" <% if (session.user.gender == 'masculino') { %> selected <% } %> >Masculino</option>
@@ -68,7 +68,7 @@
 </div>
 <div class="row">
   <div class="input-field col l6">
-    <i class="material-icons prefix">location_on</i>
+    <i class="material-icons prefix">location_city</i>
     <input type="text" name="address" id="direccion" value="<%= session.user.address %>" class="validate">
     <label for="direccion">Dirección </label>
   </div>

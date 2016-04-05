@@ -36,7 +36,7 @@
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <i class="material-icons prefix">android</i>
+      <i class="material-icons prefix">wc</i>
       <label>Género</label>
       <% allowUser.gender = (allowUser.gender[0]).toUpperCase() + allowUser.gender.slice(1) %>
       <input type="text" name="gender" disabled value="<%= allowUser.gender %>">
@@ -61,12 +61,12 @@
   </div>
   <div class="row">
     <div class="input-field col l6">
-      <i class="material-icons prefix">location_on</i>
+      <i class="material-icons prefix">location_city</i>
       <input type="text" name="direccion" disabled value="<%= allowUser.address %>">
       <label>Dirección </label>
     </div>
     <div class="input-field col l6">
-      <i class="material-icons prefix">supervisor_account</i>      
+      <i class="material-icons prefix">supervisor_account</i>
       <input type="text" name="eps-asociada" disabled value="<%= allowUser.epsRelated %>">
       <label>EPS Asociada </label>
     </div>

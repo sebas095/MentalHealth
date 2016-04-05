@@ -83,3 +83,12 @@ li > a:hover {
 .nonfuncional:hover {
   background: #E3F2FD;
 }
+
+@font-face {
+  font-family: Berkshire_Swash;
+  src: url(/font/Berkshire_Swash/BerkshireSwash-Regular.ttf);
+}
+
+.style-title {
+  font-family: Berkshire_Swash;
+}
