@@ -79,3 +79,7 @@ li > a:hover {
 .maxImageRool {
   max-width: 30%;
 }
+
+.nonfuncional:hover {
+  background: #E3F2FD;
+}

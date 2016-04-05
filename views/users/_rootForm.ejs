@@ -4,6 +4,7 @@
   </div>
   <div class="row">
     <div class="col l6">
+      <i class="material-icons prefix">label_outline</i>
       <label >Tipo de Documento </label>
       <select name="typeDocument" required="" aria-required="true">
         <option value="cédula-de-ciudadanía">Cedula de Ciudadanía</option>
@@ -13,22 +14,26 @@
       </select>
     </div>
     <div class="input-field col l6">
+      <i class="material-icons prefix">label_outline</i>
       <input type="text" name="numDocument" id="numDocumento" required="" aria-required="true" class="validate">
       <label for="numDocumento">N° de Documento </label>
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6">
+      <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="names" id="nombre" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true" class="validate">
       <label for="nombre">Nombres </label>
     </div>
     <div class="input-field col l6">
+      <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="lastnames" id="apellidos" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true" class="validate">
       <label for="apellidos">Apellidos </label>
     </div>
   </div>
   <div class="row">
     <div class="col l6">
+      <i class="material-icons prefix">android</i>
       <label >Género </label>
       <select name="gender" required="" aria-required="true" class="validate">
         <option value="masculino">Masculino</option>
@@ -36,34 +41,40 @@
       </select>
     </div>
     <div class="col l6">
+      <i class="material-icons prefix">today</i>
       <label for="nac">Fecha de Nacimiento </label>
       <input type="date" name="birthdate" id="nac" required="" aria-required="true" class="validate"><br><br>
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6">
+      <i class="material-icons prefix">email</i>
       <input type="text" name="mail" id="emails"
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="" aria-required="true" class="validate">
       <label for="emails">Correo </label>
     </div>
     <div class="input-field col l6">
+      <i class="material-icons prefix">phone</i>
       <input type="text" name="phone" id="telef" pattern="[0-9]+" required="" aria-required="true" class="validate">
       <label for="telef">Telefono </label>
     </div>
   </div>
   <div class="row">
     <div class="input-field col l12">
+      <i class="material-icons prefix">location_on</i>
       <input type="text" name="address" id="dir" required="" aria-required="true" class="validate">
       <label for="dir">Dirección </label>
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6">
+      <i class="material-icons prefix">lock_outline</i>
       <input type="password" name="pwd" id="pwd"
         pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true" class="validate">
       <label for="pwd">Contraseña </label>
     </div>
     <div class="input-field col l6">
+      <i class="material-icons prefix">lock</i>
       <input type="password" name="cpwd" id="cpwd"
         pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true" class="validate">
       <label for="cpwd">Confirmar Contraseña </label>

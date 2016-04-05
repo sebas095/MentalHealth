@@ -4,27 +4,32 @@
 </div>
 <div class="row">
   <div class="input-field col l6">
+    <i class="material-icons prefix">label_outline</i>
     <input type="text" name="nit" disabled value="<%= session.user.documentNumber %>" class="validate">
     <label for="nit">NIT </label>
   </div>
   <div class="input-field col l6">
+    <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="nameEps" id="nombre" class="validate" value="<%= session.user.names %>" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
     <label for="nombre">Nombre o Razón Social </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l6">
+    <i class="material-icons prefix">email</i>
     <input type="text" name="mailEps" id="correo" value="<%= session.user.email %>" class="validate"
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
     <label for="correo">Correo </label>
   </div>
   <div class="input-field col l6">
+    <i class="material-icons prefix">phone</i>
     <input type="text" name="phoneEps" id="telefono" pattern="[0-9]+" value="<%= session.user.epsPhone %>" class="validate">
     <label for="telefono">Telefono </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l12">
+    <i class="material-icons prefix">location_on</i>
     <input type="text" name="addressEps" id="direccion" value="<%= session.user.address %>" class="validate">
     <label for="direccion">Dirección </label>
   </div>
@@ -32,6 +37,7 @@
 <div class="row"><h5>Persona Responsable</h5></div>
 <div class="row">
   <div class="col l6">
+    <i class="material-icons prefix">label_outline</i>
     <label >Tipo de Documento </label>
     <select name="typeDocument">
       <option value="cédula-de-ciudadanía" <% if (session.user.documentType == 'cédula-de-ciudadanía') { %> selected <% } %> >
@@ -48,22 +54,26 @@
     </select>
   </div>
   <div class="input-field col l6">
+    <i class="material-icons prefix">label_outline</i>
     <input type="text" name="numDocument" id="numDocumento" value="<%= session.user.documentNumberPerson %>" class="validate">
     <label for="numDocumento">N° de Documento </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l6">
+    <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="names" id="nombre" class="validate" value="<%= session.user.namesPerson %>" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
     <label for="nombre">Nombres </label>
   </div>
   <div class="input-field col l6">
+    <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="lastnames" id="apellidos" class="validate" value="<%= session.user.lastnames %>" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
     <label for="apellidos">Apellidos </label>
   </div>
 </div>
 <div class="row">
   <div class="col l6">
+    <i class="material-icons prefix">android</i>
     <label >Género </label>
     <select name="gender">
       <option value="masculino" <% if (session.user.gender == 'masculino') { %> selected <% } %> >Masculino</option>
@@ -71,17 +81,20 @@
     </select>
   </div>
   <div class="input-field col l6">
+    <i class="material-icons prefix">phone</i>
     <input type="text" id="telefono" name="phone" class="validate" value="<%= session.user.phone %>" pattern="[0-9]+">
     <label for="telefono">Telefono </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l6">
+    <i class="material-icons prefix">lock_outline</i>
     <input type="password" name="pwd" id="pwd" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
     <label for="pwd">Nueva Contraseña </label>
   </div>
   <div class="input-field col l6">
+    <i class="material-icons prefix">lock</i>
     <input type="password" name="cpwd" id="cpwd" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
     <label for="cpwd">Confirmar Contraseña</label>

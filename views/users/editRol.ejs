@@ -81,6 +81,7 @@
   </div>
   <div class="row">
     <div class="input-field col l6 col s12">
+      <i class="material-icons prefix">label_outline</i>
       <label>Tipo de Identificación </label>
       <% var typeDocument = undefined %>
       <% if (!Array.isArray(session.user.rol) && session.user.rol.name == 'eps') { %>
@@ -95,23 +96,26 @@
       <input disabled value="<%= typeDocument %>" type="text" name="typeDocument">
     </div>
     <div class="input-field col l6 col s12">
-      <label>Número de Identificacón </label>
+      <i class="material-icons prefix">label_outline</i>
       <input disabled value="<%= session.user.documentNumber %>" type="text" name="numDocument">
+      <label>Número de Identificacón </label>
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6 col s12">
-      <label>Nombre </label>
+      <i class="material-icons prefix">perm_identity</i>
       <input disabled value="<%= session.user.names %>" type="text" name="names">
+      <label>Nombre </label>
     </div>
     <div class="input-field col l6 col s12">
-      <label>Correo </label>
+      <i class="material-icons prefix">email</i>
       <input disabled value="<%= session.user.email %>" type="text" name="mail">
+      <label>Correo </label>
     </div>
   </div>
   <div class="row">
     <div class="input-field col l6 col s12">
-      <label>Telefono </label>
+      <i class="material-icons prefix">phone</i>
       <% var phone = undefined; %>
       <% if (!Array.isArray(session.user.rol) && session.user.rol.name == 'eps') { %>
         <% phone = session.user.epsPhone; %>
@@ -119,10 +123,12 @@
         <% phone = session.user.phone %>
       <% } %>
       <input disabled value="<%= phone %>" type="text" name="phone">
+      <label>Telefono </label>
     </div>
     <div class="input-field col l6 col s12">
-      <label>Dirección </label>
+      <i class="material-icons prefix">location_on</i>
       <input disabled value="<%= session.user.address %>" type="text" name="address">
+      <label>Dirección </label>
     </div>
   </div>
   <div class="row center">
