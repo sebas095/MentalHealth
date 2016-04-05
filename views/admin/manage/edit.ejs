@@ -1,0 +1,24 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <label><h2>
+        <center>Editar Perfil</center>
+      </h2></label>
+    </div>
+  </div>
+
+<% if (session.user.rol.name == 'eps') { %>
+  <form action="/users/<%= session.user.id %>/eps/manage/edit?_method=put" method="post" onsubmit="return comparePwd(this) && checkDate(this, 'user');">
+<% } else if (session.user.rol.name == 'root') { %>
+  <form action="/users/<%= session.user.id %>/root/manage/edit?_method=put" method="post" onsubmit="return comparePwd(this) && checkDate(this, 'eps');">
+<% } %>
+<% if (session.user.rol.name == 'root') { %>
+  <% include _editEpsForm.ejs %>
+<% } else { %>
+  <% include _editUserForm.ejs %>
+<% } %>
+
+<div class="row center">
+  <input class="btn waves-effect waves-light cyan darken-2" type="submit" value="ENVIAR">
+</div>
+</form>

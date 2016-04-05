@@ -68,11 +68,6 @@ exports.home = function(req, res) {
   }
 }
 
-exports.manage = function(req, res) {
-  if (req.params.rol == 'root') res.render('admin/manage/root');
-  else                      res.render('admin/manage/eps');
-}
-
 exports.rolForm = function(req, res) {
   res.render('users/editRol', {rolCurr: req.params.rol});
 }

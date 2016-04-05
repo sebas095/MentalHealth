@@ -1,19 +1,26 @@
 <div class="row center">
   <h3>Listado de Usuarios Registradas</h3>
 </div>
-<%# if (allUsers.length == 0) {%>
-  <!--form action="#" method="get" onclick="alert('No hay Eps Registradas')">-->
-<%# } else {%>
-  <form action="#" method="post">
-<%# } %>
-  <div class="row">
-    <div class="col l8 offset-l2 col s12">
-      <select name="requests">
-        <%# if (allUsers.length == 0) { %>
-          <option value="none">No hay solicitudes Pendientes</option>
-      </select>
-    </div>
+<% if (allUsers.length == 0) {%>
+  <form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>/manage" method="get" onclick="alert('No hay Eps Registradas')">-
+<% } else {%>
+  <form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>/manage/edit" method="get">
+<% } %>
+<div class="row">
+  <div class="col l8 offset-l2 col s12">
+    <select name="requests">
+      <% if (allUsers.length == 0) { %>
+        <option value="none">No hay Usuarios Registrados</option>
+      <% } else { %>
+        <% for (var user in allUsers) { %>
+          <option value="<%= allUsers[user].names %>-<%= allUsers[user].documentNumber %>">
+            <%= allUsers[user].names %>-<%= allUsers[user].documentNumber %>
+          </option>
+        <% } %>
+      <% } %>
+    </select>
   </div>
+</div>
   <div class="row center">
     <input type="submit" class="btn waves-effect waves-light cyan darken-2" value="EDITAR ROL">
   </div>

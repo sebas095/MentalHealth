@@ -86,3 +86,61 @@ exports.allowEps = function(req, res) {
     }
   });
 }
+
+exports.manage = function(req, res) {
+  var allUsers = [];
+
+  Eps.all(function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    for (var i in data) {
+      if (data[i].accept >= 1) allUsers.push(data[i]);
+    }
+    res.render('admin/manage/root', {allUsers: allUsers});
+  });
+}
+
+exports.manageProfile = function(req, res) {
+  var user = req.query.requests.split('-');
+
+  Eps.find({
+    names: user[0],
+    documentNumber: user[1]
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    else res.render('admin/manage/edit', {manageUser: data[0]});
+  });
+}
+
+exports.storeChanges = function(req, res) {
+  var user = {};
+  var id = req.body.ident;
+
+  if (req.body.nit)          user.documentNumber = req.body.nit;
+  if (req.body.nameEps)      user.names = req.body.nameEps;
+  if (req.body.mailEps)      user.email = req.body.mailEps;
+  if (req.body.phoneEps)     user.epsPhone = req.body.phoneEps;
+  if (req.body.addressEps)   user.address = req.body.addressEps;
+  if (req.body.typeDocument) user.documentType = req.body.typeDocument;
+  if (req.body.numDocument)  user.documentNumberPerson = req.body.numDocument;
+  if (req.body.names)        user.namesPerson = req.body.names;
+  if (req.body.lastnames)    user.lastnames = req.body.lastnames;
+  if (req.body.gender)       user.gender = req.body.gender;
+  if (req.body.phone)        user.phone = req.body.phone;
+  if (req.body.pwd)          user.password = req.body.pwd;
+  if (req.body.state == '1') user.accept = 1;
+  if (req.body.state == '2') user.accept = 2;
+
+  Eps.update(id, user, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    res.redirect('/users/' + req.session.user.id + '/root/manage');
+  });
+}
