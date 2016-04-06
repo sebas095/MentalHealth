@@ -2,7 +2,7 @@
   <h3>Listado de Solicitudes de Cuentas Pendientes</h3>
 </div>
 <% if (allUsers.length == 0) {%>
-  <form action="/users/<%= session.user.id %>" method="get" onclick="alert('No hay Solicitudes por revisar')">
+  <form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>" method="get" onclick="alert('No hay Solicitudes por revisar')">
 <% } else {%>
   <form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" method="post">
 <% } %>
