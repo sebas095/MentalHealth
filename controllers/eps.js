@@ -145,14 +145,14 @@ exports.manageProfile = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
-    else res.render('admin/manage/edit', {manageUser: data[0]});
+    if (req.query.editRol) res.render('admin/manage/editRol', {manageRol: data[0]});
+    if (req.query.profile) res.render('admin/manage/edit', {manageUser: data[0]});
+    // calendar else                   res.render('admin/manage/edit', {manageUser: data[0]});
   });
 }
 
 exports.storeChanges = function(req, res) {
   var user = {};
-  var id = req.body.ident;
-  //Falta actualizar roles y organizar los checkbox
 
   if (req.body.typeDocument) user.documentType = req.body.typeDocument;
   if (req.body.numDocument)  user.documentNumber = req.body.numDocument;
@@ -168,11 +168,46 @@ exports.storeChanges = function(req, res) {
   if (req.body.state == '1') user.accept = 1;
   if (req.body.state == '2') user.accept = 2;
 
-  User.update(id, user, function(err, data) {
+  User.find({
+    names: req.body.names,
+    documentNumber: req.body.documentNumber
+  }, function(err, data) {
     if (err) {
       console.log('Error: ', err);
-      return res.send(500, err);
+      res.send(500, err);
     }
-    res.redirect('/users/' + req.session.user.id + '/eps/manage');
+    else {
+      user.id = data[0].id;
+      user.rol = data[0].rol;
+
+      if (req.body.rechazarpaciente) {
+        user = deleteRoles(user, 'paciente');
+      }
+      if (req.body.rechazarmedicoGeneral) {
+        user = deleteRoles(user, 'medicoGeneral');
+      }
+      if (req.body.rechazarmedicoEspecialista) {
+        user = deleteRoles(user, 'medicoEspecialista');
+      }
+
+      if (user.rol.length == 0) {
+        User.destroy(user.id, function(err, data) {
+          if (err) {
+            console.log('Error: ', err);
+            res.send(500, err);
+          }
+          res.redirect('/users/' + req.session.user.id + '/eps/manage');
+        });
+      }
+      else {
+        User.update(user.id, user, function(err, data) {
+          if (err) {
+            console.log('Error: ', err);
+            return res.send(500, err);
+          }
+          res.redirect('/users/' + req.session.user.id + '/eps/manage');
+        });
+      }
+    }
   });
 }

@@ -1,0 +1,137 @@
+<% function getIndex(array, match) { %>
+  <% for (var i in array) { %>
+    <% if (array[i].name == match) return i; %>
+  <% } %>
+<% } %>
+
+<% var rol = undefined, ext = undefined, ok = undefined; %>
+<% if (!Array.isArray(session.user.rol)) { %>
+  <% if (session.user.rol.photo == null) { %>
+    <% rol = "logo" %>
+    <% ext = ".png" %>
+    <% ok = false; %>
+  <% } else { %>
+    <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol.name); %>
+    <% rol = session.user.id + rol; %>
+    <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol.ext; %>
+    <% ok = true; %>
+  <% } %>
+<% } else {%>
+  <% rol = (session.rolEdit)? ("-" + session.rolEdit.rol) : ("-" + session.user.rol[0].name); %>
+  <% var index = getIndex(session.user.rol, rol.slice(1)); %>
+  <% if (session.user.rol[index].photo == null) { %>
+    <% rol = "logo" %>
+    <% ext = ".png" %>
+    <% ok = false; %>
+  <% } else { %>
+    <% rol = session.user.id + rol; %>
+    <% ext = (session.rolEdit)? session.rolEdit.ext : session.user.rol[0].ext; %>
+    <% ok  = true; %>
+  <% } %>
+<% } %>
+<% var tmp = rol.split('-'); %>
+<% var urlRol = (ok == true)? tmp[tmp.length - 1] : rol.slice(8); %>
+<% rol = (ok == true)? ("users/user-" + session.user.id + '/' + rol) : rol %>
+<% urlRol = urlRol || rolCurr %>
+
+<form action="/users/<%= session.user.id %>/<%= urlRol %>/edit?_method=put" enctype="multipart/form-data" method="post">
+  <div class="row center">
+    <% if (!Array.isArray(session.user.rol)) { %>
+      <h3><%= (session.user.rol.name).toUpperCase() %></h3>
+      <img src="/images/<%= rol %><%= ext %>" alt="<%= session.user.rol.name %>" class="maxImageRool"/>
+    <% } else {%>
+      <% var tmp = rolCurr.split('medico'); %>
+      <% var aux = (rolCurr == 'paciente')? "PACIENTE" : (tmp[1])? ("MÉDICO " + tmp[1].toUpperCase()) : ("MÉDICO " + tmp[0].toUpperCase()) %>
+      <h3><%= aux %></h3>
+      <img src="/images/<%= rol %><%= ext %>" alt="<%= aux %>" class="maxImageRool"/>
+    <% } %>
+  </div>
+  <div class="row">
+    <% if (ok) { %>
+    <div class="col l4 col s12">
+      <div class="row center"><br>
+        <button type="submit" class="btn waves-effect waves-light cyan darken-2" formaction="/users/<%= session.user.id %>/<%= urlRol %>/edit?_method=delete" formmethod="post" name="button">
+          BORRAR FOTO DE PERFIl
+        </button>
+      </div>
+    </div>
+    <div class="col l2 col s12"><br><br>
+      <label><h6>Subir Foto de Perfil </h6></label>
+    </div>
+    <% } else { %>
+      <div class="col l3 offset-l3 col s12"><br><br>
+        <label><h6>Subir Foto de Perfil </h6></label>
+      </div>
+    <% } %>
+    <div class="col l6 col s12">
+      <div>
+        <div class="file-field input-field">
+          <div class="btn waves-effect waves-light cyan darken-2">
+            <div class="file-path-wrapper">
+              <span>Seleccionar</span>
+              <input type="file" name="photo" accept="image/*">
+            </div>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col s12">
+      <i class="material-icons prefix">label_outline</i>
+      <label>Tipo de Identificación </label>
+      <% var typeDocument = undefined %>
+      <% if (!Array.isArray(manageRol.rol) && manageRol.rol.name == 'eps') { %>
+        <% typeDocument = "Nit"; %>
+      <% } else { %>
+        <% typeDocument = manageRol.documentType.split('-'); %>
+        <% for (var i in typeDocument) { %>
+          <% typeDocument[i] = (typeDocument[i][0]).toUpperCase() + typeDocument[i].slice(1); %>
+        <% } %>
+        <% typeDocument = typeDocument.join(' '); %>
+      <% } %>
+      <input disabled value="<%= typeDocument %>" type="text" name="typeDocument">
+    </div>
+    <div class="input-field col l6 col s12">
+      <i class="material-icons prefix">label_outline</i>
+      <input disabled value="<%= manageRol.documentNumber %>" type="text" name="numDocument">
+      <label>Número de Identificacón </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input disabled value="<%= manageRol.names %>" type="text" name="names">
+      <label>Nombre </label>
+    </div>
+    <div class="input-field col l6 col s12">
+      <i class="material-icons prefix">email</i>
+      <input disabled value="<%= manageRol.email %>" type="text" name="mail">
+      <label>Correo </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col s12">
+      <i class="material-icons prefix">phone</i>
+      <% var phone = undefined; %>
+      <% if (!Array.isArray(manageRol.rol) && manageRol.rol.name == 'eps') { %>
+        <% phone = manageRol.epsPhone; %>
+      <% } else {%>
+        <% phone = manageRol.phone %>
+      <% } %>
+      <input disabled value="<%= phone %>" type="text" name="phone">
+      <label>Telefono </label>
+    </div>
+    <div class="input-field col l6 col s12">
+      <i class="material-icons prefix">location_city</i>
+      <input disabled value="<%= manageRol.address %>" type="text" name="address">
+      <label>Dirección </label>
+    </div>
+  </div>
+  <div class="row center">
+    <input class="btn waves-effect waves-light cyan darken-2" type="submit" name="save" value="GUARDAR">
+  </div>
+</form>

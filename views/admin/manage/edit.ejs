@@ -8,9 +8,9 @@
   </div>
 
 <% if (session.user.rol.name == 'eps') { %>
-  <form action="/users/<%= session.user.id %>/eps/manage/edit?_method=put" method="post" onsubmit="return comparePwd(this) && checkDate(this, 'user');">
+  <form action="/users/<%= session.user.id %>/eps/manage/edit?_method=put" method="post" onsubmit="return comparePwd(this) && checkDate(this, 'user') && allowUsers(this);">
 <% } else if (session.user.rol.name == 'root') { %>
-  <form action="/users/<%= session.user.id %>/root/manage/edit?_method=put" method="post" onsubmit="return comparePwd(this) && checkDate(this, 'eps');">
+  <form action="/users/<%= session.user.id %>/root/manage/edit?_method=put" method="post" onsubmit="return comparePwd(this) && allowUsers(this);">
 <% } %>
 <% if (session.user.rol.name == 'root') { %>
   <% include _editEpsForm.ejs %>

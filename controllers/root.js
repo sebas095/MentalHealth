@@ -113,8 +113,10 @@ exports.manageProfile = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
-    else res.render('admin/manage/edit', {manageUser: data[0]});
+    if (req.query.editRol) res.render('admin/manage/editRol', {manageRol: data[0]});
+    else                   res.render('admin/manage/edit', {manageUser: data[0]});
   });
+
 }
 
 exports.storeChanges = function(req, res) {

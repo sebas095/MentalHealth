@@ -77,8 +77,10 @@
       <% allowUser.rol[i].name = (allowUser.rol[i].name[0]).toUpperCase() + allowUser.rol[i].name.slice(1) %>
       <div class="col l4">
         <% if (rol == 'paciente') { %>
+          <i class="material-icons prefix">assignment_ind</i>
           <label><%= allowUser.rol[i].name %></label>
         <% } else { %>
+          <i class="material-icons prefix">assignment_ind</i>
           <label>Médico <%= (allowUser.rol[i].name).split('Medico')[1] %></label>
         <% } %>
         <div>
