@@ -3,40 +3,42 @@
   <center><label><h4>REGISTRO EPS</h4></label></center><br><br>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">label_outline</i>
     <input type="text" name="nit" id="nit" class="validate" required="" aria-required="true">
     <label for="nit">NIT </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="nameEps" id="nameEps" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
     <label for="nameEps">Nombre o Razón Social </label>
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">email</i>
     <input type="text" name="mailEps" id="mail" class="validate"
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="" aria-required="true">
     <label for="mail">Correo </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">phone</i>
     <input type="text" name="phoneEps" id="telefonoEps" pattern="[0-9]+" class="validate" required="" aria-required="true">
     <label for="telefonoEps">Telefono </label>
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l12">
+  <div class="input-field col l12 col m12 col s12">
     <i class="material-icons prefix">location_city</i>
     <input type="text" name="addressEps" id="addressEps" class="validate" required="" aria-required="true">
     <label for="addressEps">Dirección </label>
   </div>
 </div>
-<div class="row"><h5>Persona Responsable</h5></div>
+<div class="row center">
+  <p><h5>Persona Responsable</h5></p>
+</div>
 <div class="row">
-  <div class="col l6">
+  <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">label_outline</i>
     <label for="td">Tipo de Documento </label>
     <select name="typeDocument" id="td" required="" aria-required="true">
@@ -46,26 +48,26 @@
       <option value="id">Id</option>
     </select>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">label_outline</i>
     <input type="text" name="numDocument" id="numDocumento" class="validate" required="" aria-required="true">
     <label for="numDocumento">N° de Documento </label>
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="names" id="nombres" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
     <label for="nombres">Nombres </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="lastnames" id="apellido" class="validate" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
     <label for="apellido">Apellidos </label>
   </div>
 </div>
 <div class="row">
-  <div class="col l6">
+  <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">wc</i>
     <label for="gen">Género </label>
     <select name="gender" id="gen" required="" aria-required="true">
@@ -73,20 +75,20 @@
       <option value="femenino">Femenino</option>
     </select>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">phone</i>
     <input type="text" id="tel" name="phone" class="validate" pattern="[0-9]+" required="" aria-required="true">
     <label for="tel">Telefono </label>
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">lock_outline</i>
     <input type="password" name="pwd" id="pwdEps" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
     <label for="pwdEps">Contraseña </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">lock</i>
     <input type="password" name="cpwd" id="cpwdEps" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="" aria-required="true">
