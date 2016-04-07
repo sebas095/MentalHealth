@@ -75,7 +75,7 @@
     <% for (var i in allowUser.rol) {%>
       <% var rol = allowUser.rol[i].name %>
       <% allowUser.rol[i].name = (allowUser.rol[i].name[0]).toUpperCase() + allowUser.rol[i].name.slice(1) %>
-      <div class="col l4 col m4 col s4">
+      <div class="col l4 col m4 col s12">
         <% if (rol == 'paciente') { %>
           <i class="material-icons prefix">assignment_ind</i>
           <label><%= allowUser.rol[i].name %></label>
@@ -92,7 +92,7 @@
             <input type="checkbox" class="filled-in" name="rechazar<%= rol %>" value="rechazar-<%= rol %>" id="<%= rol %>-reprobada-check">
             <label for="<%= rol %>-reprobada-check">Rechazar</label>
           </p>
-        </div>
+        </div><br /><br />
       </div>
     <% } %>
   </div>
