@@ -3,7 +3,7 @@
     <label><h3>PACIENTE, MÉDICO GENERAL Y ESPECIALISTA</h3></label>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <label for="numDocument">Tipo de Documento</label>
       <% var dt = (allowUser.documentType).split('-') %>
@@ -13,7 +13,7 @@
       <% allowUser.documentType = dt.join(" "); %>
       <input type="text" id="numDocument" name="numDocument" disabled value="<%= allowUser.documentType %>">
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <input type="text" name="numDocumento"  disabled value="<%= allowUser.documentNumber %>">
       <input type="hidden" name="numDocument" value="<%= allowUser.documentNumber %>">
@@ -21,13 +21,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="nombre"  disabled value="<%= allowUser.names %>">
       <input type="hidden" name="names" value="<%= allowUser.names %>">
       <label>Nombre </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="apellidos"  disabled value="<%= allowUser.lastnames %>">
       <input type="hidden" name="lastnames" value="<%= allowUser.lastnames %>">
@@ -35,37 +35,37 @@
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">wc</i>
       <label>Género</label>
       <% allowUser.gender = (allowUser.gender[0]).toUpperCase() + allowUser.gender.slice(1) %>
       <input type="text" name="gender" disabled value="<%= allowUser.gender %>">
     </div>
-    <div class="col l6">
+    <div class="col l6 col m6 col s12">
       <i class="material-icons prefix">today</i>
       <label>Fecha de Nacimiento </label>
       <input type="date" name="nacimiento" disabled value="<%= allowUser.birthdate %>"><br><br>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">email</i>
       <input type="text" name="correo" disabled value="<%= allowUser.email %>">
       <label>Correo </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">phone</i>
       <input type="text" name="telefono" disabled value="<%= allowUser.phone %>">
       <label>Telefono </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">location_city</i>
       <input type="text" name="direccion" disabled value="<%= allowUser.address %>">
       <label>Dirección </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">supervisor_account</i>
       <input type="text" name="eps-asociada" disabled value="<%= allowUser.epsRelated %>">
       <label>EPS Asociada </label>
@@ -75,7 +75,7 @@
     <% for (var i in allowUser.rol) {%>
       <% var rol = allowUser.rol[i].name %>
       <% allowUser.rol[i].name = (allowUser.rol[i].name[0]).toUpperCase() + allowUser.rol[i].name.slice(1) %>
-      <div class="col l4">
+      <div class="col l4 col m4 col s4">
         <% if (rol == 'paciente') { %>
           <i class="material-icons prefix">assignment_ind</i>
           <label><%= allowUser.rol[i].name %></label>

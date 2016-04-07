@@ -48,22 +48,22 @@
   </div>
   <div class="row">
     <% if (ok) { %>
-    <div class="col l4 col s12">
+    <div class="col l4 col m4 col s12">
       <div class="row center"><br>
         <button type="submit" class="btn waves-effect waves-light cyan darken-2" formaction="/users/<%= session.user.id %>/<%= urlRol %>/edit?_method=delete" formmethod="post" name="button">
           BORRAR FOTO DE PERFIl
         </button>
       </div>
     </div>
-    <div class="col l2 col s12"><br><br>
+    <div class="col l2 col m12 col s12"><br><br>
       <label><h6>Subir Foto de Perfil </h6></label>
     </div>
     <% } else { %>
-      <div class="col l3 offset-l3 col s12"><br><br>
+      <div class="col l3 offset-l3 col m12 col s12"><br><br>
         <label><h6>Subir Foto de Perfil </h6></label>
       </div>
     <% } %>
-    <div class="col l6 col s12">
+    <div class="col l6 col m12 col s12">
       <div>
         <div class="file-field input-field">
           <div class="btn waves-effect waves-light cyan darken-2">
@@ -80,7 +80,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6 col s12">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <label>Tipo de Identificación </label>
       <% var typeDocument = undefined %>
@@ -95,26 +95,26 @@
       <% } %>
       <input disabled value="<%= typeDocument %>" type="text" name="typeDocument">
     </div>
-    <div class="input-field col l6 col s12">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <input disabled value="<%= session.user.documentNumber %>" type="text" name="numDocument">
       <label>Número de Identificacón </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6 col s12">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input disabled value="<%= session.user.names %>" type="text" name="names">
       <label>Nombre </label>
     </div>
-    <div class="input-field col l6 col s12">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">email</i>
       <input disabled value="<%= session.user.email %>" type="text" name="mail">
       <label>Correo </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6 col s12">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">phone</i>
       <% var phone = undefined; %>
       <% if (!Array.isArray(session.user.rol) && session.user.rol.name == 'eps') { %>
@@ -125,7 +125,7 @@
       <input disabled value="<%= phone %>" type="text" name="phone">
       <label>Telefono </label>
     </div>
-    <div class="input-field col l6 col s12">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">location_city</i>
       <input disabled value="<%= session.user.address %>" type="text" name="address">
       <label>Dirección </label>

@@ -3,13 +3,13 @@
     <label><h3>EPS</h3></label>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <input type="text" name="nit" disabled value="<%= allowUser.documentNumber %>">
       <input type="hidden" name="numDocument" value="<%= allowUser.documentNumber %>">
       <label>NIT </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="name" disabled value="<%= allowUser.names %>">
       <input type="hidden" name="names" value="<%= allowUser.names %>">
@@ -17,19 +17,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">email</i>
       <input type="text" name="correo" disabled value="<%= allowUser.email %>">
       <label>Correo </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">phone</i>
       <input type="text" name="telefono" disabled value="<%= allowUser.epsPhone %>">
       <label>Teléfono </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l12">
+    <div class="input-field col l12 col m12 col s12">
       <i class="material-icons prefix">location_city</i>
       <input type="text" name="direccion" disabled value="<%= allowUser.address %>">
       <label>Direción </label>
@@ -39,7 +39,7 @@
     <h4>&nbsp;Persona Responsable</h4>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <label>Tipo de Documento</label>
       <% var dt = (allowUser.documentType).split('-') %>
@@ -49,32 +49,32 @@
       <% allowUser.documentType = dt.join(" ") %>
       <input type="text" name="numDocument" disabled value="<%= allowUser.documentType %>">
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <label>N° de Documento </label>
       <input type="text" name="numDocumento" disabled value="<%= allowUser.documentNumberPerson %>">
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="nombre" disabled value="<%= allowUser.namesPerson %>">
       <label>Nombre </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="apellidos" disabled value="<%= allowUser.lastnames %>">
       <label>Apellidos </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <% allowUser.gender = (allowUser.gender[0]).toUpperCase() + allowUser.gender.slice(1) %>
       <i class="material-icons prefix">wc</i>
       <label>Género</label>
       <input type="text" name="gender" disabled value="<%= allowUser.gender %>">
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">phone</i>
       <input type="text" name="telefono" disabled value="<%= allowUser.phone %>">
       <label>Telefono </label>

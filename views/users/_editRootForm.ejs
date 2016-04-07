@@ -3,7 +3,7 @@
     <center><label><h4>ROOT DEL SISTEMA</label></h4></center>
   </div>
   <div class="row">
-    <div class="col l6">
+    <div class="col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <label >Tipo de Documento </label>
       <select name="typeDocument">
@@ -21,26 +21,26 @@
         </option>
       </select>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">label_outline</i>
       <input type="text" name="numDocument" id="numDocumento" value="<%= session.user.documentNumber %>" class="validate">
       <label for="numDocumento">N° de Documento </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="names" id="nombre" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= session.user.names %>" class="validate">
       <label for="nombre">Nombres </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">perm_identity</i>
       <input type="text" name="lastnames" id="apellidos" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= session.user.lastnames %>" class="validate">
       <label for="apellidos">Apellidos </label>
     </div>
   </div>
   <div class="row">
-    <div class="col l6">
+    <div class="col l6 col m6 col s12">
       <i class="material-icons prefix">wc</i>
       <label >Género </label>
       <select name="gender" class="validate">
@@ -48,40 +48,40 @@
         <option value="femenino" <% if (session.user.documentType == 'femenino') { %> selected <% } %> > Femenino</option>
       </select>
     </div>
-    <div class="col l6">
+    <div class="col l6 col m6 col s12">
       <i class="material-icons prefix">today</i>
       <label for="nacimiento">Fecha de Nacimiento </label>
       <input type="date" name="birthdate" value="<%= session.user.birthdate %>" class="validate"><br><br>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">email</i>
       <input type="text" name="mail" id="correo"
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="<%= session.user.email %>" class="validate">
       <label for="correo">Correo </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">phone</i>
       <input type="text" name="phone" id="telefono" value="<%= session.user.phone %>" pattern="[0-9]+" class="validate">
       <label for="telefono">Telefono </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l12">
+    <div class="input-field col l12 col m12 col s12">
       <i class="material-icons prefix">location_city</i>
       <input type="text" name="address" id="direccion" value="<%= session.user.address %>" class="validate">
       <label for="direccion">Dirección </label>
     </div>
   </div>
   <div class="row">
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">lock_outline</i>
       <input type="password" name="pwd" id="pwd"
         pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" class="validate">
       <label for="pwd">Nueva Contraseña </label>
     </div>
-    <div class="input-field col l6">
+    <div class="input-field col l6 col m6 col s12">
       <i class="material-icons prefix">lock</i>
       <input type="password" name="cpwd" id="cpwd"
         pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" class="validate">
