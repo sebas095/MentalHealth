@@ -2,8 +2,13 @@ const Root = require('../models/root');
 const Eps = require('../models/eps');
 const nodemailer = require('nodemailer');
 const config = require('../config/email');
+const path = require('path');
+const fs = require('fs');
+const imageHelper = require('../helpers/images');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 const uuid = require('uuid');
+const multer = require('multer');
+var upload = multer({dest: 'data/'}).single('photo');
 
 exports.create = function(req, res) {
   Root.create({
@@ -113,10 +118,82 @@ exports.manageProfile = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
-    if (req.query.editRol) res.render('admin/manage/editRol', {manageRol: data[0]});
-    else                   res.render('admin/manage/edit', {manageUser: data[0]});
+    if (req.query.editRol) {
+      if (data[0].rol.photo != null) {
+        imageHelper.translateImage({
+          path: data[0].rol.photo,
+          targetName: data[0].id + '-' + data[0].rol.name + data[0].rol.ext,
+          targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + req.session.user.id),
+          id: req.session.user.id
+        }, function() {
+          res.render('admin/manage/editRolEps', {manageRol: data[0]});
+        });
+      }
+      else res.render('admin/manage/editRolEps', {manageRol: data[0]});
+    }
+    else res.render('admin/manage/edit', {manageUser: data[0]});
   });
+}
 
+/*
+imageHelper.translateImage({
+  path: req.file.path,
+  targetName: req.params.id + '-' + req.params.rol + ext,
+  targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + req.session.user.id),
+  id: req.session.user.id
+}, function() {
+  res.redirect('/users/' + req.params.id + '/' + req.params.rol);
+});
+*/
+
+exports.editRolProfile = function(req, res) {
+  upload(req, res, function(err) {
+    if (err) console.log('Error: ', err);
+    if (req.file) {
+      Eps.find({id: req.body.idRol}, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+
+        var user = data[0];
+        var ext = path.extname(req.file.originalname);
+
+        if (user.rol.photo == null) {
+          user.rol.photo = req.file.path;
+          user.rol.ext = ext;
+
+          Eps.update(user.id, {rol: user.rol}, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              res.send(500, err);
+            }
+
+            var dir = path.resolve(__dirname, '..', 'public/images/users/user-' + data[0].id);
+            fs.exists(dir, function(exist) {
+              if (exist) {
+                imageHelper.translateImage({
+                  path: data[0].rol.photo,
+                  targetName: data[0].id + '-' + data[0].rol.name + data[0].rol.ext,
+                  targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + data[0].id),
+                  id: data[0].id
+                }, function() {
+                  res.redirect('/users/' + req.session.user.id + '/root/manage');
+                });
+              }
+              else res.redirect('/users/' + req.session.user.id + '/root/manage');
+            });
+          });
+        }
+        else {
+          // falta actaulizar en public
+        }
+      });
+    }
+    else {
+      res.redirect('/users/' + req.session.user.id + '/root/manage');
+    }
+  });
 }
 
 exports.storeChanges = function(req, res) {

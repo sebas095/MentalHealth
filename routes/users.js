@@ -64,6 +64,10 @@ module.exports = function(app, mountPoint) {
 
   router.put('/:id/eps/manage/edit', sessionController.loginRequired, epsController.storeChanges);
 
+  router.put('/:id/root/manage/editRol', sessionController.loginRequired, rootController.editRolProfile);
+
+  //router.get('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.);
+
   // DELETE
   router.delete('/:id/edit', sessionController.loginRequired, userController.deleteAccount);
 
