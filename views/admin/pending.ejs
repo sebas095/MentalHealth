@@ -7,7 +7,7 @@
   <form action="/users/<%= session.user.id %>/<%= session.user.rol.name %>/pending" method="post">
 <% } %>
   <div class="row">
-    <div class="col l8 offset-l2 col m8 col s12">
+    <div class="col l8 offset-l2 col m12 col s12">
       <select name="requests">
         <% if (allUsers.length == 0) { %>
           <option value="none">No hay solicitudes Pendientes</option>

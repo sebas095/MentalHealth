@@ -147,10 +147,10 @@ exports.editRolProfile = function(req, res) {
         res.send(500, err);
       }
 
-      var user = data[0];
-      var ext = path.extname(req.file.originalname);
-
       if (req.file) {
+        var user = data[0];
+        var ext = path.extname(req.file.originalname);
+
         if (user.rol.photo == null) {
           user.rol.photo = req.file.path;
           user.rol.ext = ext;
@@ -193,13 +193,22 @@ exports.editRolProfile = function(req, res) {
                   console.log('Error: ', err);
                   res.send(500, err);
                 }
-                imageHelper.translateImage({
-                  path: user.rol.photo,
-                  targetName: user.id + '-' + user.rol.name + user.rol.ext,
-                  targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + user.id),
-                  id: user.id
-                }, function() {
-                  res.redirect('/users/' + req.session.user.id + '/root/manage');
+
+                var dirExist = path.resolve(__dirname, '..', 'public/images/users/user-' + user.id);
+                dirExist = path.join(dirExist, user.id + '-' + user.rol.name + user.rol.ext);
+
+                fs.exists(dirExist, function(exist) {
+                  if (exist) {
+                    imageHelper.translateImage({
+                      path: user.rol.photo,
+                      targetName: user.id + '-' + user.rol.name + user.rol.ext,
+                      targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + user.id),
+                      id: user.id
+                    }, function() {
+                      res.redirect('/users/' + req.session.user.id + '/root/manage');
+                    });
+                  }
+                  else res.redirect('/users/' + req.session.user.id + '/root/manage');
                 });
               });
             });
@@ -215,8 +224,8 @@ exports.editRolProfile = function(req, res) {
 
 exports.deleteImageProfile = function(req, res) {
   Eps.find({
-    names: req.session.nameRol,
-    documentNumber: req.session.docRol
+    names: req.session.tmp.nameRol,
+    documentNumber: req.session.tmp.docRol
   }, function(err, data) {
     if (err) {
       console.log('Error: ', err);

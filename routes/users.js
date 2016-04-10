@@ -26,6 +26,8 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/eps/manage', sessionController.loginRequired, epsController.manage);
 
+  router.get('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.chooseRol);
+
   router.get('/:id/root/manage/edit', sessionController.loginRequired, rootController.manageProfile);
 
   router.get('/:id/eps/manage/edit', sessionController.loginRequired, epsController.manageProfile);
@@ -66,7 +68,7 @@ module.exports = function(app, mountPoint) {
 
   router.put('/:id/root/manage/editRol', sessionController.loginRequired, rootController.editRolProfile);
 
-  //router.get('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.);
+  router.put('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.editRolProfile);
 
   // DELETE
   router.delete('/:id/edit', sessionController.loginRequired, userController.deleteAccount);
@@ -74,6 +76,8 @@ module.exports = function(app, mountPoint) {
   router.delete('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.deleteRolImage);
 
   router.delete('/:id/root/manage/editRol', sessionController.loginRequired, rootController.deleteImageProfile);
+
+  router.delete('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.deleteImageProfile);
 
   router.delete('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');

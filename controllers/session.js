@@ -21,6 +21,7 @@ exports.new = function(req, res) {
   var errors = req.session.errors || {};
   req.session.errors = {};
   req.session.tmp = {};
+  req.session.tmp2 = {};
 
   if (req.session.user) {
     destroyUserImages(req, function() {
@@ -242,6 +243,7 @@ exports.destroy = function(req, res){
   destroyUserImages(req, function() {
     delete req.session.user;
     req.session.tmp = {};
+    req.session.tmp2 = {};
     req.session.rolEdit = undefined;
     res.redirect('/');
   });

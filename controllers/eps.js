@@ -1,9 +1,14 @@
 const Eps = require('../models/eps');
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 const config = require('../config/email');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 const uuid = require('uuid');
+const imageHelper = require('../helpers/images');
+const multer = require('multer');
+var upload = multer({dest: 'data/'}).single('photo');
 
 exports.create = function(req, res) {
   Eps.create({
@@ -119,6 +124,173 @@ function deleteRoles(user, name) {
   return user;
 }
 
+exports.chooseRol = function(req, res) {
+  User.find({
+    names: req.query.names,
+    documentNumber: req.query.rolNum
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+
+    var index = getIndex(data[0].rol, req.query.rolesList);
+    if (data[0].rol[index].photo != null) {
+      imageHelper.translateImage({
+        path: data[0].rol[index].photo,
+        targetName: data[0].id + '-' + data[0].rol[index].name + data[0].rol[index].ext,
+        targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + req.session.user.id),
+        id: req.session.user.id
+      }, function() {
+        res.render('admin/manage/editRolUsers', {manageRol: data[0], chosen: req.query.rolesList});
+      });
+    }
+    else res.render('admin/manage/editRolUsers', {manageRol: data[0], chosen: req.query.rolesList});
+  });
+}
+
+exports.editRolProfile = function(req, res) {
+  upload(req, res, function(err) {
+    if (err) console.log('Error: ', err);
+    User.find({
+      names: req.body.nameRol,
+      documentNumber: req.body.docRol
+    }, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        res.send(500, err);
+      }
+
+      if (req.file) {
+        var user = data[0];
+        var ext = path.extname(req.file.originalname);
+        var index = getIndex(data[0].rol, req.body.currRol);
+
+        if (user.rol[index].photo == null) {
+          user.rol[index].photo = req.file.path;
+          user.rol[index].ext = ext;
+
+          User.update(user.id, {rol: user.rol}, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              res.send(500, err)
+            }
+
+            var dir = path.resolve(__dirname, '..', 'public/images/users/user-' + user.id);
+            fs.exists(dir, function(exist) {
+              if (exist) {
+                imageHelper.translateImage({
+                  path: user.rol[index].photo,
+                  targetName: user.id + '-' + user.rol[index].name + user.rol.ext,
+                  targetName: path.resolve(__dirname, '..', 'public/users/user-' + user.id),
+                  id: user.id
+                }, function() {
+                  res.redirect('/users/' + req.session.user.id + '/eps/manage');
+                });
+              }
+              else {
+                res.redirect('/users/' + req.session.user.id + '/eps/manage');
+              }
+            });
+          });
+        }
+
+        else {
+          var dirTmp = path.resolve(__dirname, '..', 'public/users/user-' + req.session.user.id);
+          dirTmp = path.join(dirTmp, user.id + '-' + user.rol[index].name + user.rol[index].ext);
+
+          imageHelper.deleteImage({path: dirTmp}, function() {
+            var oldPath = user.rol[index].photo;
+            user.rol[index].photo = req.file.path;
+            user.rol[index].ext = ext;
+
+            imageHelper.deleteImage({path: oldPath}, function() {
+              User.update(user.id, {rol: user.rol}, function(err, data) {
+                if (err) {
+                  console.log('Error: ', err);
+                  res.send(500, err);
+                }
+
+                var dirExist = path.resolve(__dirname, '..', 'public/images/users/user-' + user.id);
+                dirExist = path.join(dirExist, user.id + '-' + user.rol[index].name + user.rol[index].ext);
+
+                fs.exists(dirExist, function(exist) {
+                  if (exist) {
+                    imageHelper.translateImage({
+                      path: user.rol[index].photo,
+                      targetName: user.id + '-' + user.rol[index].name + user.rol[index].ext,
+                      targetPath: path.resolve(__dirname, '..', 'public/users/user-' + user.id),
+                      id: user.id
+                    }, function() {
+                      res.redirect('/users/' + req.session.user.id + '/eps/manage');
+                    });
+                  }
+                  else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+                });
+              });
+            });
+          });
+        }
+      }
+      else {
+        res.redirect('/users/' + req.session.user.id + '/eps/manage');
+      }
+    });
+  });
+}
+
+exports.deleteImageProfile = function(req, res) {
+  User.find({
+    names: req.session.tmp2.nameRol,
+    documentNumber: req.session.tmp2.docRol
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+
+    var index = getIndex(data[0].rol, req.session.tmp2.chosen);
+    imageHelper.deleteImage({path: data[0].rol[index].photo}, function() {
+      var dirTmp = path.resolve(__dirname, '..', 'public/images/users/user-' + req.session.user.id);
+      dirTmp = path.join(dirTmp, data[0].id + '-' + data[0].rol[index].name + data[0].rol[index].ext);
+
+      imageHelper.deleteImage({path: dirTmp}, function() {
+        var dir = path.resolve(__dirname, '..', 'public/images/users/user-' + data[0].id);
+        dir = path.join(dir, data[0].id + '-' + data[0].rol[index].name + data[0].rol[index].ext);
+
+        fs.exists(dir, function(exist) {
+          if (exist) {
+            imageHelper.deleteImage({path: dir}, function() {
+              var newRol = data[0].rol;
+              newRol[index].photo = newRol[index].ext = null;
+
+              User.update(data[0].id, {rol: newRol}, function(err, data) {
+                if (err) {
+                  console.log('Error: ', err);
+                  res.send(500, err);
+                }
+                res.redirect('/users/' + req.session.user.id + '/eps/manage');
+              });
+            });
+          }
+          else {
+            var newRol = data[0].rol;
+            newRol[index].photo = newRol[index].ext = null;
+
+            User.update(data[0].id, {rol: newRol}, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              res.redirect('/users/' + req.session.user.id + '/eps/manage');
+            });
+          }
+        });
+      });
+    });
+  });
+}
+
 exports.manage = function(req, res) {
   var allUsers = [];
 
@@ -145,9 +317,8 @@ exports.manageProfile = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
-    if (req.query.editRol) res.render('admin/manage/editRol', {manageRol: data[0]});
+    if (req.query.editRol) res.render('admin/manage/pending', {pendingRoles: data[0]});
     if (req.query.profile) res.render('admin/manage/edit', {manageUser: data[0]});
-    // calendar else                   res.render('admin/manage/edit', {manageUser: data[0]});
   });
 }
 
@@ -210,4 +381,11 @@ exports.storeChanges = function(req, res) {
       }
     }
   });
+}
+
+function getIndex(array, match) {
+  for (var i in array) {
+    if (array[i].name == match) return i;
+  }
+  return -1;
 }
