@@ -149,16 +149,19 @@ imageHelper.translateImage({
 exports.editRolProfile = function(req, res) {
   upload(req, res, function(err) {
     if (err) console.log('Error: ', err);
-    if (req.file) {
-      Eps.find({id: req.body.idRol}, function(err, data) {
-        if (err) {
-          console.log('Error: ', err);
-          res.send(500, err);
-        }
+    Eps.find({
+      names: req.body.nameRol,
+      documentNumber: req.body.docRol
+    }, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        res.send(500, err);
+      }
 
-        var user = data[0];
-        var ext = path.extname(req.file.originalname);
+      var user = data[0];
+      var ext = path.extname(req.file.originalname);
 
+      if (req.file) {
         if (user.rol.photo == null) {
           user.rol.photo = req.file.path;
           user.rol.ext = ext;
@@ -169,14 +172,14 @@ exports.editRolProfile = function(req, res) {
               res.send(500, err);
             }
 
-            var dir = path.resolve(__dirname, '..', 'public/images/users/user-' + data[0].id);
+            var dir = path.resolve(__dirname, '..', 'public/images/users/user-' + user.id);
             fs.exists(dir, function(exist) {
               if (exist) {
                 imageHelper.translateImage({
-                  path: data[0].rol.photo,
-                  targetName: data[0].id + '-' + data[0].rol.name + data[0].rol.ext,
-                  targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + data[0].id),
-                  id: data[0].id
+                  path: user.rol.photo,
+                  targetName: user.id + '-' + user.rol.name + user.rol.ext,
+                  targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + user.id),
+                  id: user.id
                 }, function() {
                   res.redirect('/users/' + req.session.user.id + '/root/manage');
                 });
@@ -185,14 +188,89 @@ exports.editRolProfile = function(req, res) {
             });
           });
         }
+
         else {
-          // falta actaulizar en public
+          var dirTmp = path.resolve(__dirname, '..', 'public/images/users/user-' + req.session.user.id);
+          dirTmp = path.join(dirTmp, user.id + '-' + user.rol.name + user.rol.ext);
+
+          imageHelper.deleteImage({path: dirTmp}, function() {
+            var oldPath = user.rol.photo;
+            user.rol.photo = req.file.path;
+            user.rol.ext = ext;
+
+            imageHelper.deleteImage({path: oldPath}, function() {
+              Eps.update(user.id, {rol: user.rol}, function(err, data) {
+                if (err) {
+                  console.log('Error: ', err);
+                  res.send(500, err);
+                }
+                imageHelper.translateImage({
+                  path: user.rol.photo,
+                  targetName: user.id + '-' + user.rol.name + user.rol.ext,
+                  targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + user.id),
+                  id: user.id
+                }, function() {
+                  res.redirect('/users/' + req.session.user.id + '/root/manage');
+                });
+              });
+            });
+          });
         }
+      }
+      else {
+        res.redirect('/users/' + req.session.user.id + '/root/manage');
+      }
+    });
+  });
+}
+
+exports.deleteImageProfile = function(req, res) {
+  Eps.find({
+    names: req.session.nameRol,
+    documentNumber: req.session.docRol
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    imageHelper.deleteImage({path: data[0].rol.photo}, function() {
+      var dirTmp = path.resolve(__dirname, '..', 'public/images/users/user-' + req.session.user.id);
+      dirTmp = path.join(dirTmp, data[0].id + '-' + data[0].rol.name + data[0].rol.ext);
+
+      imageHelper.deleteImage({path: dirTmp}, function() {
+        var dir = path.resolve(__dirname, '..', 'public/images/users/user-' + data[0].id);
+        dir = path.join(dir, data[0].id + '-' + data[0].rol.name + data[0].rol.ext);
+
+        fs.exists(dir, function(exist) {
+          if (exist) {
+            imageHelper.deleteImage({path: dir}, function() {
+              var newRol = data[0].rol;
+              newRol.photo = newRol.ext = null;
+
+              Eps.update(data[0].id, {rol: newRol}, function(err, data) {
+                if (err) {
+                  console.log('Error: ', err);
+                  res.send(500, err);
+                }
+                res.redirect('/users/' + req.session.user.id + '/root/manage');
+              });
+            });
+          }
+          else {
+            var newRol = data[0].rol;
+            newRol.photo = newRol.ext = null;
+
+            Eps.update(data[0].id, {rol: newRol}, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              res.redirect('/users/' + req.session.user.id + '/root/manage');
+            });
+          }
+        });
       });
-    }
-    else {
-      res.redirect('/users/' + req.session.user.id + '/root/manage');
-    }
+    });
   });
 }
 

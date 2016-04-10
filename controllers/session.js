@@ -20,6 +20,7 @@ exports.loginRequired = function(req, res, next) {
 exports.new = function(req, res) {
   var errors = req.session.errors || {};
   req.session.errors = {};
+  req.session.tmp = {};
 
   if (req.session.user) {
     destroyUserImages(req, function() {
@@ -240,6 +241,7 @@ exports.request = function(req, res) {
 exports.destroy = function(req, res){
   destroyUserImages(req, function() {
     delete req.session.user;
+    req.session.tmp = {};
     req.session.rolEdit = undefined;
     res.redirect('/');
   });

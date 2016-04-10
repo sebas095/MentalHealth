@@ -73,6 +73,8 @@ module.exports = function(app, mountPoint) {
 
   router.delete('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.deleteRolImage);
 
+  router.delete('/:id/root/manage/editRol', sessionController.loginRequired, rootController.deleteImageProfile);
+
   router.delete('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
     res.render('index');
   });

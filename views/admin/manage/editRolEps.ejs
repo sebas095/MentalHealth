@@ -18,12 +18,14 @@
   <div class="row center">
     <h3><%= (manageRol.rol.name).toUpperCase() %></h3>
     <img src="/images/<%= rol %><%= ext %>" alt="<%= manageRol.rol.name %>" class="maxImageRool"/>
-    <input type="hidden" name="idRol" value="<%= manageRol.id %>">
+    <input type="hidden" name="nameRol" value="<%= manageRol.names %>">
+    <input type="hidden" name="docRol" value="<%= manageRol.documentNumber %>">
   </div>
   <div class="row">
     <% if (ok) { %>
     <div class="col l4 col s12">
       <div class="row center"><br>
+        <% session.tmp = {nameRol: manageRol.names, docRol: manageRol.documentNumber}; %>
         <button type="submit" class="btn waves-effect waves-light cyan darken-2" formaction="/users/<%= session.user.id %>/root/manage/editRol?_method=delete" formmethod="post" name="button">
           BORRAR FOTO DE PERFIl
         </button>
