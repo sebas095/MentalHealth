@@ -135,17 +135,6 @@ exports.manageProfile = function(req, res) {
   });
 }
 
-/*
-imageHelper.translateImage({
-  path: req.file.path,
-  targetName: req.params.id + '-' + req.params.rol + ext,
-  targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + req.session.user.id),
-  id: req.session.user.id
-}, function() {
-  res.redirect('/users/' + req.params.id + '/' + req.params.rol);
-});
-*/
-
 exports.editRolProfile = function(req, res) {
   upload(req, res, function(err) {
     if (err) console.log('Error: ', err);
