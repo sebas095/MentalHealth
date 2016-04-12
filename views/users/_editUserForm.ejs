@@ -72,12 +72,22 @@
     <input type="text" name="address" id="direccion" value="<%= session.user.address %>" class="validate">
     <label for="direccion">Dirección </label>
   </div>
-  <div class="input-field col l6 col m6 col s12">
+  <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">supervisor_account</i>
-    <input type="text" name="epsRelated" id="eps-asociada" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= session.user.epsRelated %>" class="validate">
     <label for="eps-asociada">EPS Asociada </label>
+    <select name="epsRelated" id="eps-asociada" required="" aria-required="true" class="validate">
+      <% if(allEps.length == 0) { %>
+        <option value="none">No hay Eps Registradas</option>
+      <% } else { %>
+        <% for(var eps in allEps) { %>
+          <option value="<%= allEps[eps].names %>-<%= allEps[eps].documentNumber %>"
+            <% if(session.user.epsRelated == (allEps[eps].names + '-' + allEps[eps].documentNumber)) { %> selected <% } %>>
+            <%= allEps[eps].names %>-<%= allEps[eps].documentNumber %>
+          </option>
+        <% } %>
+      <% } %>
+    </select>
   </div>
-</div>
 <div class="row">
   <div class="col l12 col m12 col s12">
     <i class="material-icons prefix">assignment_ind</i>

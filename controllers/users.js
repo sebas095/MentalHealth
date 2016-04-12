@@ -352,7 +352,10 @@ exports.pending = function(req, res) {
     });
   }
   else {
-    User.find({accept: 0}, function(err, data) {
+    User.find({
+      accept: 0,
+      epsRelated: req.session.user.names + '-' + req.session.user.documentNumber
+    }, function(err, data) {
       if (err) {
         console.log('Error: ', err);
         return res.send(500, err);
@@ -396,7 +399,13 @@ exports.new = function(req, res) {
 }
 
 exports.edit = function(req, res) {
-  res.render('users/edit');
+  Eps.all(function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    res.render('users/edit', {allEps: data});
+  });
 }
 
 exports.saveChanges = function(req, res) {

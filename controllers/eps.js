@@ -299,8 +299,11 @@ exports.manage = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
+
     for (var i in data) {
-      if (data[i].accept >= 1) allUsers.push(data[i]);
+      if (data[i].accept >= 1 && (data[i].epsRelated == req.session.user.names + '-' + req.session.user.documentNumber)) {
+        allUsers.push(data[i]);
+      }
     }
     res.render('admin/manage/eps', {allUsers: allUsers});
   });
