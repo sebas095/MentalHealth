@@ -368,15 +368,30 @@ exports.pending = function(req, res) {
 }
 
 exports.new = function(req, res) {
+  var hasRoot = undefined;
   Root.find({accept: 1}, function(err, data) {
     if (err) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
     if (data.length == 0) {
-      res.render('users/new', {hasRoot: false});
+      Eps.all(function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          return res.send(500, err);
+        }
+        res.render('users/new', {hasRoot: false, allEps: data});
+      });
     }
-    else res.render('users/new', {hasRoot: true});
+    else {
+      Eps.all(function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          return res.send(500, err);
+        }
+        res.render('users/new', {hasRoot: true, allEps: data});
+      });
+    }
   });
 }
 
