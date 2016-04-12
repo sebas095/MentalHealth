@@ -5,6 +5,7 @@ const userController = require('../controllers/users');
 const rootController = require('../controllers/root');
 const epsController = require('../controllers/eps');
 const sessionController = require('../controllers/session');
+const calendarController = require('../controllers/calendar');
 
 module.exports = function(app, mountPoint) {
   // GET
@@ -16,9 +17,7 @@ module.exports = function(app, mountPoint) {
 
   router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.rolForm);
 
-  router.get('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
-    res.render('index');
-  });
+  router.get('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', sessionController.loginRequired, calendarController.home);
 
   router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
 

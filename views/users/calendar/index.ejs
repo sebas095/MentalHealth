@@ -1,0 +1,22 @@
+<div class="row center">
+  <h4>Calendar</h4>
+  <table class="bordered striped responsive-table centered height-table">
+    <thead>
+      <tr>
+        <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
+        <% for(var data in header) { %>
+          <th><%= header[data] %></th>
+        <% } %>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i = 0; i < 8; i++) { %>
+        <tr>
+          <% for(var data in header) { %>
+            <td>Test <%= data %></td>
+          <% } %>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
