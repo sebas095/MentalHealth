@@ -1,6 +1,35 @@
+<div class="container">
+  <br><br><div class="row center">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="medicoGeneral">
+      MÉDICO GENERAL
+    </button>
+  </div>
+  <div class="row center">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="medicoEspecialista">
+      MÉDICO ESPECIALISTA
+    </button>
+  </div><br>
+</div>
+
+<div class="row">
+  <div class="col l8 offset-l2 col m12 col s12">
+    <i class="material-icons prefix">supervisor_account</i>
+    <label >MÉDICOS </label>
+    <select name="medicos" class="validate">
+      <option value="masculino">Test</option>
+    </select>
+  </div>
+  <div class="row center">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="medicoEspecialista">
+      VER AGENDA
+    </button>
+  </div>
+</div>
 <div class="row center">
-  <h4>Calendar</h4>
-  <table class="bordered striped responsive-table centered height-table">
+  <h4>AGENDA</h4><br>
+
+
+  <table class="striped responsive-table centered height-table">
     <thead>
       <tr>
         <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
@@ -13,7 +42,7 @@
       <% for(var i = 0; i < 8; i++) { %>
         <tr>
           <% for(var data in header) { %>
-            <td>Test <%= data %></td>
+            <td><%= i %></td>
           <% } %>
         </tr>
       <% } %>
