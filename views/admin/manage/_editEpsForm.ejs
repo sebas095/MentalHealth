@@ -3,12 +3,12 @@
   <center><label><h4>REGISTRO EPS</h4></label></center><br><br>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">label_outline</i>
     <input type="text" name="nit" value="<%= manageUser.documentNumber %>" class="validate">
     <label for="nit">NIT </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="nameEps" id="nombre" class="validate" value="<%= manageUser.names %>" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
     <input type="hidden" name="ident" value="<%= manageUser.id %>">
@@ -16,25 +16,25 @@
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">email</i>
     <input type="text" name="mailEps" id="correo" value="<%= manageUser.email %>" class="validate"
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
     <label for="correo">Correo </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">phone</i>
     <input type="text" name="phoneEps" id="telefono" pattern="[0-9]+" value="<%= manageUser.epsPhone %>" class="validate">
     <label for="telefono">Telefono </label>
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">location_city</i>
     <input type="text" name="addressEps" id="direccion" value="<%= manageUser.address %>" class="validate">
     <label for="direccion">Dirección </label>
   </div>
-  <div class="col l6">
+  <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">thumbs_up_down</i>
     <label >Estado de la Cuenta </label>
     <select name="state">
@@ -45,7 +45,7 @@
 </div>
 <div class="row"><h5>&nbsp;&nbsp;Persona Responsable</h5></div>
 <div class="row">
-  <div class="col l6">
+  <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">label_outline</i>
     <label >Tipo de Documento </label>
     <select name="typeDocument">
@@ -62,26 +62,26 @@
       </option>
     </select>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">label_outline</i>
     <input type="text" name="numDocument" id="numDocumento" value="<%= manageUser.documentNumberPerson %>" class="validate">
     <label for="numDocumento">N° de Documento </label>
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="names" id="nombre" class="validate" value="<%= manageUser.namesPerson %>" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
     <label for="nombre">Nombres </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
     <input type="text" name="lastnames" id="apellidos" class="validate" value="<%= manageUser.lastnames %>" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
     <label for="apellidos">Apellidos </label>
   </div>
 </div>
 <div class="row">
-  <div class="col l6">
+  <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">wc</i>
     <label >Género </label>
     <select name="gender">
@@ -89,20 +89,20 @@
       <option value="femenino" <% if (manageUser.gender == 'femenino') { %> selected <% } %> >Femenino</option>
     </select>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">phone</i>
     <input type="text" id="telefono" name="phone" class="validate" value="<%= manageUser.phone %>" pattern="[0-9]+">
     <label for="telefono">Telefono </label>
   </div>
 </div>
 <div class="row">
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">lock_outline</i>
     <input type="password" name="pwd" id="pwd" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
     <label for="pwd">Nueva Contraseña </label>
   </div>
-  <div class="input-field col l6">
+  <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">lock</i>
     <input type="password" name="cpwd" id="cpwd" class="validate"
       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">

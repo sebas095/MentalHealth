@@ -127,7 +127,7 @@ function deleteRoles(user, name) {
 exports.chooseRol = function(req, res) {
   User.find({
     names: req.query.names,
-    documentNumber: req.query.rolNum
+    documentNumber: req.query.rolNum,
   }, function(err, data) {
     if (err) {
       console.log('Error: ', err);
@@ -320,8 +320,15 @@ exports.manageProfile = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
-    if (req.query.editRol) res.render('admin/manage/pending', {pendingRoles: data[0]});
-    if (req.query.profile) res.render('admin/manage/edit', {manageUser: data[0]});
+    var user = data[0];
+    Eps.all(function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+      if (req.query.editRol) res.render('admin/manage/pending', {pendingRoles: user});
+      if (req.query.profile) res.render('admin/manage/edit', {manageUser: user, allEps: data});
+    });
   });
 }
 
