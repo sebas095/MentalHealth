@@ -44,8 +44,8 @@
       <i class="material-icons prefix">wc</i>
       <label >Género </label>
       <select name="gender" class="validate">
-        <option value="masculino" <% if (session.user.documentType == 'masculino') { %> selected <% } %> > Masculino</option>
-        <option value="femenino" <% if (session.user.documentType == 'femenino') { %> selected <% } %> > Femenino</option>
+        <option value="masculino" <% if (session.user.gender == 'masculino') { %> selected <% } %> > Masculino</option>
+        <option value="femenino" <% if (session.user.gender == 'femenino') { %> selected <% } %> > Femenino</option>
       </select>
     </div>
     <div class="col l6 col m6 col s12">

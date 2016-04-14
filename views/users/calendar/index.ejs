@@ -1,51 +1,43 @@
 <div class="container">
   <br><br><div class="row center">
-    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="medicoGeneral">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="cGeneral" id="medicoGeneral">
       MÉDICO GENERAL
     </button>
   </div>
   <div class="row center">
-    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="medicoEspecialista">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="cEspecialista" id="medicoEspecialista">
       MÉDICO ESPECIALISTA
     </button>
   </div><br>
+</div><hr><br>
+
+<div class="row" id="calendarGeneral">
+  <form action="#" method="get">
+    <div class="col l8 offset-l2 col m12 col s12">
+      <i class="material-icons prefix">supervisor_account</i>
+      <label>MÉDICOS GENERALES</label>
+      <select name="medicos" class="validate">
+        <option value="masculino">Test</option>
+      </select>
+    </div>
+    <div class="row center">
+      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="VER AGENDA">
+    </div>
+  </form>
+
 </div>
 
-<div class="row">
-  <div class="col l8 offset-l2 col m12 col s12">
-    <i class="material-icons prefix">supervisor_account</i>
-    <label >MÉDICOS </label>
-    <select name="medicos" class="validate">
-      <option value="masculino">Test</option>
-    </select>
-  </div>
-  <div class="row center">
-    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="button" id="medicoEspecialista">
-      VER AGENDA
-    </button>
-  </div>
-</div>
-<div class="row center">
-  <h4>AGENDA</h4><br>
-
-
-  <table class="striped responsive-table centered height-table">
-    <thead>
-      <tr>
-        <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
-        <% for(var data in header) { %>
-          <th><%= header[data] %></th>
-        <% } %>
-      </tr>
-    </thead>
-    <tbody>
-      <% for(var i = 0; i < 8; i++) { %>
-        <tr>
-          <% for(var data in header) { %>
-            <td><%= i %></td>
-          <% } %>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
+<div class="row" id="calendarEspecialista">
+  <form action="#" method="get">
+    <div class="col l8 offset-l2 col m12 col s12">
+      <i class="material-icons prefix">supervisor_account</i>
+      <label>MÉDICOS ESPECIALISTAS</label>
+      <select name="medicos" class="validate">
+        <option value="masculino">Test</option>
+      </select>
+    </div>
+    <div class="row center">
+      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="VER AGENDA">
+    </div>
+  </form>
 </div>
