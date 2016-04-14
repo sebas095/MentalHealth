@@ -17,7 +17,7 @@ exports.home = function(req, res) {
     });
   }
   else {
-    res.render('users/calendar/medicos');
+    res.render('users/calendar/medicos', {medico: req.params.rol, times: req.query.times});
   }
 }
 
@@ -49,6 +49,11 @@ exports.pending = function(req, res) {
 
 exports.initTime = function(req, res) {
   res.render('users/calendar/initTime', {medico: req.params.rol});
+}
+
+exports.saveChanges = function(req, res) {
+  console.log('body: ', req.body);
+  res.redirect('/users/' + req.session.user.id + '/' + req.params.rol);
 }
 
 function getIndex(array, match) {

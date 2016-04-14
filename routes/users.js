@@ -39,9 +39,7 @@ module.exports = function(app, mountPoint) {
   router.put('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.editRol);
   router.put('/:id/eps/allow', sessionController.loginRequired, epsController.allowUsers);
   router.put('/:id/root/allow', sessionController.loginRequired, rootController.allowEps);
-  router.put('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', function(req, res) {
-    res.render('index');
-  });
+  router.put('/:id/:rol(\\medico(General|Especialista))/calendar', sessionController.loginRequired, calendarController.saveChanges);
   router.put('/:id/root/manage/edit', sessionController.loginRequired, rootController.storeChanges);
   router.put('/:id/eps/manage/edit', sessionController.loginRequired, epsController.storeChanges);
   router.put('/:id/root/manage/editRol', sessionController.loginRequired, rootController.editRolProfile);

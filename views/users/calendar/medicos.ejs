@@ -1,31 +1,70 @@
-<div class="row center col l12 col m12 col s12">
-  <h4>AGENDA</h4><br>
-  <table class="bordered striped responsive-table centered height-table">
-    <thead>
-      <tr>
-        <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
-        <% for(var data in header) { %>
-          <th><%= header[data] %></th>
-        <% } %>
-      </tr>
-    </thead>
-    <tbody>
-      <% for(var i = 0; i < 8; i++) { %>
+<% var day = false; %>
+<% var min = false; %>
+<% var data = times.split(' '); %>
+<% var t = data[0].split(':') %>
+<% var hour = Number(t[0]); %>
+<% var tmp = 12 - hour; %>
+
+<% if (tmp < 0) { %>
+  <% tmp = 6 - hour %>
+<% } else { %>
+  <% tmp += 6; %>
+<% } %>
+
+<% if (t[1] == '00') { %>
+  <% min = true; %>
+<% } else { %>
+  <% min = false; %>
+<% } %>
+
+<% if (data[1] == 'a.m') { %>
+  <% day = true; %>
+<% } else { %>
+  <% day = false; %>
+<% } %>
+
+<form action="/users/<%= session.user.id %>/<%= medico %>/calendar?_method=put" method="post">
+  <div class="row center col l12 col m12 col s12">
+    <h4>AGENDA</h4><br>
+    <table class="bordered striped responsive-table centered height-table">
+      <thead>
         <tr>
+          <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
           <% for(var data in header) { %>
-            <% if (data == 0) { %>
-              <td>
-                <%= i %>
-              </td>
-            <% } else { %>
-              <td>
-                <input type="checkbox" class="filled-in" name="aprobarEps" value="aprobar-eps" id="aprobada-check-<%= i %>-<%= data %>">
-                <label for="aprobada-check-<%= i %>-<%= data %>">Disponible</label>
-              </td>
-            <% } %>
+            <th><%= header[data] %></th>
           <% } %>
         </tr>
-      <% } %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% for(var i = 0; i < tmp; i++) { %>
+          <% if (i == 7) continue; %>
+          <tr>
+            <% for(var data in header) { %>
+              <% if (data == 0) { %>
+                <td>
+                  <% var h = hour + i; %>
+                  <% if (h >= 12) { %>
+                    <% day = false; %>
+                  <% } %>
+                  <% h = (h > 12)? (h % 12) : h%>
+                  <% var m = '00' %>
+                  <% var am = (day)? 'a.m' : 'p.m'; %>
+                  <% min = !min; %>
+                  <%= h %>:<%= m %> <%= am %>
+                </td>
+              <% } else { %>
+                <td>
+                  <input type="checkbox" class="filled-in" name="<%= header[data] %>-<%= i %>" value="aprobar-eps" id="aprobada-check-<%= i %>-<%= data %>">
+                  <label for="aprobada-check-<%= i %>-<%= data %>">Disponible</label>
+                </td>
+              <% } %>
+            <% } %>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row center">
+    <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="GUARDAR">
+  </div>
+</form>
