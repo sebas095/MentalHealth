@@ -12,28 +12,51 @@
 </div><hr><br>
 
 <div class="row" id="calendarGeneral">
-  <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
+  <% if (generales.length == 0)  { %>
+    <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Generales disponibles')">
+  <% } else { %>
+    <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
+  <% } %>
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>
       <label>MÉDICOS GENERALES</label>
       <select name="medicos" class="validate">
-        <option value="masculino">Test</option>
+        <% if (generales.length == 0) { %>
+          <option value="none">No hay Médicos Generales disponibles</option>
+        <% } else { %>
+          <% for (var user in generales) { %>
+            <option value="<%= generales[user].names %>-<%= generales[user].documentNumber %>">
+              <%= generales[user].names %>-<%= generales[user].documentNumber %>
+            </option>
+          <% } %>
+        <% } %>
       </select>
     </div>
     <div class="row center">
       <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="VER AGENDA">
     </div>
   </form>
-
 </div>
 
 <div class="row" id="calendarEspecialista">
-  <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
+  <% if (especialistas.length == 0)  { %>
+    <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Especialistas disponibles')">
+  <% } else { %>
+    <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
+  <% } %>
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>
       <label>MÉDICOS ESPECIALISTAS</label>
       <select name="medicos" class="validate">
-        <option value="masculino">Test</option>
+        <% if (especialistas.length == 0) { %>
+          <option value="none">No hay Médicos Especialistas disponibles</option>
+        <% } else { %>
+          <% for (var user in especialistas) { %>
+            <option value="<%= especialistas[user].names %>-<%= especialistas[user].documentNumber %>">
+              <%= especialistas[user].names %>-<%= especialistas[user].documentNumber %>
+            </option>
+          <% } %>
+        <% } %>
       </select>
     </div>
     <div class="row center">

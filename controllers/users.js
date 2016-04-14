@@ -1,14 +1,24 @@
 const User = require('../models/user');
 const Eps = require('../models/eps');
 const Root = require('../models/root');
+const Calendar = require('../models/calendar');
 const uuid = require('uuid');
 const multer = require('multer');
 const path = require('path');
 const imageHelper = require('../helpers/images');
 var upload = multer({dest: 'data/'}).single('photo');
+var initCalendar = {
+  lunes: [],
+  martes: [],
+  miercoles: [],
+  jueves: [],
+  viernes: [],
+  sabado: []
+};
 
 exports.create = function(req, res) {
   var roles = [];
+  var flag1 = false, flag2 = false;
   if (req.body.paciente) {
     roles.push({
       name: req.body.paciente,
@@ -17,17 +27,21 @@ exports.create = function(req, res) {
     });
   }
   if (req.body.medicoGeneral) {
+    flag1 = true;
     roles.push({
       name: req.body.medicoGeneral,
       photo: null,
-      ext: null
+      ext: null,
+      idCalendar: uuid.v4()
     });
   }
   if (req.body.medicoEspecialista) {
+    flag2 = true;
     roles.push({
       name: req.body.medicoEspecialista,
       photo: null,
-      ext: null
+      ext: null,
+      idCalendar: uuid.v4()
     });
   }
 
@@ -51,7 +65,54 @@ exports.create = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
-    res.redirect('/');
+    var user = data;
+
+    if (flag1) {
+      var index = getIndex(user.rol, 'medicoGeneral');
+      Calendar.create({
+        id: user.rol[index].idCalendar,
+        currWeek: initCalendar,
+        currTime: {},
+        record: []
+      }, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+        if (flag2) {
+          var index = getIndex(user.rol, 'medicoEspecialista');
+          Calendar.create({
+            id: user.rol[index].idCalendar,
+            currWeek: initCalendar,
+            currTime: {},
+            record: []
+          }, function(err, data) {
+            if (err) {
+              console.log('Error: ', err);
+              res.send(500, err);
+            }
+            res.redirect('/');
+          });
+        }
+        else res.redirect('/');
+      });
+    }
+    else if (flag2) {
+      var index = getIndex(user.rol, 'medicoEspecialista');
+      Calendar.create({
+        id: user.rol[index].idCalendar,
+        currWeek: initCalendar,
+        currTime: {},
+        record: []
+      }, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+        res.redirect('/');
+      });
+    }
+    else res.redirect('/');
   });
 }
 

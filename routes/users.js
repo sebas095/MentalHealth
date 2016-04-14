@@ -14,6 +14,7 @@ module.exports = function(app, mountPoint) {
   router.get('/:id/edit', sessionController.loginRequired, userController.edit);
   router.get('/:id/:rol(\\eps|paciente|root|medico(General|Especialista))/edit', sessionController.loginRequired, userController.rolForm);
   router.get('/:id/paciente/pendingList', sessionController.loginRequired, calendarController.pending);
+  router.get('/:id/:rol(\\medico(General|Especialista))/initTime', sessionController.loginRequired, calendarController.initTime);
   router.get('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', sessionController.loginRequired, calendarController.home);
   router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
   router.get('/:id/root/manage', sessionController.loginRequired, rootController.manage);
