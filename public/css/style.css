@@ -30,6 +30,9 @@
    display: none;
  }
 
+ #calendarGeneral, #calendarEspecialista {
+   display: none;
+ }
 
  input.link {
    font-family: "Verdana" sans-serif;

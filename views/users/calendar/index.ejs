@@ -1,18 +1,18 @@
 <div class="container">
   <br><br><div class="row center">
-    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="cGeneral" id="medicoGeneral">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" id="cGeneral" name="medicoGeneral">
       MÉDICO GENERAL
     </button>
   </div>
   <div class="row center">
-    <button class="waves-effect waves-light btn cyan darken-2" type="button" name="cEspecialista" id="medicoEspecialista">
+    <button class="waves-effect waves-light btn cyan darken-2" type="button" id="cEspecialista" name="medicoEspecialista">
       MÉDICO ESPECIALISTA
     </button>
   </div><br>
 </div><hr><br>
 
 <div class="row" id="calendarGeneral">
-  <form action="#" method="get">
+  <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>
       <label>MÉDICOS GENERALES</label>
@@ -28,7 +28,7 @@
 </div>
 
 <div class="row" id="calendarEspecialista">
-  <form action="#" method="get">
+  <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>
       <label>MÉDICOS ESPECIALISTAS</label>
