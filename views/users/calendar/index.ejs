@@ -16,6 +16,7 @@
     <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Generales disponibles')">
   <% } else { %>
     <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
+      <input type="hidden" name="currMedic" value="medicoGeneral">
   <% } %>
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>
@@ -43,6 +44,7 @@
     <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Especialistas disponibles')">
   <% } else { %>
     <form action="/users/<%= session.user.id %>/paciente/calendar" method="get">
+      <input type="hidden" name="currMedic" value="medicoEspecialista">
   <% } %>
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>

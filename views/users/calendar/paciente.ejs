@@ -1,19 +1,25 @@
 <div class="row center">
+  <% week = calMedico.currWeek; %>
+  <% keys = Object.keys(week); %>
+  <% size = week['lunes'].length; %>
   <hr><h5>AGENDA DE <%= (medico.names).toUpperCase() %> <%= (medico.lastnames).toUpperCase() %></h5><br>
   <table class="bordered striped responsive-table centered height-table">
     <thead>
       <tr>
         <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
         <% for(var data in header) { %>
-          <th><%= header[data] %></th>
+          <th style="background: #e0f2f1"><%= header[data] %></th>
         <% } %>
       </tr>
     </thead>
     <tbody>
       <% for(var i = 0; i < 8; i++) { %>
+        <% var aux = 0; %>
         <tr>
-          <% for(var data in header) { %>
-            <td><%= i %></td>
+          <% for (var j in week[keys[aux]]) { %>
+            <td style="<%= week[keys[aux]][0].color %>">
+              <%= week[keys[aux]][0].hour %>
+            </td>
           <% } %>
         </tr>
       <% } %>

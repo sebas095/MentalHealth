@@ -24,18 +24,23 @@
 <% } %>
 
 <form action="/users/<%= session.user.id %>/<%= medico %>/calendar?_method=put" method="post">
+  <input type="hidden" name="init" value="<%= times %>">
+  <input type="hidden" name="numRow" value="<%= tmp %>">
   <div class="row center col l12 col m12 col s12">
     <h4>AGENDA</h4><br>
+    <%= calMedico %>
     <table class="bordered striped responsive-table centered height-table">
       <thead>
         <tr>
           <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
+          <% var header2 = ["Hora", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"] %>
           <% for(var data in header) { %>
             <th><%= header[data] %></th>
           <% } %>
         </tr>
       </thead>
       <tbody>
+        <% var rowTime = undefined; %>
         <% for(var i = 0; i < tmp; i++) { %>
           <% if (i == 7) continue; %>
           <tr>
@@ -46,15 +51,16 @@
                   <% if (h >= 12) { %>
                     <% day = false; %>
                   <% } %>
-                  <% h = (h > 12)? (h % 12) : h%>
+                  <% h = (h > 12)? (h % 12) : h; %>
                   <% var m = '00' %>
                   <% var am = (day)? 'a.m' : 'p.m'; %>
                   <% min = !min; %>
-                  <%= h %>:<%= m %> <%= am %>
+                  <% rowTime = h + ':' + m + ' ' + am %>
+                  <%= rowTime %>
                 </td>
               <% } else { %>
                 <td>
-                  <input type="checkbox" class="filled-in" name="<%= header[data] %>-<%= i %>" value="aprobar-eps" id="aprobada-check-<%= i %>-<%= data %>">
+                  <input type="checkbox" class="filled-in" name="<%= header2[data] %>-<%= rowTime %>" value="aprobar-eps" id="aprobada-check-<%= i %>-<%= data %>">
                   <label for="aprobada-check-<%= i %>-<%= data %>">Disponible</label>
                 </td>
               <% } %>

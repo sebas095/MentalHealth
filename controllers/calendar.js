@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Calendar = require('../models/calendar');
 const uuid = require('uuid');
 
 exports.home = function(req, res) {
@@ -13,7 +14,18 @@ exports.home = function(req, res) {
         console.log('Error: ', err);
         res.send(500, err);
       }
-      res.render('users/calendar/paciente', {medico: data[0]});
+
+      var medico = data[0]
+      var index = getIndex(data[0].rol, req.query.currMedic);
+      var idCal = data[0].rol[index].idCalendar;
+
+      Calendar.get(idCal, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+        res.render('users/calendar/paciente', {calMedico: data, medico: medico});
+      });
     });
   }
   else {
@@ -48,12 +60,79 @@ exports.pending = function(req, res) {
 }
 
 exports.initTime = function(req, res) {
-  res.render('users/calendar/initTime', {medico: req.params.rol});
+  var index = getIndex(req.session.user.rol, req.params.rol);
+  var idCal = req.session.user.rol[index].idCalendar;
+
+  Calendar.get(idCal, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    var week = data.currWeek;
+    if (isEmpty(week)) {
+      res.render('users/calendar/initTime', {medico: req.params.rol, empty: true});
+    }
+    else res.render('users/calendar/initTime', {medico: req.params.rol, empty: false});
+  });
 }
 
 exports.saveChanges = function(req, res) {
-  console.log('body: ', req.body);
-  res.redirect('/users/' + req.session.user.id + '/' + req.params.rol);
+  var index = getIndex(req.session.user.rol, req.params.rol);
+  var idCal = req.session.user.rol[index].idCalendar;
+  var limit = Number(req.body.numRow);
+  var init = req.body.init.split(' ');
+  var am = init[1];
+  var initH = Number(init[0].split(':')[0]);
+  var hours = [];
+  var flag1 = (am == 'a.m');
+  var week = {};
+  var days = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+
+  for (var i = 0; i < limit; i++) {
+    var h = initH + i;
+    if (h >= 12) flag1 = false;
+    if (h == 1) continue;
+
+    var tmp = (flag1)? 'a.m' : 'p.m';
+    h = (h > 12)? h % 12 : h;
+    hours.push(h + ':00 ' + tmp);
+  }
+
+  for (var day in days) {
+    var arr = [];
+    for (var i in hours) {
+      var json = {};
+      json.hour = hours[i];
+      json.color = "background: #f44336";
+      arr.push(json);
+    }
+    week[days[day]] = arr;
+  }
+
+  var weekForm = Object.keys(req.body);
+  weekForm.splice(0, 1);
+  weekForm.splice(0, 1);
+  weekForm.splice(weekForm.length - 1, 1);
+
+  for (var day in weekForm) {
+    var data = weekForm[day].split('-');
+    var d = data[0];
+    var h = data[1];
+    for (var i in week[d]) {
+      if (week[d][i].hour == h) {
+        week[d][i].color = "background: #00c853";
+        break;
+      }
+    }
+  }
+
+  Calendar.update(idCal, {currWeek: week}, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    res.redirect('/users/' + req.session.user.id + '/' + req.params.rol + '/initTime');
+  });
 }
 
 function getIndex(array, match) {
@@ -61,4 +140,17 @@ function getIndex(array, match) {
     if (array[i].name == match) return i;
   }
   return -1;
+}
+
+function isEmpty(week) {
+  var keys = Object.keys(week);
+  var empty = true;
+
+  for (var key in keys) {
+    if (week[keys[key]].length > 0) {
+      empty = false;
+      break;
+    }
+  }
+  return empty;
 }
