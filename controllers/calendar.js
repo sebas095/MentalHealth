@@ -24,7 +24,13 @@ exports.home = function(req, res) {
           console.log('Error: ', err);
           res.send(500, err);
         }
-        res.render('users/calendar/paciente', {calMedico: data, medico: medico});
+        var newWeek = transform(data.currWeek);
+        res.render('users/calendar/paciente', {
+          calMedico: newWeek.newWeek,
+          hourRow: newWeek.hours,
+          medico: medico,
+          length: data.currWeek['lunes'].length
+        });
       });
     });
   }
@@ -103,7 +109,7 @@ exports.saveChanges = function(req, res) {
     for (var i in hours) {
       var json = {};
       json.hour = hours[i];
-      json.color = "background: #f44336";
+      json.color = "background: #9e9e9e";
       arr.push(json);
     }
     week[days[day]] = arr;
@@ -153,4 +159,23 @@ function isEmpty(week) {
     }
   }
   return empty;
+}
+
+function transform(week) {
+  var k = Object.keys(week);
+  var limit = week["lunes"].length;
+  var newWeek = {};
+  var hours = [];
+
+  for (var i = 0; i < limit; i++) {
+    var arr = [0];
+
+    for (var d = 0, day = week[k[d]]; d < 6; d++) {
+      arr.push(day[i]);
+    }
+    hours.push(week["lunes"][i].hour);
+    newWeek[i] = arr;
+  }
+
+  return {newWeek: newWeek, hours: hours};
 }

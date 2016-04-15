@@ -1,7 +1,7 @@
 <div class="row center">
-  <% week = calMedico.currWeek; %>
-  <% keys = Object.keys(week); %>
-  <% size = week['lunes'].length; %>
+  <% var week = calMedico; %>
+  <% var keys = Object.keys(week); %>
+  <% var size = length; %>
   <hr><h5>AGENDA DE <%= (medico.names).toUpperCase() %> <%= (medico.lastnames).toUpperCase() %></h5><br>
   <table class="bordered striped responsive-table centered height-table">
     <thead>
@@ -13,13 +13,15 @@
       </tr>
     </thead>
     <tbody>
-      <% for(var i = 0; i < 8; i++) { %>
-        <% var aux = 0; %>
+      <% var k = 0; %>
+      <% for(var i = 0; i < size; i++) { %>
         <tr>
-          <% for (var j in week[keys[aux]]) { %>
-            <td style="<%= week[keys[aux]][0].color %>">
-              <%= week[keys[aux]][0].hour %>
-            </td>
+          <% for (var j in week[i + ""]) { %>
+            <% if (j == 0) { %>
+              <td style="background: #e0f2f1"><%= hourRow[k++] %></td>
+            <% } else { %>
+              <td style="<%= week[i + ""][j].color %>"></td>
+            <% } %>
           <% } %>
         </tr>
       <% } %>
