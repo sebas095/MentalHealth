@@ -13,7 +13,7 @@ const express = require('express'),
       config = require('./config/email');
 
 var app = express();
-var urlApp = undefined;
+var urlApp = "http://judge.utp.edu.co:4000/";
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
