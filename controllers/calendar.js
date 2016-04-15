@@ -25,11 +25,14 @@ exports.home = function(req, res) {
           res.send(500, err);
         }
         var newWeek = transform(data.currWeek);
+        var flag = isEmpty(data.currWeek);
+
         res.render('users/calendar/paciente', {
           calMedico: newWeek.newWeek,
           hourRow: newWeek.hours,
           medico: medico,
-          length: data.currWeek['lunes'].length
+          length: data.currWeek['lunes'].length,
+          empty: flag
         });
       });
     });
