@@ -133,6 +133,74 @@ exports.showCalendar = function(req, res) {
 exports.saveChanges = function(req, res) {
   var index = getIndex(req.session.user.rol, req.params.rol);
   var idCal = req.session.user.rol[index].idCalendar;
+  var week = manageCalendar(req);
+
+  Calendar.update(idCal, {currWeek: week}, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    res.redirect('/users/' + req.session.user.id + '/' + req.params.rol + '/initTime');
+  });
+}
+
+exports.editSave = function(req, res) {
+  var index = getIndex(req.session.user.rol, req.params.rol);
+  var idCal = req.session.user.rol[index].idCalendar;
+  var week = manageCalendar(req);
+  console.log('newWeek: ', week);
+
+  Calendar.update(idCal, {currWeek: week}, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    console.log('week: ', data.currWeek);
+    res.redirect('/users/' + req.session.user.id + '/' + req.params.rol + '/initTime');
+  });
+}
+
+function getIndex(array, match) {
+  for (var i in array) {
+    if (array[i].name == match) return i;
+  }
+  return -1;
+}
+
+function isEmpty(week) {
+  var keys = Object.keys(week);
+  var empty = true;
+
+  for (var key in keys) {
+    if (week[keys[key]].length > 0) {
+      empty = false;
+      break;
+    }
+  }
+  return empty;
+}
+
+function transform(week) {
+  var k = Object.keys(week);
+  var limit = week["lunes"].length;
+  var newWeek = {};
+  var hours = [];
+
+  for (var i = 0; i < limit; i++) {
+    var arr = [0];
+
+    for (var d = 0, day = week[k[d]]; d < 6; d++) {
+      arr.push(day[i]);
+    }
+    hours.push(week["lunes"][i].hour);
+    newWeek[i] = arr;
+  }
+
+  return {newWeek: newWeek, hours: hours};
+}
+
+
+function manageCalendar(req) {
   var limit = Number(req.body.numRow);
   var init = req.body.init.split(' ');
   var am = init[1];
@@ -179,55 +247,5 @@ exports.saveChanges = function(req, res) {
       }
     }
   }
-
-  Calendar.update(idCal, {currWeek: week}, function(err, data) {
-    if (err) {
-      console.log('Error: ', err);
-      res.send(500, err);
-    }
-    res.redirect('/users/' + req.session.user.id + '/' + req.params.rol + '/initTime');
-  });
-}
-
-exports.editSave = function(req, res) {
-  
-}
-
-function getIndex(array, match) {
-  for (var i in array) {
-    if (array[i].name == match) return i;
-  }
-  return -1;
-}
-
-function isEmpty(week) {
-  var keys = Object.keys(week);
-  var empty = true;
-
-  for (var key in keys) {
-    if (week[keys[key]].length > 0) {
-      empty = false;
-      break;
-    }
-  }
-  return empty;
-}
-
-function transform(week) {
-  var k = Object.keys(week);
-  var limit = week["lunes"].length;
-  var newWeek = {};
-  var hours = [];
-
-  for (var i = 0; i < limit; i++) {
-    var arr = [0];
-
-    for (var d = 0, day = week[k[d]]; d < 6; d++) {
-      arr.push(day[i]);
-    }
-    hours.push(week["lunes"][i].hour);
-    newWeek[i] = arr;
-  }
-
-  return {newWeek: newWeek, hours: hours};
+  return week;
 }

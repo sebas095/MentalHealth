@@ -3,6 +3,8 @@
 <% var size = length; %>
 
 <form action="/users/<%= session.user.id %>/<%= medicoRol %>/calendar/edit?_method=put" method="post">
+  <input type="hidden" name="init" value="<%= week[0][1].hour %>">
+  <input type="hidden" name="numRow" value="<%= size %>">
   <div class="row center col l12 col m12 col s12">
     <h4>AGENDA</h4><br>
     <table class="bordered striped responsive-table centered height-table">
@@ -26,8 +28,8 @@
               <% } else { %>
                 <td>
                   <input type="checkbox" class="filled-in" name="<%= header2[aux++] %>-<%= week[i + ""][j].hour %>"
-                  value="aprobar-eps" id="aprobada-check-<%= i %>-<%= data %>" <% if (week[i + ""][j].color == "background: #00c853") { %>  checked <% } %>>
-                  <label for="aprobada-check-<%= i %>-<%= data %>">Disponible</label>
+                  value="aprobar-eps" id="aprobada-check-<%= i %>-<%= j %>" <% if (week[i + ""][j].color == "background: #00c853") { %>  checked <% } %>>
+                  <label for="aprobada-check-<%= i %>-<%= j %>">Disponible</label>
                 </td>
               <% } %>
             <% } %>
