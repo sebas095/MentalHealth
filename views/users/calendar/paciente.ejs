@@ -19,6 +19,7 @@
           <% for (var j in week[i + ""]) { %>
             <% if (j == 0) { %>
               <td style="background: #e0f2f1"><%= hourRow[k++] %></td>
+              <td style="<%= week[i + ""][j].color %>"></td>
             <% } else { %>
               <td style="<%= week[i + ""][j].color %>"></td>
             <% } %>

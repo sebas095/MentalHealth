@@ -25,6 +25,11 @@
             <% for (var j in week[i + ""]) { %>
               <% if (j == 0) { %>
                 <td style="background: #e0f2f1"><%= hourRow[k++] %></td>
+                <td>
+                  <input type="checkbox" class="filled-in" name="<%= header2[aux++] %>-<%= week[i + ""][j].hour %>"
+                  value="aprobar-eps" id="aprobada-check-<%= i %>-<%= j %>" <% if (week[i + ""][j].color == "background: #00c853") { %>  checked <% } %>>
+                  <label for="aprobada-check-<%= i %>-<%= j %>">Disponible</label>
+                </td>
               <% } else { %>
                 <td>
                   <input type="checkbox" class="filled-in" name="<%= header2[aux++] %>-<%= week[i + ""][j].hour %>"

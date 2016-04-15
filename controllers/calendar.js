@@ -183,17 +183,24 @@ function isEmpty(week) {
 function transform(week) {
   var k = Object.keys(week);
   var limit = week["lunes"].length;
-  var newWeek = {};
+  var newWeek = {0: [0]};
   var hours = [];
+  var json = {};
 
   for (var i = 0; i < limit; i++) {
-    var arr = [0];
-
-    for (var d = 0, day = week[k[d]]; d < 6; d++) {
-      arr.push(day[i]);
-    }
     hours.push(week["lunes"][i].hour);
-    newWeek[i] = arr;
+    json[week["lunes"][i].hour] = []
+  }
+
+  for (var d = 0; d < 6; d++) {
+    for (var i in week[k[d]]) {
+      json[week[k[d]][i].hour].push(week[k[d]][i]);
+    }
+  }
+
+  var keys = Object.keys(json);
+  for (var i in keys) {
+    newWeek[i] = json[keys[i]];
   }
 
   return {newWeek: newWeek, hours: hours};
