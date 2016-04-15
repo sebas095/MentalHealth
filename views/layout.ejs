@@ -27,7 +27,7 @@
       <ul id="nav-mobile" class="side-nav fixed blue lighten-5">
         <% var rolCurr = undefined, rol = undefined, ext = undefined, ok = undefined; %>
         <% if (!session.user) { %>
-          <img src="/images/logo.png" alt="Logo" class="responsive-img"></hr>
+          <img src="/images/logo.png" alt="Logo" class="responsive-img"><hr/>
           <li class="bold"><a href="/" class="waves-effect waves-teal">Home</a></li>
           <li class="bold"><a href="/users/new" class="waves-effect waves-teal">Registrarse</a></li>
           <li class="bold"><a href="/login" class="waves-effect waves-teal">Iniciar Sesión</a></li>
@@ -62,11 +62,11 @@
           <% ext = ext || tmpExt %>
           <% rol = (ok == true)? ("users/user-" + session.user.id + '/' + rol) : rol %>
 
-          <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img"></hr>
+          <img src="/images/<%= rol %><%= ext %>" alt="<%= rolCurr %>" class="responsive-img"><hr/>
           <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>
             <% if (Array.isArray(session.user.rol)) { %>
               <form action="/users/<%= session.user.id %>/data" method="get">
-              </hr><br><h6><b>Roles: </b></h6><br><br>
+              <hr/><br><h6><b>Roles: </b></h6><br><br>
                 <select class="roles" name="roles">
                   <% for (var rol in session.user.rol) { %>
                     <% var user = "" %>
