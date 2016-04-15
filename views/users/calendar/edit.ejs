@@ -1,0 +1,42 @@
+<% var week = calMedico; %>
+<% var keys = Object.keys(week); %>
+<% var size = length; %>
+
+<form action="/users/<%= session.user.id %>/<%= medicoRol %>/calendar/edit?_method=put" method="post">
+  <div class="row center col l12 col m12 col s12">
+    <h4>AGENDA</h4><br>
+    <table class="bordered striped responsive-table centered height-table">
+      <thead>
+        <tr>
+          <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
+          <% var header2 = ["Hora", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"] %>
+          <% for(var data in header) { %>
+            <th style="background: #e0f2f1"><%= header[data] %></th>
+          <% } %>
+        </tr>
+      </thead>
+      <tbody>
+        <% var k = 0, aux = 1; %>
+        <% for(var i = 0; i < size; i++) { %>
+          <% aux = 1; %>
+          <tr>
+            <% for (var j in week[i + ""]) { %>
+              <% if (j == 0) { %>
+                <td style="background: #e0f2f1"><%= hourRow[k++] %></td>
+              <% } else { %>
+                <td>
+                  <input type="checkbox" class="filled-in" name="<%= header2[aux++] %>-<%= week[i + ""][j].hour %>"
+                  value="aprobar-eps" id="aprobada-check-<%= i %>-<%= data %>" <% if (week[i + ""][j].color == "background: #00c853") { %>  checked <% } %>>
+                  <label for="aprobada-check-<%= i %>-<%= data %>">Disponible</label>
+                </td>
+              <% } %>
+            <% } %>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row center">
+    <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="GUARDAR">
+  </div>
+</form>

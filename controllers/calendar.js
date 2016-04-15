@@ -42,6 +42,28 @@ exports.home = function(req, res) {
   }
 }
 
+exports.edit = function(req, res) {
+  var medico = req.session.user;
+  var index = getIndex(medico.rol, req.params.rol);
+  var idCal = medico.rol[index].idCalendar;
+
+  Calendar.get(idCal, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    var newWeek = transform(data.currWeek);
+
+    res.render('users/calendar/edit', {
+      calMedico: newWeek.newWeek,
+      hourRow: newWeek.hours,
+      medico: medico,
+      length: data.currWeek['lunes'].length,
+      medicoRol: req.params.rol
+    });
+  });
+}
+
 exports.pending = function(req, res) {
   var eps = req.session.user.epsRelated;
   var generales = [];
@@ -82,6 +104,29 @@ exports.initTime = function(req, res) {
       res.render('users/calendar/initTime', {medico: req.params.rol, empty: true});
     }
     else res.render('users/calendar/initTime', {medico: req.params.rol, empty: false});
+  });
+}
+
+exports.showCalendar = function(req, res) {
+  var medico = req.session.user;
+  var index = getIndex(medico.rol, req.params.rol);
+  var idCal = medico.rol[index].idCalendar;
+
+  Calendar.get(idCal, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    var newWeek = transform(data.currWeek);
+    var flag = isEmpty(data.currWeek);
+
+    res.render('users/calendar/paciente', {
+      calMedico: newWeek.newWeek,
+      hourRow: newWeek.hours,
+      medico: medico,
+      length: data.currWeek['lunes'].length,
+      empty: flag
+    });
   });
 }
 
@@ -142,6 +187,10 @@ exports.saveChanges = function(req, res) {
     }
     res.redirect('/users/' + req.session.user.id + '/' + req.params.rol + '/initTime');
   });
+}
+
+exports.editSave = function(req, res) {
+  
 }
 
 function getIndex(array, match) {

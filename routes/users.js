@@ -16,6 +16,8 @@ module.exports = function(app, mountPoint) {
   router.get('/:id/paciente/pendingList', sessionController.loginRequired, calendarController.pending);
   router.get('/:id/:rol(\\medico(General|Especialista))/initTime', sessionController.loginRequired, calendarController.initTime);
   router.get('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', sessionController.loginRequired, calendarController.home);
+  router.get('/:id/:rol(\\medico(General|Especialista))/calendar/edit', sessionController.loginRequired, calendarController.edit);
+  router.get('/:id/:rol(\\medico(General|Especialista))/calendar/show', sessionController.loginRequired, calendarController.showCalendar);
   router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
   router.get('/:id/root/manage', sessionController.loginRequired, rootController.manage);
   router.get('/:id/eps/manage', sessionController.loginRequired, epsController.manage);
@@ -44,6 +46,7 @@ module.exports = function(app, mountPoint) {
   router.put('/:id/eps/manage/edit', sessionController.loginRequired, epsController.storeChanges);
   router.put('/:id/root/manage/editRol', sessionController.loginRequired, rootController.editRolProfile);
   router.put('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.editRolProfile);
+  router.get('/:id/:rol(\\medico(General|Especialista))/calendar/edit', sessionController.loginRequired, calendarController.editSave);
 
   // DELETE
   router.delete('/:id/edit', sessionController.loginRequired, userController.deleteAccount);

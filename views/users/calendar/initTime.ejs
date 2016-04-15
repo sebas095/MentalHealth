@@ -24,9 +24,13 @@
 <% } else { %>
   <br><br>
   <div class="row center col l12 col m12 col s12">
-    <a class="waves-effect waves-light btn cyan darken-2" href="#">VER AGENDA</a>
+    <a class="waves-effect waves-light btn cyan darken-2" href="/users/<%= session.user.id %>/<%= medico %>/calendar/show">
+      VER AGENDA
+    </a>
   </div><br><br>
   <div class="row center col l12 col m12 col s12">
-    <a class="waves-effect waves-light btn cyan darken-2" href="#">EDITAR AGENDA</a>
+    <a class="waves-effect waves-light btn cyan darken-2" href="/users/<%= session.user.id %>/<%= medico %>/calendar/edit">
+      EDITAR AGENDA
+    </a>
   </div>
 <% } %>
