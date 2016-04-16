@@ -3,6 +3,10 @@
   <% var keys = Object.keys(week); %>
   <% var size = length; %>
   <hr><h5>AGENDA DE <%= (medico.names).toUpperCase() %> <%= (medico.lastnames).toUpperCase() %></h5><br>
+  <div class="row">
+    <br><img src="/images/green.png" alt="Verde" />&nbsp;&nbsp;Disponible&nbsp;&nbsp;
+    &nbsp;&nbsp;<img src="/images/red.png" alt="Rojo" />&nbsp;&nbsp;Ocupado <br><br>
+  </div>
   <table class="bordered striped responsive-table centered height-table">
     <thead>
       <tr>

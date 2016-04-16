@@ -148,14 +148,12 @@ exports.editSave = function(req, res) {
   var index = getIndex(req.session.user.rol, req.params.rol);
   var idCal = req.session.user.rol[index].idCalendar;
   var week = manageCalendar(req);
-  console.log('newWeek: ', week);
 
   Calendar.update(idCal, {currWeek: week}, function(err, data) {
     if (err) {
       console.log('Error: ', err);
       res.send(500, err);
     }
-    console.log('week: ', data.currWeek);
     res.redirect('/users/' + req.session.user.id + '/' + req.params.rol + '/initTime');
   });
 }
@@ -232,7 +230,7 @@ function manageCalendar(req) {
     for (var i in hours) {
       var json = {};
       json.hour = hours[i];
-      json.color = "background: #9e9e9e";
+      json.color = "background: #d32f2f";
       arr.push(json);
     }
     week[days[day]] = arr;
