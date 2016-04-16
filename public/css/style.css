@@ -101,5 +101,9 @@ li > a:hover {
 }
 
 table, th, td {
-    border: 1px solid white;
+	border: 1px solid white;
+}
+
+.edit {
+	left: -10px;
 }

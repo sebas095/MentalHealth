@@ -66,7 +66,7 @@
           <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>" class="waves-effect waves-teal">Home</a></li>
             <% if (Array.isArray(session.user.rol)) { %>
               <form action="/users/<%= session.user.id %>/data" method="get">
-              <hr/><br><h6><b>Roles: </b></h6><br><br>
+              <hr/><br><h6><b>&nbsp;&nbsp;Roles: </b></h6><br><br>
                 <select class="roles" name="roles">
                   <% for (var rol in session.user.rol) { %>
                     <% var user = "" %>
@@ -95,9 +95,11 @@
 
           <% if (rolCurr == 'root' || rolCurr == 'eps') { %>
             <li class="bold"><a href="/users/<%= session.user.id %>/<%= rolCurr %>/edit" class="waves-effect waves-teal">Editar Rol</a></li>
+            <li class="bold"><a href="/users/<%= session.user.id %>/edit" class="waves-effect waves-teal ">Editar Perfil</a></li>
+          <% } else { %>
+            <li class="bold"><a href="/users/<%= session.user.id %>/edit" class="waves-effect waves-teal edit">Editar Perfil</a></li>
           <% } %>
 
-          <li class="bold"><a href="/users/<%= session.user.id %>/edit" class="waves-effect waves-teal">Editar Perfil</a></li>
           <li class="bold logout">
             <form action="/logout?_method=delete" method="post">
               <div class="">
