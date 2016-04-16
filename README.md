@@ -46,4 +46,4 @@ Ingresar en el navegador a:
 
     http://localhost:8080
 <h3>Avances del proyecto</h3>
-* [APP](https:judge.utp.edu.co:4000)
+* [APP](https://judge.utp.edu.co:4000)
