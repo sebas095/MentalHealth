@@ -1,5 +1,6 @@
 const Eps = require('../models/eps');
 const User = require('../models/user');
+const Calendar = require('../models/calendar');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
@@ -39,6 +40,8 @@ exports.create = function(req, res) {
 exports.allowUsers = function(req, res) {
   var user = undefined;
   var userMail = undefined;
+  var index1 = -1, index2 = -1;
+  var idCal1 = undefined, idCal2 = undefined;
 
   User.find({
     documentNumber: req.body.numDocument,
@@ -57,9 +60,13 @@ exports.allowUsers = function(req, res) {
         user = deleteRoles(user, 'paciente');
       }
       if (req.body.rechazarmedicoGeneral) {
+        index1 = getIndex(user.rol, 'medicoGeneral');
+        idCal1 = (index1 != -1)? user.rol[index1].idCalendar : undefined;
         user = deleteRoles(user, 'medicoGeneral');
       }
       if (req.body.rechazarmedicoEspecialista) {
+        index2 = getIndex(user.rol, 'medicoEspecialista');
+        idCal2 = (index2 != -1)? user.rol[index2].idCalendar : undefined;
         user = deleteRoles(user, 'medicoEspecialista');
       }
 
@@ -78,7 +85,34 @@ exports.allowUsers = function(req, res) {
                   `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
           });
 
-          res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+          if (index1 != -1) {
+            Calendar.destroy(idCal1, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              if (index2 != -1) {
+                Calendar.destroy(idCal2, function(err, data) {
+                  if (err) {
+                    console.log('Error: ', err);
+                    res.send(500, err);
+                  }
+                  res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+                });
+              }
+              else res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+            });
+          }
+          else if (index2 != -1) {
+            Calendar.destroy(idCal2, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+            });
+          }
+          else res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
         });
       }
 
@@ -98,7 +132,34 @@ exports.allowUsers = function(req, res) {
                   `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
           });
 
-          res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+          if (index1 != -1) {
+            Calendar.destroy(idCal1, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              if (index2 != -1) {
+                Calendar.destroy(idCal2, function(err, data) {
+                  if (err) {
+                    console.log('Error: ', err);
+                    res.send(500, err);
+                  }
+                  res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+                });
+              }
+              else res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+            });
+          }
+          else if (index2 != -1) {
+            Calendar.destroy(idCal2, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
+            });
+          }
+          else res.redirect('/users/' + req.session.user.id + '/' + req.session.user.rol.name + '/pending');
         });
       }
     }
@@ -334,6 +395,8 @@ exports.manageProfile = function(req, res) {
 
 exports.storeChanges = function(req, res) {
   var user = {};
+  var index1 = -1, index2 = -1;
+  var idCal1 = undefined, idCal2 = undefined;
 
   if (req.body.typeDocument) user.documentType = req.body.typeDocument;
   if (req.body.numDocument)  user.documentNumber = req.body.numDocument;
@@ -365,9 +428,13 @@ exports.storeChanges = function(req, res) {
         user = deleteRoles(user, 'paciente');
       }
       if (req.body.rechazarmedicoGeneral) {
+        index1 = getIndex(user.rol, 'medicoGeneral');
+        idCal1 = (index1 != -1)? user.rol[index1].idCalendar : undefined;
         user = deleteRoles(user, 'medicoGeneral');
       }
       if (req.body.rechazarmedicoEspecialista) {
+        index2 = getIndex(user.rol, 'medicoEspecialista');
+        idCal2 = (index2 != -1)? user.rol[index2].idCalendar : undefined;
         user = deleteRoles(user, 'medicoEspecialista');
       }
 
@@ -377,7 +444,35 @@ exports.storeChanges = function(req, res) {
             console.log('Error: ', err);
             res.send(500, err);
           }
-          res.redirect('/users/' + req.session.user.id + '/eps/manage');
+
+          if (index1 != -1) {
+            Calendar.destroy(idCal1, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              if (index2 != -1) {
+                Calendar.destroy(idCal2, function(err, data) {
+                  if (err) {
+                    console.log('Error: ', err);
+                    res.send(500, err);
+                  }
+                  res.redirect('/users/' + req.session.user.id + '/eps/manage');
+                });
+              }
+              else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+            });
+          }
+          else if (index2 != -1) {
+            Calendar.destroy(idCal2, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              res.redirect('/users/' + req.session.user.id + '/eps/manage');
+            });
+          }
+          else res.redirect('/users/' + req.session.user.id + '/eps/manage');
         });
       }
       else {
@@ -386,7 +481,34 @@ exports.storeChanges = function(req, res) {
             console.log('Error: ', err);
             return res.send(500, err);
           }
-          res.redirect('/users/' + req.session.user.id + '/eps/manage');
+          if (index1 != -1) {
+            Calendar.destroy(idCal1, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              if (index2 != -1) {
+                Calendar.destroy(idCal2, function(err, data) {
+                  if (err) {
+                    console.log('Error: ', err);
+                    res.send(500, err);
+                  }
+                  res.redirect('/users/' + req.session.user.id + '/eps/manage');
+                });
+              }
+              else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+            });
+          }
+          else if (index2 != -1) {
+            Calendar.destroy(idCal2, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              res.redirect('/users/' + req.session.user.id + '/eps/manage');
+            });
+          }
+          else res.redirect('/users/' + req.session.user.id + '/eps/manage');
         });
       }
     }
