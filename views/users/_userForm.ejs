@@ -22,12 +22,12 @@
 <div class="row">
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
-    <input type="text" name="names" id="nombreUser" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true" class="validate">
+    <input type="text" name="names" id="nombreUser" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true" class="validate">
     <label for="nombreUser">Nombres </label>
   </div>
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
-    <input type="text" name="lastnames" id="lastnames" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true" class="validate">
+    <input type="text" name="lastnames" id="lastnames" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true" class="validate">
     <label for="lastnames">Apellidos </label>
   </div>
 </div>
@@ -43,7 +43,7 @@
   <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">today</i>
     <label for="nacimiento">Fecha de Nacimiento </label>
-    <input type="date" name="birthdate" id="nacimiento" required="" aria-required="true" class="validate"><br><br>
+    <input type="date" name="birthdate" id="nacimiento" placeholder="aaaa-mm-dd" required="" aria-required="true" class="validate"><br><br>
   </div>
 </div>
 <div class="row">

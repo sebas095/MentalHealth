@@ -6,6 +6,7 @@ const uuid = require('uuid');
 const multer = require('multer');
 const path = require('path');
 const imageHelper = require('../helpers/images');
+const validateHelper = require('../helpers/validate');
 var upload = multer({dest: 'data/'}).single('photo');
 var initCalendar = {
   lunes: [],
@@ -45,75 +46,81 @@ exports.create = function(req, res) {
     });
   }
 
-  User.create({
-    id: uuid.v4(),
-    documentType: req.body.typeDocument,
-    documentNumber: req.body.numDocument,
-    names: req.body.names,
-    lastnames: req.body.lastnames,
-    gender: req.body.gender,
-    birthdate: req.body.birthdate,
-    email: req.body.mail,
-    phone: req.body.phone,
-    address: req.body.address,
-    epsRelated: req.body.epsRelated,
-    rol: roles,
-    password: req.body.pwd,
-    accept: 0
-  }, function(err, data) {
-    if (err) {
-      console.log('Error: ', err);
-      return res.send(500, err);
-    }
-    var user = data;
+  if (validateHelper.validateName(req.body.names) && validateHelper.validateName(req.body.lastnames)
+   && validateHelper.validateEmail(req.body.mail) && validateHelper.validatePhone(req.body.phone)
+   && validateHelper.validatePwd(req.body.pwd)) {
 
-    if (flag1) {
-      var index = getIndex(user.rol, 'medicoGeneral');
-      Calendar.create({
-        id: user.rol[index].idCalendar,
-        currWeek: initCalendar,
-        currTime: {},
-        record: []
-      }, function(err, data) {
-        if (err) {
-          console.log('Error: ', err);
-          res.send(500, err);
-        }
-        if (flag2) {
-          var index = getIndex(user.rol, 'medicoEspecialista');
-          Calendar.create({
-            id: user.rol[index].idCalendar,
-            currWeek: initCalendar,
-            currTime: {},
-            record: []
-          }, function(err, data) {
-            if (err) {
-              console.log('Error: ', err);
-              res.send(500, err);
-            }
-            res.redirect('/');
-          });
-        }
-        else res.redirect('/');
-      });
-    }
-    else if (flag2) {
-      var index = getIndex(user.rol, 'medicoEspecialista');
-      Calendar.create({
-        id: user.rol[index].idCalendar,
-        currWeek: initCalendar,
-        currTime: {},
-        record: []
-      }, function(err, data) {
-        if (err) {
-          console.log('Error: ', err);
-          res.send(500, err);
-        }
-        res.redirect('/');
-      });
-    }
-    else res.redirect('/');
-  });
+    User.create({
+      id: uuid.v4(),
+      documentType: req.body.typeDocument,
+      documentNumber: req.body.numDocument,
+      names: req.body.names,
+      lastnames: req.body.lastnames,
+      gender: req.body.gender,
+      birthdate: req.body.birthdate,
+      email: req.body.mail,
+      phone: req.body.phone,
+      address: req.body.address,
+      epsRelated: req.body.epsRelated,
+      rol: roles,
+      password: req.body.pwd,
+      accept: 0
+    }, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+      var user = data;
+
+      if (flag1) {
+        var index = getIndex(user.rol, 'medicoGeneral');
+        Calendar.create({
+          id: user.rol[index].idCalendar,
+          currWeek: initCalendar,
+          currTime: {},
+          record: []
+        }, function(err, data) {
+          if (err) {
+            console.log('Error: ', err);
+            res.send(500, err);
+          }
+          if (flag2) {
+            var index = getIndex(user.rol, 'medicoEspecialista');
+            Calendar.create({
+              id: user.rol[index].idCalendar,
+              currWeek: initCalendar,
+              currTime: {},
+              record: []
+            }, function(err, data) {
+              if (err) {
+                console.log('Error: ', err);
+                res.send(500, err);
+              }
+              res.redirect('/');
+            });
+          }
+          else res.redirect('/');
+        });
+      }
+      else if (flag2) {
+        var index = getIndex(user.rol, 'medicoEspecialista');
+        Calendar.create({
+          id: user.rol[index].idCalendar,
+          currWeek: initCalendar,
+          currTime: {},
+          record: []
+        }, function(err, data) {
+          if (err) {
+            console.log('Error: ', err);
+            res.send(500, err);
+          }
+          res.redirect('/');
+        });
+      }
+      else res.redirect('/');
+    });
+  }
+  else res.redirect('/');
 }
 
 exports.home = function(req, res) {
@@ -473,62 +480,64 @@ exports.saveChanges = function(req, res) {
   var user = {};
   if (!Array.isArray(req.session.user.rol)) {
     if (req.session.user.rol.name == 'eps') {
-      if (req.body.nit)          user.documentNumber = req.body.nit;
-      if (req.body.nameEps)      user.names = req.body.nameEps;
-      if (req.body.mailEps)      user.email = req.body.mailEps;
-      if (req.body.phoneEps)     user.epsPhone = req.body.phoneEps;
-      if (req.body.addressEps)   user.address = req.body.addressEps;
-      if (req.body.typeDocument) user.documentType = req.body.typeDocument;
-      if (req.body.numDocument)  user.documentNumberPerson = req.body.numDocument;
-      if (req.body.names)        user.namesPerson = req.body.names;
-      if (req.body.lastnames)    user.lastnames = req.body.lastnames;
-      if (req.body.gender)       user.gender = req.body.gender;
-      if (req.body.phone)        user.phone = req.body.phone;
-      if (req.body.pwd)          user.password = req.body.pwd;
+      if (req.body.nit)                                                          user.documentNumber = req.body.nit;
+      if (req.body.nameEps && validateHelper.validateName(req.body.nameEps))     user.names = req.body.nameEps;
+      if (req.body.mailEps && validateHelper.validateEmail(req.body.mailEps))    user.email = req.body.mailEps;
+      if (req.body.phoneEps && validateHelper.validatePhone(req.body.phoneEps))  user.epsPhone = req.body.phoneEps;
+      if (req.body.addressEps)                                                   user.address = req.body.addressEps;
+      if (req.body.typeDocument)                                                 user.documentType = req.body.typeDocument;
+      if (req.body.numDocument)                                                  user.documentNumberPerson = req.body.numDocument;
+      if (req.body.names && validateHelper.validateName(req.body.names))         user.namesPerson = req.body.names;
+      if (req.body.lastnames && validateHelper.validateName(req.body.lastnames)) user.lastnames = req.body.lastnames;
+      if (req.body.gender)                                                       user.gender = req.body.gender;
+      if (req.body.phone && validateHelper.validatePhone(req.body.phone))        user.phone = req.body.phone;
+      if (req.body.pwd && validateHelper.validatePwd(req.body.pwd))              user.password = req.body.pwd;
 
       Eps.update(req.session.user.id, user, function(err, data) {
         if (err) {
           console.log('Error: ', err);
           return res.send(500, err);
         }
+        req.flash('message', 'Tus Datos han sido actualizados éxitosamente!');
         req.session.user = data;
         res.redirect('/users/' + req.session.user.id + '/eps');
       });
     }
     else {
-      if (req.body.typeDocument) user.documentType = req.body.typeDocument;
-      if (req.body.numDocument)  user.documentNumber = req.body.numDocument;
-      if (req.body.names)        user.names = req.body.names;
-      if (req.body.lastnames)    user.lastnames = req.body.lastnames;
-      if (req.body.gender)       user.gender = req.body.gender;
-      if (req.body.birthdate)    user.birthdate = req.body.birthdate;
-      if (req.body.mail)         user.email = req.body.mail;
-      if (req.body.phone)        user.phone = req.body.phone;
-      if (req.body.address)      user.address = req.body.address;
-      if (req.body.pwd)          user.password = req.body.pwd;
+      if (req.body.typeDocument)                                                 user.documentType = req.body.typeDocument;
+      if (req.body.numDocument)                                                  user.documentNumber = req.body.numDocument;
+      if (req.body.names && validateHelper.validateName(req.body.names))         user.names = req.body.names;
+      if (req.body.lastnames && validateHelper.validateName(req.body.lastnames)) user.lastnames = req.body.lastnames;
+      if (req.body.gender)                                                       user.gender = req.body.gender;
+      if (req.body.birthdate)                                                    user.birthdate = req.body.birthdate;
+      if (req.body.mail && validateHelper.validateEmail(req.body.mail))          user.email = req.body.mail;
+      if (req.body.phone && validateHelper.validatePhone(req.body.phone))        user.phone = req.body.phone;
+      if (req.body.address)                                                      user.address = req.body.address;
+      if (req.body.pwd && validateHelper.validatePwd(req.body.pwd))              user.password = req.body.pwd;
 
       Root.update(req.session.user.id, user, function(err, data) {
         if (err) {
           console.log('Error: ', err);
           return res.send(500, err);
         }
+        req.flash('message', 'Tus Datos han sido actualizados éxitosamente!');
         req.session.user = data;
         res.redirect('/users/' + req.session.user.id + '/root');
       });
     }
   }
   else {
-    if (req.body.typeDocument) user.documentType = req.body.typeDocument;
-    if (req.body.numDocument)  user.documentNumber = req.body.numDocument;
-    if (req.body.names)        user.names = req.body.names;
-    if (req.body.lastnames)    user.lastnames = req.body.lastnames;
-    if (req.body.gender)       user.gender = req.body.gender;
-    if (req.body.birthdate)    user.birthdate = req.body.birthdate;
-    if (req.body.mail)         user.email = req.body.mail;
-    if (req.body.phone)        user.phone = req.body.phone;
-    if (req.body.address)      user.address = req.body.address;
-    if (req.body.epsRelated)   user.epsRelated = req.body.epsRelated;
-    if (req.body.pwd)          user.password = req.body.pwd;
+    if (req.body.typeDocument)                                                 user.documentType = req.body.typeDocument;
+    if (req.body.numDocument)                                                  user.documentNumber = req.body.numDocument;
+    if (req.body.names && validateHelper.validateName(req.body.names))         user.names = req.body.names;
+    if (req.body.lastnames && validateHelper.validateName(req.body.lastnames)) user.lastnames = req.body.lastnames;
+    if (req.body.gender)                                                       user.gender = req.body.gender;
+    if (req.body.birthdate)                                                    user.birthdate = req.body.birthdate;
+    if (req.body.mail && validateHelper.validateEmail(req.body.mail))          user.email = req.body.mail;
+    if (req.body.phone && validateHelper.validatePhone(req.body.phone))        user.phone = req.body.phone;
+    if (req.body.address)                                                      user.address = req.body.address;
+    if (req.body.epsRelated)                                                   user.epsRelated = req.body.epsRelated;
+    if (req.body.pwd && validateHelper.validatePwd(req.body.pwd))              user.password = req.body.pwd;
 
     User.update(req.session.user.id, user, function(err, data) {
       if (err) {
@@ -537,6 +546,7 @@ exports.saveChanges = function(req, res) {
       }
       var rol = req.session.rolEdit.rol || req.session.user.rol[0].name;
       req.session.user = data;
+      req.flash('message', 'Tus Datos han sido actualizados éxitosamente!');
       res.redirect('/users/' + req.session.user.id + '/' + rol);
     });
   }

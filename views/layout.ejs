@@ -113,6 +113,11 @@
 
     <main>
       <div class="col l10">
+        <% if (messages.length > 0) { %>
+          <div>
+            <input type="hidden" id="myAlert" value="<%= messages() %>">
+          </div>
+        <% } %>
         <%- body %>
         <% if (session.user) {%>
           <div class="col l2"><br></div>
@@ -195,5 +200,6 @@
     <script src="/js/editUser.js"></script>
     <script src="/js/recoveryPassword.js"></script>
     <script src="/js/calendar.js"></script>
+    <script src="/js/alerts.js"></script>
   </body>
 </html>

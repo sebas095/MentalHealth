@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const config = require('../config/email');
 const path = require('path');
 const fs = require('fs');
+const validateHelper = require('../helpers/validate');
 const imageHelper = require('../helpers/images');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 const uuid = require('uuid');
@@ -11,27 +12,33 @@ const multer = require('multer');
 var upload = multer({dest: 'data/'}).single('photo');
 
 exports.create = function(req, res) {
-  Root.create({
-    id: uuid.v4(),
-    documentType: req.body.typeDocument,
-    documentNumber: req.body.numDocument,
-    names: req.body.names,
-    lastnames: req.body.lastnames,
-    gender: req.body.gender,
-    birthdate: req.body.birthdate,
-    email: req.body.mail,
-    phone: req.body.phone,
-    address: req.body.address,
-    rol: {'name': 'root', 'photo': null, 'ext': null},
-    password: req.body.pwd,
-    accept: 1
-  }, function(err, data) {
-    if (err) {
-      console.log('Error: ', err);
-      return res.send(500, err);
-    }
-    res.redirect('/');
-  });
+  if (validateHelper.validateName(req.body.names) && validateHelper.validateName(req.body.lastnames)
+   && validateHelper.validateEmail(req.body.mail) && validateHelper.validatePhone(req.body.phone)
+   && validateHelper.validatePwd(req.body.pwd)) {
+
+    Root.create({
+      id: uuid.v4(),
+      documentType: req.body.typeDocument,
+      documentNumber: req.body.numDocument,
+      names: req.body.names,
+      lastnames: req.body.lastnames,
+      gender: req.body.gender,
+      birthdate: req.body.birthdate,
+      email: req.body.mail,
+      phone: req.body.phone,
+      address: req.body.address,
+      rol: {'name': 'root', 'photo': null, 'ext': null},
+      password: req.body.pwd,
+      accept: 1
+    }, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+      res.redirect('/');
+    });
+  }
+  else res.redirect('/');
 }
 
 exports.allowEps = function(req, res) {
@@ -170,10 +177,12 @@ exports.editRolProfile = function(req, res) {
                   targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + user.id),
                   id: user.id
                 }, function() {
+                  req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                   res.redirect('/users/' + req.session.user.id + '/root/manage');
                 });
               }
-              else res.redirect('/users/' + req.session.user.id + '/root/manage');
+              req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
+              res.redirect('/users/' + req.session.user.id + '/root/manage');
             });
           });
         }
@@ -205,10 +214,12 @@ exports.editRolProfile = function(req, res) {
                       targetPath: path.resolve(__dirname, '..', 'public/images/users/user-' + user.id),
                       id: user.id
                     }, function() {
+                      req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                       res.redirect('/users/' + req.session.user.id + '/root/manage');
                     });
                   }
-                  else res.redirect('/users/' + req.session.user.id + '/root/manage');
+                  req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
+                  res.redirect('/users/' + req.session.user.id + '/root/manage');
                 });
               });
             });
@@ -250,6 +261,7 @@ exports.deleteImageProfile = function(req, res) {
                   console.log('Error: ', err);
                   res.send(500, err);
                 }
+                req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                 res.redirect('/users/' + req.session.user.id + '/root/manage');
               });
             });
@@ -263,6 +275,7 @@ exports.deleteImageProfile = function(req, res) {
                 console.log('Error: ', err);
                 res.send(500, err);
               }
+              req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
               res.redirect('/users/' + req.session.user.id + '/root/manage');
             });
           }
@@ -276,26 +289,27 @@ exports.storeChanges = function(req, res) {
   var user = {};
   var id = req.body.ident;
 
-  if (req.body.nit)          user.documentNumber = req.body.nit;
-  if (req.body.nameEps)      user.names = req.body.nameEps;
-  if (req.body.mailEps)      user.email = req.body.mailEps;
-  if (req.body.phoneEps)     user.epsPhone = req.body.phoneEps;
-  if (req.body.addressEps)   user.address = req.body.addressEps;
-  if (req.body.typeDocument) user.documentType = req.body.typeDocument;
-  if (req.body.numDocument)  user.documentNumberPerson = req.body.numDocument;
-  if (req.body.names)        user.namesPerson = req.body.names;
-  if (req.body.lastnames)    user.lastnames = req.body.lastnames;
-  if (req.body.gender)       user.gender = req.body.gender;
-  if (req.body.phone)        user.phone = req.body.phone;
-  if (req.body.pwd)          user.password = req.body.pwd;
-  if (req.body.state == '1') user.accept = 1;
-  if (req.body.state == '2') user.accept = 2;
+  if (req.body.nit)                                                          user.documentNumber = req.body.nit;
+  if (req.body.nameEps && validateHelper.validateName(req.body.nameEps))     user.names = req.body.nameEps;
+  if (req.body.mailEps && validateHelper.validateEmail(req.body.mailEps))    user.email = req.body.mailEps;
+  if (req.body.phoneEps && validateHelper.validatePhone(req.body.phoneEps))  user.epsPhone = req.body.phoneEps;
+  if (req.body.addressEps)                                                   user.address = req.body.addressEps;
+  if (req.body.typeDocument)                                                 user.documentType = req.body.typeDocument;
+  if (req.body.numDocument)                                                  user.documentNumberPerson = req.body.numDocument;
+  if (req.body.names && validateHelper.validateName(req.body.names))         user.namesPerson = req.body.names;
+  if (req.body.lastnames && validateHelper.validateName(req.body.lastnames)) user.lastnames = req.body.lastnames;
+  if (req.body.gender)                                                       user.gender = req.body.gender;
+  if (req.body.phone && validateHelper.validatePhone(req.body.phone))        user.phone = req.body.phone;
+  if (req.body.pwd && validateHelper.validatePwd(req.body.pwd))              user.password = req.body.pwd;
+  if (req.body.state == '1')                                                 user.accept = 1;
+  if (req.body.state == '2')                                                 user.accept = 2;
 
   Eps.update(id, user, function(err, data) {
     if (err) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
+    req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
     res.redirect('/users/' + req.session.user.id + '/root/manage');
   });
 }

@@ -31,12 +31,12 @@
 <div class="row">
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
-    <input type="text" name="names" id="nombre" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.names %>" class="validate">
+    <input type="text" name="names" id="nombre" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.names %>" class="validate">
     <label for="nombre">Nombres </label>
   </div>
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
-    <input type="text" name="lastnames" id="apellidos" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.lastnames %>" class="validate">
+    <input type="text" name="lastnames" id="apellidos" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.lastnames %>" class="validate">
     <label for="apellidos">Apellidos </label>
   </div>
 </div>
@@ -52,7 +52,7 @@
   <div class="col l6 col m6 col s12">
     <i class="material-icons prefix">today</i>
     <label for="nacimiento">Fecha de Nacimiento </label>
-    <input type="date" name="birthdate" value="<%= manageUser.birthdate %>" class="validate"><br><br>
+    <input type="date" name="birthdate" placeholder="aaaa-mm-dd" value="<%= manageUser.birthdate %>" class="validate"><br><br>
   </div>
 </div>
 <div class="row">

@@ -89,7 +89,7 @@ exports.create = function(req, res) {
             }
             if (data.length == 0) {
               req.session.errors = [{"message": 'Los datos son incorrectos'}];
-              req.flash('message', 'Datos incorrectos!');
+              req.flash('message', 'Los Datos ingresados son incorrectos!');
               res.redirect('/login');
             }
             else {
@@ -130,6 +130,7 @@ exports.changePassword = function(req, res) {
           console.log('Error: ', err);
           res.send(500, err);
         }
+        req.flash('message', 'Su contraseña ha sido cambiada éxitosamente!');
         res.redirect('/login');
       });
     }
@@ -146,6 +147,7 @@ exports.changePassword = function(req, res) {
               console.log('Error: ', err);
               res.send(500, err);
             }
+            req.flash('message', 'Su contraseña ha sido cambiada éxitosamente!');
             res.redirect('/login');
           });
         }
@@ -156,6 +158,7 @@ exports.changePassword = function(req, res) {
               res.send(500, err);
             }
             if (data.length == 0) {
+              req.flash('message', 'Usted no se encuentra registrrado en la aplicación!');
               res.redirect('/');
             }
             else {
@@ -165,6 +168,7 @@ exports.changePassword = function(req, res) {
                   console.log('Error: ', err);
                   res.send(500, err);
                 }
+                req.flash('message', 'Su contraseña ha sido cambiada éxitosamente!');
                 res.redirect('/');
               });
             }

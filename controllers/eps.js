@@ -8,33 +8,41 @@ const config = require('../config/email');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 const uuid = require('uuid');
 const imageHelper = require('../helpers/images');
+const validateHelper = require('../helpers/validate');
 const multer = require('multer');
 var upload = multer({dest: 'data/'}).single('photo');
 
 exports.create = function(req, res) {
-  Eps.create({
-    id: uuid.v4(),
-    documentNumber: req.body.nit,
-    names: req.body.nameEps,
-    email: req.body.mailEps,
-    epsPhone: req.body.phoneEps,
-    address: req.body.addressEps,
-    rol: {'name': 'eps', 'photo': null, 'ext': null},
-    accept: 0,
-    password: req.body.pwd,
-    documentType: req.body.typeDocument,
-    documentNumberPerson: req.body.numDocument,
-    namesPerson: req.body.names,
-    lastnames: req.body.lastnames,
-    gender: req.body.gender,
-    phone: req.body.phone,
-  }, function(err, data) {
-    if (err) {
-      console.log('Error: ', err);
-      return res.send(500, err);
-    }
-    res.redirect('/');
-  });
+  if (validateHelper.validateName(req.body.nameEps) && validateHelper.validateEmail(req.body.mailEps)
+   && validateHelper.validatePhone(req.body.phoneEps) && validateHelper.validatePwd(req.body.pwd)
+   && validateHelper.validateName(req.body.names) && validateHelper.validateName(req.body.lastnames)
+   && validateHelper.validatePhone(req.body.phone)) {
+
+    Eps.create({
+      id: uuid.v4(),
+      documentNumber: req.body.nit,
+      names: req.body.nameEps,
+      email: req.body.mailEps,
+      epsPhone: req.body.phoneEps,
+      address: req.body.addressEps,
+      rol: {'name': 'eps', 'photo': null, 'ext': null},
+      accept: 0,
+      password: req.body.pwd,
+      documentType: req.body.typeDocument,
+      documentNumberPerson: req.body.numDocument,
+      namesPerson: req.body.names,
+      lastnames: req.body.lastnames,
+      gender: req.body.gender,
+      phone: req.body.phone,
+    }, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+      else res.redirect('/');
+    });
+  }
+  else res.redirect('/');
 }
 
 exports.allowUsers = function(req, res) {
@@ -246,10 +254,12 @@ exports.editRolProfile = function(req, res) {
                   targetName: path.resolve(__dirname, '..', 'public/users/user-' + user.id),
                   id: user.id
                 }, function() {
+                  req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                   res.redirect('/users/' + req.session.user.id + '/eps/manage');
                 });
               }
               else {
+                req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                 res.redirect('/users/' + req.session.user.id + '/eps/manage');
               }
             });
@@ -283,10 +293,12 @@ exports.editRolProfile = function(req, res) {
                       targetPath: path.resolve(__dirname, '..', 'public/users/user-' + user.id),
                       id: user.id
                     }, function() {
+                      req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                       res.redirect('/users/' + req.session.user.id + '/eps/manage');
                     });
                   }
-                  else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+                  req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
+                  res.redirect('/users/' + req.session.user.id + '/eps/manage');
                 });
               });
             });
@@ -330,6 +342,7 @@ exports.deleteImageProfile = function(req, res) {
                   console.log('Error: ', err);
                   res.send(500, err);
                 }
+                req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                 res.redirect('/users/' + req.session.user.id + '/eps/manage');
               });
             });
@@ -343,6 +356,7 @@ exports.deleteImageProfile = function(req, res) {
                 console.log('Error: ', err);
                 res.send(500, err);
               }
+              req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
               res.redirect('/users/' + req.session.user.id + '/eps/manage');
             });
           }
@@ -398,19 +412,19 @@ exports.storeChanges = function(req, res) {
   var index1 = -1, index2 = -1;
   var idCal1 = undefined, idCal2 = undefined;
 
-  if (req.body.typeDocument) user.documentType = req.body.typeDocument;
-  if (req.body.numDocument)  user.documentNumber = req.body.numDocument;
-  if (req.body.names)        user.names = req.body.names;
-  if (req.body.lastnames)    user.lastnames = req.body.lastnames;
-  if (req.body.gender)       user.gender = req.body.gender;
-  if (req.body.birthdate)    user.birthdate = req.body.birthdate;
-  if (req.body.mail)         user.email = req.body.mail;
-  if (req.body.phone)        user.phone = req.body.phone;
-  if (req.body.address)      user.address = req.body.address;
-  if (req.body.epsRelated)   user.epsRelated = req.body.epsRelated;
-  if (req.body.pwd)          user.password = req.body.pwd;
-  if (req.body.state == '1') user.accept = 1;
-  if (req.body.state == '2') user.accept = 2;
+  if (req.body.typeDocument)                                                 user.documentType = req.body.typeDocument;
+  if (req.body.numDocument)                                                  user.documentNumber = req.body.numDocument;
+  if (req.body.names && validateHelper.validateName(req.body.names))         user.names = req.body.names;
+  if (req.body.lastnames && validateHelper.validateName(req.body.lastnames)) user.lastnames = req.body.lastnames;
+  if (req.body.gender)                                                       user.gender = req.body.gender;
+  if (req.body.birthdate)                                                    user.birthdate = req.body.birthdate;
+  if (req.body.mail && validateHelper.validateEmail(req.body.mail))          user.email = req.body.mail;
+  if (req.body.phone && validateHelper.validatePhone(req.body.phone))        user.phone = req.body.phone;
+  if (req.body.address)                                                      user.address = req.body.address;
+  if (req.body.epsRelated)                                                   user.epsRelated = req.body.epsRelated;
+  if (req.body.pwd && validateHelper.validatePwd(req.body.pwd))              user.password = req.body.pwd;
+  if (req.body.state == '1')                                                 user.accept = 1;
+  if (req.body.state == '2')                                                 user.accept = 2;
 
   User.find({
     names: req.body.names,
@@ -457,10 +471,12 @@ exports.storeChanges = function(req, res) {
                     console.log('Error: ', err);
                     res.send(500, err);
                   }
+                  req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                   res.redirect('/users/' + req.session.user.id + '/eps/manage');
                 });
               }
-              else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+              req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
+              res.redirect('/users/' + req.session.user.id + '/eps/manage');
             });
           }
           else if (index2 != -1) {
@@ -469,10 +485,12 @@ exports.storeChanges = function(req, res) {
                 console.log('Error: ', err);
                 res.send(500, err);
               }
+              req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
               res.redirect('/users/' + req.session.user.id + '/eps/manage');
             });
           }
-          else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+          req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
+          res.redirect('/users/' + req.session.user.id + '/eps/manage');
         });
       }
       else {
@@ -493,10 +511,12 @@ exports.storeChanges = function(req, res) {
                     console.log('Error: ', err);
                     res.send(500, err);
                   }
+                  req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
                   res.redirect('/users/' + req.session.user.id + '/eps/manage');
                 });
               }
-              else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+              req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
+              res.redirect('/users/' + req.session.user.id + '/eps/manage');
             });
           }
           else if (index2 != -1) {
@@ -505,10 +525,12 @@ exports.storeChanges = function(req, res) {
                 console.log('Error: ', err);
                 res.send(500, err);
               }
+              req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
               res.redirect('/users/' + req.session.user.id + '/eps/manage');
             });
           }
-          else res.redirect('/users/' + req.session.user.id + '/eps/manage');
+          req.flash('message', 'Los cambios realizados se veran reflejados cuando el usuario vuelva a iniciar sesión!');
+          res.redirect('/users/' + req.session.user.id + '/eps/manage');
         });
       }
     }
