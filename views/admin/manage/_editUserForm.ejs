@@ -22,7 +22,7 @@
   </div>
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">label_outline</i>
-    <input type="text" name="numDocument" id="numDocumento" value="<%= manageUser.documentNumber %>" class="validate">
+    <input type="text" name="numDocument" id="numDocumento" autocomplete="off" value="<%= manageUser.documentNumber %>" class="validate">
     <input type="hidden" name="ident" value="<%= manageUser.documentNumber %>">
     <input type="hidden" name="ident" value="<%= manageUser.names %>">
     <label for="numDocumento">N° de Documento </label>
@@ -31,12 +31,12 @@
 <div class="row">
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
-    <input type="text" name="names" id="nombre" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.names %>" class="validate">
+    <input type="text" name="names" id="nombre" autocomplete="off" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.names %>" class="validate">
     <label for="nombre">Nombres </label>
   </div>
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">perm_identity</i>
-    <input type="text" name="lastnames" id="apellidos" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.lastnames %>" class="validate">
+    <input type="text" name="lastnames" id="apellidos" autocomplete="off" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" value="<%= manageUser.lastnames %>" class="validate">
     <label for="apellidos">Apellidos </label>
   </div>
 </div>
@@ -58,20 +58,20 @@
 <div class="row">
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">lock_outline</i>
-    <input type="text" name="mail" id="correo"
+    <input type="text" name="mail" id="correo" autocomplete="off"
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="<%= manageUser.email %>" class="validate">
     <label for="correo">Correo </label>
   </div>
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">phone</i>
-    <input type="text" name="phone" id="telefono" pattern="[0-9]+" value="<%= manageUser.phone %>" class="validate">
+    <input type="text" name="phone" id="telefono" autocomplete="off" pattern="[0-9]+" value="<%= manageUser.phone %>" class="validate">
     <label for="telefono">Telefono </label>
   </div>
 </div>
 <div class="row">
   <div class="input-field col l6 col m6 col s12">
     <i class="material-icons prefix">location_city</i>
-    <input type="text" name="address" id="direccion" value="<%= manageUser.address %>" class="validate">
+    <input type="text" name="address" id="direccion" autocomplete="off" value="<%= manageUser.address %>" class="validate">
     <label for="direccion">Dirección </label>
   </div>
   <div class="col l6 col m6 col s12">

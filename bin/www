@@ -1,28 +1,103 @@
-#!/usr/bin/nodejs
-var http = require('http');
-var os = require('os');
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
 
 var app = require('../app');
+var debug = require('debug')('mental-health:server');
+var fs = require('fs');
+var https = require('https');
 
-var server = http.createServer(app);
-var port = process.env.PORT || 4000;
+var options = {
+  key: fs.readFileSync('./certs/mental-health-key.pem').toString(),
+  cert: fs.readFileSync('./certs/mental-health-cert.pem').toString()
+};
 
-server.listen(port, function(err) {
-  if (err) throw err;
+/**
+ * Get port from environment and store in Express.
+ */
 
-  console.log('Starting server\nAvailable on:'.yellow);
-  var ifaces = os.networkInterfaces();
+var port = normalizePort(process.env.PORT || '4000');
+app.set('port', port);
 
-  Object.keys(ifaces).forEach(function (dev) {
-    ifaces[dev].forEach(function (details) {
-      if (details.family === 'IPv4') {
-        console.log(('  ' + 'http://' + details.address + ':' + port.toString()).green);
-      }
-    });
-  });
+/**
+ * Create HTTP server.
+ */
+
+var server = app.listen(app.get('port'), function(){
+  debug('Express server listening on port ' + server.address().port);
 });
 
-process.on('SIGINT', function() {
-  console.log("\nShutdown the server, bye :D".yellow);
-  process.exit();
+var serverSecure = https.createServer(options, app);
+serverSecure.listen(8443, function(){
+  debug('Express server listening on port ' + server.address().port);
 });
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
