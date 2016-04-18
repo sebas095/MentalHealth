@@ -244,13 +244,21 @@ exports.request = function(req, res) {
 
 // DELETE /logout  -- Destruir sesion
 exports.destroy = function(req, res){
-  destroyUserImages(req, function() {
-    delete req.session.user;
+  if (req.session.user) {
+    destroyUserImages(req, function() {
+      delete req.session.user;
+      req.session.tmp = {};
+      req.session.tmp2 = {};
+      req.session.rolEdit = undefined;
+      res.redirect('/');
+    });
+  }
+  else {
     req.session.tmp = {};
     req.session.tmp2 = {};
     req.session.rolEdit = undefined;
     res.redirect('/');
-  });
+  }
 };
 
 // Mover imagenes del server a la carpeta public
