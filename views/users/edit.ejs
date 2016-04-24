@@ -33,7 +33,7 @@
 <% if (Array.isArray(session.user.rol) || session.user.rol.name == 'eps') { %>
   <div class="center">
     <form action="/users/<%= session.user.id %>/edit?_method=delete" method="post">
-      <input type="submit" class="btn waves-effect waves-light red lighten-1" onclick="return checkedDeleted();" value="ELIMINAR CUENTA">
+      <input type="submit" class="btn waves-effect waves-light red lighten-1" onclick="return checkedDeleted('cuenta');" value="ELIMINAR CUENTA">
     </form>
   </div>
 <% } %>

@@ -1,6 +1,14 @@
 const User = require('../models/user');
 const Calendar = require('../models/calendar');
 const uuid = require('uuid');
+var initCalendar = {
+  lunes: [],
+  martes: [],
+  miercoles: [],
+  jueves: [],
+  viernes: [],
+  sabado: []
+};
 
 exports.home = function(req, res) {
   if (req.params.rol == 'paciente') {
@@ -87,6 +95,19 @@ exports.pending = function(req, res) {
       }
     }
     res.render('users/calendar/index', {generales: generales, especialistas: especialistas});
+  });
+}
+
+exports.reset = function(req, res) {
+  var index = getIndex(req.session.user.rol, req.params.rol);
+  var idCal = req.session.user.rol[index].idCalendar;
+
+  Calendar.update(idCal, {currWeek: initCalendar}, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+    res.redirect('/users/' + req.session.user.id + '/' + req.params.rol + '/initTime');
   });
 }
 
