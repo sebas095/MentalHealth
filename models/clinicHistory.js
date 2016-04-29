@@ -2,6 +2,7 @@ const resourceful = require('resourceful');
 
 var ClinicHistory = resourceful.define('clinicHistory', function() {
   this.string('id');
+  this.string('idPatient');
   this.string('job');
   this.number('historyNumber');
   this.string('civilStatus');
