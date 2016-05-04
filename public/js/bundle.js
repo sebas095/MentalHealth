@@ -3,8 +3,11 @@ const date = require('date-and-time');
 
 document.addEventListener('DOMContentLoaded', function() {
   var now = new Date();
-  var tm = date.addDays(now, 3);
-  console.log(tm);
+  for (var i = 0; i < 7; i++) {
+    var tm = date.addDays(now, i);
+    var text = document.createTextNode(tm);
+    document.querySelector("#test").appendChild(text);
+  }
 });
 
 },{"date-and-time":2}],2:[function(require,module,exports){
