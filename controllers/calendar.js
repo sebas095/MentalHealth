@@ -53,6 +53,18 @@ exports.home = function(req, res) {
   }
 }
 
+exports.createCited = function(req, res) {
+
+}
+
+exports.editCited = function(req, res) {
+
+}
+
+exports.resetCited = function(req, res) {
+  
+}
+
 exports.edit = function(req, res) {
   var medico = req.session.user;
   var index = getIndex(medico.rol, req.params.rol);
@@ -117,7 +129,7 @@ exports.reset = function(req, res) {
       subject: "Eliminación de Agenda en MENTALHEALTH",
       html: `<p>Estimado Usuario ${req.session.user.names},` +
             `</p><br><br>Se informa que su agenda en MentalHealth ha sido elimininada` +
-            ` si desea ingresar para verla ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
+            ` si desea ingresar para ver los cambios ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
             `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
     });
 
@@ -196,7 +208,7 @@ exports.editSave = function(req, res) {
       subject: "Modificación de Agenda en MENTALHEALTH",
       html: `<p>Estimado Usuario ${req.session.user.names},` +
             `</p><br><br>Se informa que su agenda en MentalHealth ha sido modificada` +
-            ` si desea ingresar para verla ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
+            ` si desea ingresar para ver los cambios ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
             `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
     });
 

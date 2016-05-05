@@ -12,6 +12,7 @@
 </div><hr><br>
 
 <div class="row" id="calendarGeneral">
+  <% var general; %>
   <% if (generales.length == 0)  { %>
     <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Generales disponibles')">
   <% } else { %>
@@ -28,6 +29,7 @@
           <% for (var user in generales) { %>
             <option value="<%= generales[user].names %>-<%= generales[user].documentNumber %>">
               <%= generales[user].names %>-<%= generales[user].documentNumber %>
+              <% general = generales[user].names + "-" + generales[user].documentNumber %>
             </option>
           <% } %>
         <% } %>
@@ -37,9 +39,25 @@
       <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="VER AGENDA">
     </div>
   </form>
+  <div class="row center col l12 col m12 col s12">
+    <form action="#" method="post">
+      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
+    </form>
+  </div>
+  <div class="row center col l12 col m12 col s12">
+    <form action="#" method="post">
+      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="MODIFICAR CITA">
+    </form>
+  </div>
+  <div class="row center col l12 col m12 col s12">
+    <form action="#" method="post">
+      <input class="btn waves-effect waves-light red lighten-1" type="submit" name="button" value="ELIMINAR CITA">
+    </form>
+  </div>
 </div>
 
 <div class="row" id="calendarEspecialista">
+  <% var especialista; %>
   <% if (especialistas.length == 0)  { %>
     <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Especialistas disponibles')">
   <% } else { %>
@@ -56,6 +74,7 @@
           <% for (var user in especialistas) { %>
             <option value="<%= especialistas[user].names %>-<%= especialistas[user].documentNumber %>">
               <%= especialistas[user].names %>-<%= especialistas[user].documentNumber %>
+              <% especialista = especialistas[user].names + "-" +especialistas[user].documentNumber %>
             </option>
           <% } %>
         <% } %>
@@ -65,4 +84,19 @@
       <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="VER AGENDA">
     </div>
   </form>
+  <div class="row center col l12 col m12 col s12">
+    <form action="#" method="post">
+      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
+    </form>
+  </div>
+  <div class="row center col l12 col m12 col s12">
+    <form action="#" method="post">
+      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="MODIFICAR CITA">
+    </form>
+  </div>
+  <div class="row center col l12 col m12 col s12">
+    <form action="#" method="post">
+      <input class="btn waves-effect waves-light red lighten-1" type="submit" name="button" value="ELIMINAR CITA">
+    </form>
+  </div>
 </div>

@@ -5,6 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < 7; i++) {
     var tm = date.addDays(now, i);
     var text = document.createTextNode(tm);
-    document.querySelector("#test").appendChild(text);
+    //document.querySelector("#test").appendChild(text);
   }
 });

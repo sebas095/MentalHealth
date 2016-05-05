@@ -44,6 +44,8 @@ module.exports = function(app, mountPoint) {
   router.put('/:id/root/manage/editRol', sessionController.loginRequired, rootController.editRolProfile);
   router.put('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.editRolProfile);
   router.put('/:id/:rol(\\medico(General|Especialista))/calendar/edit', sessionController.loginRequired, calendarController.editSave);
+  router.put('/:id/:rol(\\paciente)/calendar/calendar', sessionController.loginRequired, calendarController.createCited);
+  router.put('/:id/:rol(\\paciente)/calendar/edit', sessionController.loginRequired, calendarController.editCited);
 
   // DELETE
   router.delete('/:id/edit', sessionController.loginRequired, userController.deleteAccount);
@@ -51,6 +53,7 @@ module.exports = function(app, mountPoint) {
   router.delete('/:id/root/manage/editRol', sessionController.loginRequired, rootController.deleteImageProfile);
   router.delete('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.deleteImageProfile);
   router.delete('/:id/:rol(\\medico(General|Especialista))/calendar', sessionController.loginRequired, calendarController.reset);
+  router.delete('/:id/:rol(\\paciente)/calendar', sessionController.loginRequired, calendarController.resetCited);
 
   app.use(mountPoint, router);
 }
