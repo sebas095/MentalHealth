@@ -509,7 +509,7 @@ exports.saveChanges = function(req, res) {
       if (req.body.names && validateHelper.validateName(req.body.names))         user.names = req.body.names;
       if (req.body.lastnames && validateHelper.validateName(req.body.lastnames)) user.lastnames = req.body.lastnames;
       if (req.body.gender)                                                       user.gender = req.body.gender;
-      if (req.body.birthdate)                                                    user.birthdate = req.body.birthdate;
+      if (req.body.birthdate)                                                    {user.birthdate = req.body.birthdate; console.log(user.birthdate);}
       if (req.body.mail && validateHelper.validateEmail(req.body.mail))          user.email = req.body.mail;
       if (req.body.phone && validateHelper.validatePhone(req.body.phone))        user.phone = req.body.phone;
       if (req.body.address)                                                      user.address = req.body.address;
@@ -544,7 +544,7 @@ exports.saveChanges = function(req, res) {
         console.log('Error: ', err);
         return res.send(500, err);
       }
-      var rol = req.session.rolEdit.rol || req.session.user.rol[0].name;
+      var rol = (req.session.rolEdit)? req.session.rolEdit.rol : req.session.user.rol[0].name;
       req.session.user = data;
       req.flash('message', 'Tus Datos han sido actualizados éxitosamente!');
       res.redirect('/users/' + req.session.user.id + '/' + rol);

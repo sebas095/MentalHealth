@@ -17,7 +17,7 @@ function checkDate(form, rol) {
   if (form.birthdate.value) {
     if (rol == 'user') {
       var currentYear = new Date(Date.now()).getFullYear();
-      var birthdate = Number((form.birthdate.value).split('-')[0]);
+      var birthdate = Number((form.birthdate.value).split('/')[2]);
 
       if (currentYear - birthdate >= 3) return true;
       else {
@@ -29,7 +29,7 @@ function checkDate(form, rol) {
       if (rol.name == 'eps') return true;
       else {
         var currentYear = new Date(Date.now()).getFullYear();
-        var birthdate = Number((form.birthdate.value).split('-')[0]);
+        var birthdate = Number((form.birthdate.value).split('/')[2]);
         if (currentYear - birthdate >= 18) return true;
         else {
           alert('Por favor ingresa una fecha válida');
