@@ -18,6 +18,8 @@ module.exports = function(app, mountPoint) {
   router.get('/:id/:rol(\\paciente|medico(General|Especialista))/calendar', sessionController.loginRequired, calendarController.home);
   router.get('/:id/:rol(\\medico(General|Especialista))/calendar/edit', sessionController.loginRequired, calendarController.edit);
   router.get('/:id/:rol(\\medico(General|Especialista))/calendar/show', sessionController.loginRequired, calendarController.showCalendar);
+  router.get('/:id/:rol(\\paciente)/calendar/register', sessionController.loginRequired, calendarController.registerCited);
+  router.get('/:id/:rol(\\paciente)/calendar/edit', sessionController.loginRequired, calendarController.loadForm);
   router.get('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.pending);
   router.get('/:id/root/manage', sessionController.loginRequired, rootController.manage);
   router.get('/:id/eps/manage', sessionController.loginRequired, epsController.manage);
@@ -31,6 +33,7 @@ module.exports = function(app, mountPoint) {
   router.post('/create/root', rootController.create);
   router.post('/create/eps', epsController.create);
   router.post('/create/user', userController.create);
+  router.post('/:id/:rol(\\paciente)/calendar', sessionController.loginRequired, calendarController.createCited);
   router.post('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.allowUser);
 
   // PUT
@@ -44,7 +47,6 @@ module.exports = function(app, mountPoint) {
   router.put('/:id/root/manage/editRol', sessionController.loginRequired, rootController.editRolProfile);
   router.put('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.editRolProfile);
   router.put('/:id/:rol(\\medico(General|Especialista))/calendar/edit', sessionController.loginRequired, calendarController.editSave);
-  router.put('/:id/:rol(\\paciente)/calendar/calendar', sessionController.loginRequired, calendarController.createCited);
   router.put('/:id/:rol(\\paciente)/calendar/edit', sessionController.loginRequired, calendarController.editCited);
 
   // DELETE

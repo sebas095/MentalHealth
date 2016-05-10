@@ -37,13 +37,18 @@ exports.home = function(req, res) {
         }
         var newWeek = transform(data.currWeek);
         var flag = isEmpty(data.currWeek);
+        var exist = checkUser(req, data.currWeek);
+        var choose = chooseDate(req, data.currWeek);
 
         res.render('users/calendar/paciente', {
           calMedico: newWeek.newWeek,
           hourRow: newWeek.hours,
           medico: medico,
           length: data.currWeek['lunes'].length,
-          empty: flag
+          empty: flag,
+          exist: exist,
+          choose: choose,
+          rol: req.params.rol
         });
       });
     });
@@ -53,16 +58,187 @@ exports.home = function(req, res) {
   }
 }
 
-exports.createCited = function(req, res) {
+exports.registerCited = function(req, res) {
+  var medico = req.query.medico.split('-');
+  var user = medico[0];
+  var document = medico[1];
+  var type = req.query.type;
 
+  User.find({
+    names: user,
+    documentNumber: document
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+
+    var doct = data[0];
+    var index = getIndex(data[0].rol, type);
+    var idCal = data[0].rol[index].idCalendar;
+
+    Calendar.get(idCal, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        res.send(500, err);
+      }
+      res.render('users/calendar/new', {agenda: data, medico: doct});
+    });
+  });
+}
+
+exports.createCited = function(req, res) {
+  var chooseDay = req.body.chooseDay.split('-');
+
+  Calendar.get(req.body.dateCurr, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+
+    var week = data.currWeek;
+    week = update(req, week, chooseDay, true);
+
+    Calendar.update(data.id, {currWeek: week}, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        res.send(500, err);
+      }
+      res.redirect("/users/" + req.session.user.id + "/paciente/pendingList");
+    });
+  });
+}
+
+exports.loadForm = function(req, res) {
+  var idMedico = req.query.medico;
+
+  User.get(idMedico, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+
+    var index1 = getIndex(data.rol,"medicoGeneral");
+    var index2 = getIndex(data.rol, "medicoEspecialista");
+    var doct = data;
+
+    if(index1 != -1) {
+      var idCal = data.rol[index1].idCalendar;
+      Calendar.get(idCal, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+
+        var day = chooseDate(req, data.currWeek);
+        var chooseDay = day.key;
+        var chooseHour = day.hour;
+
+        res.render('users/calendar/editCite', {agenda: data, medico: doct, day: chooseDay, hour: chooseHour});
+      });
+    }
+    else {
+      var idCal = data.rol[index2].idCalendar;
+      Calendar.get(idCal, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+
+        var day = chooseDate(req, data.currWeek);
+        var chooseDay = day.key;
+        var chooseHour = day.hour;
+
+        res.render('users/calendar/editCite', {agenda: data, medico: doct, day: chooseDay, hour: chooseHour});
+      });
+    }
+  });
 }
 
 exports.editCited = function(req, res) {
+  var chooseDay = req.body.chooseDay.split('-');
+  var oldDate = req.body.oldDate.split('-');
 
+  Calendar.get(req.body.dateCurr, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+
+    var week = data.currWeek;
+    week = update(req, week, oldDate, false);
+    week = update(req, week, chooseDay, true);
+
+    Calendar.update(data.id, {currWeek: week}, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        res.send(500, err);
+      }
+
+      res.redirect("/users/" + req.session.user.id + "/paciente/pendingList");
+    });
+  });
 }
 
 exports.resetCited = function(req, res) {
-  
+  var idMedico = req.body.medico;
+
+  User.get(idMedico, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(500, err);
+    }
+
+    var index1 = getIndex(data.rol,"medicoGeneral");
+    var index2 = getIndex(data.rol, "medicoEspecialista");
+
+    if (index1 != -1) {
+      var idCal = data.rol[index1].idCalendar;
+      Calendar.get(idCal, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+
+        var dateCurr = chooseDate(req, data.currWeek);
+        var oldDate = [dateCurr.key, dateCurr.hour];
+        var week = data.currWeek;
+        week = update(req, week, oldDate, false);
+
+        Calendar.update(data.id, {currWeek: week}, function(err, data) {
+          if (err) {
+            console.log('Error: ', err);
+            res.send(500, err);
+          }
+
+          res.redirect("/users/" + req.session.user.id + "/paciente/pendingList");
+        });
+      });
+    }
+    else {
+      var idCal = data.rol[index2].idCalendar;
+      Calendar.get(idCal, function(err, data) {
+        if (err) {
+          console.log('Error: ', err);
+          res.send(500, err);
+        }
+
+        var dateCurr = chooseDate(req, data.currWeek);
+        var oldDate = [dateCurr.key, dateCurr.hour];
+        var week = data.currWeek;
+        week = update(req, week, oldDate, false);
+
+        Calendar.update(data.id, {currWeek: week}, function(err, data) {
+          if (err) {
+            console.log('Error: ', err);
+            res.send(500, err);
+          }
+
+          res.redirect("/users/" + req.session.user.id + "/paciente/pendingList");
+        });
+      });
+    }
+  });
 }
 
 exports.edit = function(req, res) {
@@ -97,6 +273,7 @@ exports.pending = function(req, res) {
       console.log('Error: ', err);
       res.send(500, err);
     }
+
     for (var user in data) {
       if (data[user].id != req.session.user.id) {
         var index1 = getIndex(data[user].rol, 'medicoGeneral');
@@ -109,7 +286,22 @@ exports.pending = function(req, res) {
         }
       }
     }
-    res.render('users/calendar/index', {generales: generales, especialistas: especialistas});
+
+    Calendar.all(function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        res.send(500, err);
+      }
+
+      var seen = false;
+      for (var i in data) {
+        if (checkUser(req, data[i].currWeek)) {
+          seen = true;
+          break;
+        }
+      }
+      res.render('users/calendar/index', {generales: generales, especialistas: especialistas, seen: seen});
+    });
   });
 }
 
@@ -172,7 +364,9 @@ exports.showCalendar = function(req, res) {
       hourRow: newWeek.hours,
       medico: medico,
       length: data.currWeek['lunes'].length,
-      empty: flag
+      empty: flag,
+      choose: {},
+      rol: req.params.rol
     });
   });
 }
@@ -311,4 +505,51 @@ function manageCalendar(req) {
     }
   }
   return week;
+}
+
+function update(req, week, chooseDay, available) {
+  var day = chooseDay[0];
+  var hour = chooseDay[1];
+
+  for (var i in week[day]) {
+    if (week[day][i].hour == hour) {
+      if (available) {
+        week[day][i].color = "background: #d32f2f";
+        week[day][i].idPatient = req.session.user.id;
+      }
+      else {
+        week[day][i].color = "background: #00c853";
+        if (week[day][i].idPatient) delete week[day][i].idPatient;
+      }
+      break;
+    }
+  }
+
+  return week;
+}
+
+function checkUser(req, week) {
+  var keys = Object.keys(week);
+  for (var i in keys) {
+    for (var j in week[keys[i]]) {
+      if (week[keys[i]][j].idPatient) {
+        if (week[keys[i]][j].idPatient == req.session.user.id)
+          return true;
+      }
+    }
+  }
+  return false;
+}
+
+function chooseDate(req, week) {
+  var keys = Object.keys(week);
+  for (var i in keys) {
+    for (var j in week[keys[i]]) {
+      if (week[keys[i]][j].idPatient) {
+        if (week[keys[i]][j].idPatient == req.session.user.id)
+          return {"id": req.session.user.id, "day": i, "key": keys[i], "hour": week[keys[i]][j].hour};
+      }
+    }
+  }
+  return {};
 }

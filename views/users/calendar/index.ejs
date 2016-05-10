@@ -12,7 +12,7 @@
 </div><hr><br>
 
 <div class="row" id="calendarGeneral">
-  <% var general; %>
+  <% var general, hasMG = true, hasME = true; %>
   <% if (generales.length == 0)  { %>
     <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Generales disponibles')">
   <% } else { %>
@@ -25,6 +25,7 @@
       <select name="medicos" class="validate">
         <% if (generales.length == 0) { %>
           <option value="none">No hay Médicos Generales disponibles</option>
+          <% hasMG = false; %>
         <% } else { %>
           <% for (var user in generales) { %>
             <option value="<%= generales[user].names %>-<%= generales[user].documentNumber %>">
@@ -35,25 +36,19 @@
         <% } %>
       </select>
     </div>
-    <div class="row center col l12 col m12 col s12">
+    <div class="row center col l12 col m12 col s12"><br>
       <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="VER AGENDA">
     </div>
   </form>
-  <div class="row center col l12 col m12 col s12">
-    <form action="#" method="post">
-      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
-    </form>
-  </div>
-  <div class="row center col l12 col m12 col s12">
-    <form action="#" method="post">
-      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="MODIFICAR CITA">
-    </form>
-  </div>
-  <div class="row center col l12 col m12 col s12">
-    <form action="#" method="post">
-      <input class="btn waves-effect waves-light red lighten-1" type="submit" name="button" value="ELIMINAR CITA">
-    </form>
-  </div>
+  <% if (hasMG && !seen) { %>
+    <div class="row center col l12 col m12 col s12">
+      <form action="/users/<%= session.user.id %>/paciente/calendar/register" method="get">
+        <input type="hidden" name="medico" value="<%= general %>">
+        <input type="hidden" name="type" value="medicoGeneral">
+        <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
+      </form>
+    </div>
+  <% } %>
 </div>
 
 <div class="row" id="calendarEspecialista">
@@ -70,6 +65,7 @@
       <select name="medicos" class="validate">
         <% if (especialistas.length == 0) { %>
           <option value="none">No hay Médicos Especialistas disponibles</option>
+          <% hasME = false; %>
         <% } else { %>
           <% for (var user in especialistas) { %>
             <option value="<%= especialistas[user].names %>-<%= especialistas[user].documentNumber %>">
@@ -80,23 +76,17 @@
         <% } %>
       </select>
     </div>
-    <div class="row center col l12 col m12 col s12">
+    <div class="row center col l12 col m12 col s12"><br>
       <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="VER AGENDA">
     </div>
   </form>
-  <div class="row center col l12 col m12 col s12">
-    <form action="#" method="post">
-      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
-    </form>
-  </div>
-  <div class="row center col l12 col m12 col s12">
-    <form action="#" method="post">
-      <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="MODIFICAR CITA">
-    </form>
-  </div>
-  <div class="row center col l12 col m12 col s12">
-    <form action="#" method="post">
-      <input class="btn waves-effect waves-light red lighten-1" type="submit" name="button" value="ELIMINAR CITA">
-    </form>
-  </div>
+  <% if (hasME && !seen) { %>
+    <div class="row center col l12 col m12 col s12">
+      <form action="/users/<%= session.user.id %>/paciente/calendar/register" method="get">
+        <input type="hidden" name="medico" value="<%= especialista %>">
+        <input type="hidden" name="type" value="medicoEspecialista">
+        <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
+      </form>
+    </div>
+  <% } %>
 </div>

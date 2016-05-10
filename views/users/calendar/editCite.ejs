@@ -1,0 +1,88 @@
+<% function checkWeek(week) { %>
+  <% var keys = Object.keys(week); %>
+  <% var days = []; %>
+
+  <% for (var i in keys)  { %>
+    <% var ok = false; %>
+    <% for (var j in week[keys[i]]) { %>
+      <% if (week[keys[i]][j].color == "background: #00c853") { %>
+        <% ok = true; %>
+        <% break; %>
+      <% } %>
+    <% } %>
+    <% if (ok) { %>
+      <% days.push(keys[i]); %>
+    <% } %>
+  <% } %>
+
+  <% return keys; %>
+<% } %>
+
+<% function isEmpty(week) { %>
+  <% var keys = Object.keys(week); %>
+  <% var ok = true; %>
+
+  <% for (var key in keys) { %>
+    <% if (week[keys[key]].length > 0) { %>
+      <% ok = false; %>
+      <% break; %>
+    <% } %>
+  <% } %>
+  <% return ok; %>
+<% } %>
+
+<% function getHour(week, day) { %>
+  <% var hours = []; %>
+  <% for (var i in week[day]) { %>
+    <% hours.push(week[day][i].hour); %>
+  <% } %>
+  <% return hours; %>
+<% } %>
+
+<% var dayView = {
+  "lunes": "Lunes",
+  "martes": "Martes",
+  "miercoles": "Miércoles",
+  "jueves": "Jueves",
+  "viernes": "Viernes",
+  "sabado": "Sábado"
+}; %>
+
+<div class="row col l12 col m12 col s12">
+  <% var curr; %>
+  <% var name = (medico.names).toUpperCase() + " " + (medico.lastnames).toUpperCase() %>
+  <br><center>
+    <h5>HORARIOS DISPONIBLE DE <%= name %></h1>
+  </center><br>
+  <% var days = checkWeek(agenda.currWeek) %>
+  <% if (days.length == 0 || isEmpty(agenda.currWeek)) { %>
+    <div class="row center col l12 col m12 col s12">
+      <br><h3>No hay horario disponible.</h2><br><br>
+      <a class="waves-effect waves-light btn cyan darken-2" href="/users/<%= session.user.id %>/paciente/pendingList">
+        VOLVER
+      </a>
+    </div>
+  <% } else { %>
+    <form action="/users/<%= session.user.id %>/paciente/calendar/edit?_method=PUT" method="post">
+      <div class="col l8 offset-l2 col m12 col s12"><br>
+        <i class="material-icons prefix">schedule</i>
+        <label>DIA</label>
+        <select name="chooseDay">
+          <% for (var i in days)  { %>
+            <% var hours = getHour(agenda.currWeek, days[i]) %>
+            <% for (var j in hours) { %>
+              <option value="<%= days[i] %>-<%= hours[j] %>" <% if (days[i] == day && hours[j] == hour) { %> selected <% } %>>
+                <%= dayView[days[i]] %>-<%= hours[j] %>
+              </option>
+            <% } %>
+          <% } %>
+        </select><br>
+      </div>
+      <div class="row center col l12 col m12 col s12">
+        <input type="hidden" name="dateCurr" value="<%= agenda.id %>" >
+        <input type="hidden" name="oldDate" value="<%= day %>-<%= hour %>">
+        <br><input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="GUARDAR">
+      </div>
+    </form>
+  <% } %>
+</div>
