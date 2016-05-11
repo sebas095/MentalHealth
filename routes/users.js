@@ -6,6 +6,7 @@ const rootController = require('../controllers/root');
 const epsController = require('../controllers/eps');
 const sessionController = require('../controllers/session');
 const calendarController = require('../controllers/calendar');
+const clinicHistoryController = require('../controllers/clinicHistory');
 
 module.exports = function(app, mountPoint) {
   // GET
@@ -28,6 +29,7 @@ module.exports = function(app, mountPoint) {
   router.get('/:id/eps/manage/edit', sessionController.loginRequired, epsController.manageProfile);
   router.get('/:id/:rol(\\eps|root)/allow', sessionController.loginRequired, userController.allow);
   router.get('/:id/data', sessionController.loginRequired, userController.dataRol);
+  router.get('/:id/:rol(\\medico(General|Especialista))/patientsList', sessionController.loginRequired, clinicHistoryController.patients);
 
   // POST
   router.post('/create/root', rootController.create);
