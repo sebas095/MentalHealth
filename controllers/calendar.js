@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const config = require('../config/email');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
 const uuid = require('uuid');
+require('date-util');
 var initCalendar = {
   lunes: [],
   martes: [],
@@ -39,6 +40,7 @@ exports.home = function(req, res) {
         var flag = isEmpty(data.currWeek);
         var exist = checkUser(req, data.currWeek);
         var choose = chooseDate(req, data.currWeek);
+        var dateWeek = getDate();
 
         res.render('users/calendar/paciente', {
           calMedico: newWeek.newWeek,
@@ -48,6 +50,7 @@ exports.home = function(req, res) {
           empty: flag,
           exist: exist,
           choose: choose,
+          dateWeek: dateWeek,
           rol: req.params.rol
         });
       });
@@ -175,6 +178,16 @@ exports.editCited = function(req, res) {
         res.send(500, err);
       }
 
+      Email.sendMail({
+        from: req.session.admin,
+        to: req.session.user.email,
+        subject: "Modificacón de cita en MENTALHEALTH",
+        html: `<p>Estimado Usuario ${req.session.user.names},` +
+              `</p><br><br>Se informa que su cita del dia ${oldDate[0]} a las ${oldDate[1]} en MentalHealth ha sido modificada exitosamente para` +
+              ` el dia ${chooseDay[0]} a las ${chooseDay[1]} si desea ingresar para ver los cambios ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
+              `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
+      });
+
       res.redirect("/users/" + req.session.user.id + "/paciente/pendingList");
     });
   });
@@ -210,6 +223,16 @@ exports.resetCited = function(req, res) {
             console.log('Error: ', err);
             res.send(500, err);
           }
+
+          Email.sendMail({
+            from: req.session.admin,
+            to: req.session.user.email,
+            subject: "Eliminacón de cita en MENTALHEALTH",
+            html: `<p>Estimado Usuario ${req.session.user.names},` +
+                  `</p><br><br>Se informa que su cita del dia ${dateCurr.key} a las ${dateCurr.hour} en MentalHealth ha sido eliminada` +
+                  ` si desea ingresar para ver los cambios ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
+                  `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
+          });
 
           res.redirect("/users/" + req.session.user.id + "/paciente/pendingList");
         });
@@ -358,6 +381,7 @@ exports.showCalendar = function(req, res) {
     }
     var newWeek = transform(data.currWeek);
     var flag = isEmpty(data.currWeek);
+    var dateWeek = getDate();
 
     res.render('users/calendar/paciente', {
       calMedico: newWeek.newWeek,
@@ -366,6 +390,7 @@ exports.showCalendar = function(req, res) {
       length: data.currWeek['lunes'].length,
       empty: flag,
       choose: {},
+      dateWeek: dateWeek,
       rol: req.params.rol
     });
   });
@@ -552,4 +577,17 @@ function chooseDate(req, week) {
     }
   }
   return {};
+}
+
+function getDate() {
+  var keys = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  var now = new Date().strtotime('last monday').toString();
+  var dateWeek = {};
+
+  for (var i = 0; i < 6; i++) {
+    var day = new Date(now).strtotime('+' + i +' day').toString().split(' ');
+    day = day[1] + '/' + day[2] + '/' + day[3];
+    dateWeek[keys[i]] = day;
+  }
+  return dateWeek;
 }

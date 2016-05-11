@@ -16,7 +16,11 @@
       <tr>
         <% var header = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"] %>
         <% for(var data in header) { %>
-          <th style="background: #e0f2f1"><%= header[data] %></th>
+          <th style="background: #e0f2f1">
+            <%= header[data] %>
+            <br><br>
+            <%= dateWeek[header[data]] %>
+          </th>
         <% } %>
       </tr>
     </thead>
