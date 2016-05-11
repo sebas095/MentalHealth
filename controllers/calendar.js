@@ -507,7 +507,7 @@ function manageCalendar(req) {
     for (var i in hours) {
       var json = {};
       json.hour = hours[i];
-      json.color = "background: #d32f2f";
+      json.color = "background: #e57373";
       arr.push(json);
     }
     week[days[day]] = arr;
@@ -524,7 +524,7 @@ function manageCalendar(req) {
     var h = data[1];
     for (var i in week[d]) {
       if (week[d][i].hour == h) {
-        week[d][i].color = "background: #00c853";
+        week[d][i].color = "background: #a5d6a7";
         break;
       }
     }
@@ -539,11 +539,11 @@ function update(req, week, chooseDay, available) {
   for (var i in week[day]) {
     if (week[day][i].hour == hour) {
       if (available) {
-        week[day][i].color = "background: #d32f2f";
+        week[day][i].color = "background: #e57373";
         week[day][i].idPatient = req.session.user.id;
       }
       else {
-        week[day][i].color = "background: #00c853";
+        week[day][i].color = "background: #a5d6a7";
         if (week[day][i].idPatient) delete week[day][i].idPatient;
       }
       break;
