@@ -40,6 +40,7 @@ module.exports = function(app, mountPoint) {
   router.post('/create/user', userController.create);
   router.post('/:id/:rol(\\paciente)/calendar', sessionController.loginRequired, calendarController.createCited);
   router.post('/:id/:rol(\\eps|root)/pending', sessionController.loginRequired, userController.allowUser);
+  router.post('/:id/:rol(\\medico(General|Especialista))/clinicHistory/create', sessionController.loginRequired, clinicHistoryController.create);
 
   // PUT
   router.put('/:id/edit', sessionController.loginRequired, userController.saveChanges);
@@ -53,6 +54,7 @@ module.exports = function(app, mountPoint) {
   router.put('/:id/eps/manage/editRol', sessionController.loginRequired, epsController.editRolProfile);
   router.put('/:id/:rol(\\medico(General|Especialista))/calendar/edit', sessionController.loginRequired, calendarController.editSave);
   router.put('/:id/:rol(\\paciente)/calendar/edit', sessionController.loginRequired, calendarController.editCited);
+  router.put('/:id/:rol(\\medico(General|Especialista))/clinicHistory/edit', sessionController.loginRequired, clinicHistoryController.modify);
 
   // DELETE
   router.delete('/:id/edit', sessionController.loginRequired, userController.deleteAccount);

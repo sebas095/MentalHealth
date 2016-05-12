@@ -34,7 +34,7 @@ exports.patients = function(req, res) {
     			}
     		}
 
-    		var histories = [];
+    		var histories = ["test"];
     		ClinicHistory.all(function(err, data) {
     			if (err) {
     				console.log('Error: ', err);
@@ -53,15 +53,23 @@ exports.patients = function(req, res) {
 }
 
 exports.new = function(req, res) {
-	res.render('users/clinicHistory/new');
+	res.render('users/clinicHistory/new', {rol: req.params.rol});
 }
 
 exports.edit = function(req, res) {
-	res.render('users/clinicHistory/edit');
+	res.render('users/clinicHistory/edit', {rol: req.params.rol});
 }
 
 exports.show = function(req, res) {
-	res.render('users/clinicHistory/show');
+	res.render('users/clinicHistory/show', {rol: req.params.rol});
+}
+
+exports.create = function(req, res) {
+	
+}
+
+exports.modify = function(req, res) {
+	
 }
 
 function getIndex(array, match) {
