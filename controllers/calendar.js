@@ -181,7 +181,7 @@ exports.editCited = function(req, res) {
       Email.sendMail({
         from: req.session.admin,
         to: req.session.user.email,
-        subject: "Modificacón de cita en MENTALHEALTH",
+        subject: "Modificación de cita en MENTALHEALTH",
         html: `<p>Estimado Usuario ${req.session.user.names},` +
               `</p><br><br>Se informa que su cita del dia ${oldDate[0]} a las ${oldDate[1]} en MentalHealth ha sido modificada exitosamente para` +
               ` el dia ${chooseDay[0]} a las ${chooseDay[1]} si desea ingresar para ver los cambios ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
@@ -227,7 +227,7 @@ exports.resetCited = function(req, res) {
           Email.sendMail({
             from: req.session.admin,
             to: req.session.user.email,
-            subject: "Eliminacón de cita en MENTALHEALTH",
+            subject: "Eliminación de cita en MENTALHEALTH",
             html: `<p>Estimado Usuario ${req.session.user.names},` +
                   `</p><br><br>Se informa que su cita del dia ${dateCurr.key} a las ${dateCurr.hour} en MentalHealth ha sido eliminada` +
                   ` si desea ingresar para ver los cambios ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +

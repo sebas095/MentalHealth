@@ -3,7 +3,7 @@ const resourceful = require('resourceful');
 var ClinicHistory = resourceful.define('clinicHistory', function() {
   this.string('id');
   this.string('idPatient');
-  this.string('job');
+  this.string('job', {default: ""});
   this.number('historyNumber');
   this.string('civilStatus');
   this.string('currAddress');
@@ -15,7 +15,7 @@ var ClinicHistory = resourceful.define('clinicHistory', function() {
 
   // Antecedentes Heredo Familiares
   this.string('parentsAlive')
-  this.object('prentsDead');
+  this.object('parentsDead');
   this.string('sibAlive');
   this.object('sibDead');
   this.string('sonsAlive');

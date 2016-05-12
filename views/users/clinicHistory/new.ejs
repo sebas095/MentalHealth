@@ -1,281 +1,580 @@
-<div class="container">
-  <div class="center">
-    <h2>HISTORIA CLINICA</h2><br>
-  </div>
-  <div class="row">
-    <h3>Datos Filiatorios</h3>
-  </div>
-  <div class="row">
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
-      <label for="nameEps">Nombres </label>
+<form action="#" method="post">
+  <div class="container">
+    <div class="center">
+      <h2>HISTORIA CLINICA</h2><br>
     </div>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
-      <label for="nameEps">Apellidos </label>
+    <div class="row">
+      <h3>Datos Filiatorios</h3>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Edad</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="names" id="names" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="names">Nombres</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="lastnames" id="lastnames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="lastnames">Apellidos</label>
+      </div>
     </div>
-    <div class="col l6 col m6 col s12">
-      <i class="material-icons prefix">wc</i>
-      <label >Género </label>
-      <select name="gender" required="" aria-required="true" class="validate">
-        <option value="masculino">Masculino</option>
-        <option value="femenino">Femenino</option>
-      </select>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="age" id="age" autocomplete="off" class="validate" pattern="[0-9]+">
+        <label for="age">Edad</label>
+      </div>
+      <div class="col l6 col m6 col s12">
+        <i class="material-icons prefix">wc</i>
+        <label >Género </label>
+        <select name="gender" required="" aria-required="true" class="validate">
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Ocupación</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="job" id="job" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="job">Ocupación</label>
+      </div>
+      <div class="col l6 col m6 col s12">
+        <i class="material-icons prefix">today</i>
+        <label for="birthdate">Fecha de Nacimiento </label>
+        <input type="text" name="birthdate" id="birthdate" placeholder="mm/dd/aaaa" required="" aria-required="true" class="datepicker validate"><br><br>
+      </div>
     </div>
-    <div class="col l6 col m6 col s12">
-      <i class="material-icons prefix">today</i>
-      <label for="nac">Fecha de Nacimiento </label>
-      <input type="text" name="birthdate" id="birthdate" placeholder="mm/dd/aaaa" required="" aria-required="true" class="datepicker validate"><br><br>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="numH" id="numH" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
+        <label for="numH">Número de Historia</label>
+      </div>
+      <div class="col l6 col m6 col s12">
+        <i class="material-icons prefix">wc</i>
+        <label>Estado Civil </label>
+        <select name="state" required="" aria-required="true" class="validate">
+          <option value="soltero">Soltero(a)</option>
+          <option value="casado">Casado(a)</option>
+          <option value="divorciado">Divorciado(a)</option>
+          <option value="viudo">Viudo(a)</option>
+          <option value="union-libre">Unión Libre</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Número de Historia</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="document" id="document" autocomplete="off" class="validate" required="" aria-required="true">
+        <label for="document">DNI</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="nacion" id="nacion" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+" required="" aria-required="true">
+        <label for="nacion">Nacionalidad</label>
+      </div>
     </div>
-    <div class="col l6 col m6 col s12">
-      <i class="material-icons prefix">wc</i>
-      <label>Estadi Civil </label>
-      <select name="gender" required="" aria-required="true" class="validate">
-        <option value="soltero">Soltero(a)</option>
-        <option value="casado">Casado(a)</option>
-        <option value="divorciado">Divorciado(a)</option>
-        <option value="viudo">Viudo(a)</option>
-        <option value="union-libre">Unión Libre</option>
-      </select>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="currAddr" id="currAddr" autocomplete="off" class="validate">
+        <label for="currAddr">Residencia Actual</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="pastAddr" id="pastAddr" autocomplete="off" class="validate">
+        <label for="pastAddr">Residencia Anterior</label>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" required="" aria-required="true">
-      <label for="nameEps">DNI</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="grade" id="grade" autocomplete="off" class="validate">
+        <label for="grade">Grado de Instrucción</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="religion" id="religion" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="religion">Religión</label>
+      </div>
     </div>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" required="" aria-required="true">
-      <label for="nameEps">Nacionalidad</label>
+    <br>
+    <div class="row">
+      <div class="input-field col l12 col m12 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="reasonCons" name="reasonCons" class="materialize-textarea"></textarea>
+        <label for="reasonCons">Motivo de la Consulta</label>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Residencia Actual</label>
+    <br>
+    <div class="row">
+      <div class="input-field col l12 col m12 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="history" name="history" class="materialize-textarea"></textarea>
+        <label for="history">Antecedentes de la Enfermedad</label>
+      </div>
     </div>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Residencia Anterior</label>
+    <br>
+    <h3>Antecedentes Heredo Familiares</h3><br>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="parentsNames" id="parentsNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="parentsNames">Padres</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="parentsAlive" id="parentsAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="parentsAlive">Vivos</label>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Grado de Instrucción</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="parentsDead" id="parentsDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="parentsDead">Fallecidos</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+         <i class="material-icons prefix">perm_identity</i>
+        <textarea id="parentsReasons" id="parentsReasons" class="materialize-textarea"></textarea>
+        <label for="parentsReasons">Causas</label>
+      </div>
     </div>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Religión</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="sibNames" id="sibNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="sibNames">Hermanos</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="sibAlive" id="sibAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="sibAlive">Vivos</label>
+      </div>
     </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="input-field col l12 col m12 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <textarea id="textarea1" class="materialize-textarea"></textarea>
-      <label for="textarea1">Motivo de la Consulta</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="sibDead" id="sibDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="sibDead">Fallecidos</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+         <i class="material-icons prefix">perm_identity</i>
+        <textarea id="sibReasons" id="sibReasons" class="materialize-textarea"></textarea>
+        <label for="sibReasons">Causas</label>
+      </div>
     </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="input-field col l12 col m12 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <textarea id="textarea1" class="materialize-textarea"></textarea>
-      <label for="textarea1">Antecedentes de la Enfermedad</label>
+      <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="sonNames" id="sonNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="sonNames">Hijos</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="sonAlive" id="sonAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="sonAlive">Vivos</label>
+      </div>
     </div>
-  </div>
-  <br>
-  <h3>Antecedentes Heredo Familiares</h3><br>
-  <div class="row">
-    <h5>Padres</h5>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Vivos</label>
+    <div class="row">
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <input type="text" name="sonDead" id="sonDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <label for="sonDead">Fallecidos</label>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="sonReasons" id="sonReasons" class="materialize-textarea"></textarea>
+        <label for="sonReasons">Causas</label>
+      </div>
     </div>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Fallecidos</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l12 col m12 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <textarea id="textarea1" class="materialize-textarea"></textarea>
-      <label for="textarea1">Causas</label>
-    </div>
-  </div>
-  <div class="row">
-    <h5>Hermanos</h5>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Vivos</label>
-    </div>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Fallecidos</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l12 col m12 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <textarea id="textarea1" class="materialize-textarea"></textarea>
-      <label for="textarea1">Causas</label>
-    </div>
-  </div>
-  <div class="row">
-    <h5>Hijos</h5>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Vivos</label>
-    </div>
-    <div class="input-field col l6 col m6 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <input type="text" name="name" autocomplete="off" class="validate" pattern="[0-9]+" required="" aria-required="true">
-      <label for="nameEps">Fallecidos</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col l12 col m12 col s12">
-      <i class="material-icons prefix">perm_identity</i>
-      <textarea id="textarea1" class="materialize-textarea"></textarea>
-      <label for="textarea1">Causas</label>
-    </div>
-  </div>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>DBT</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="DBTParents" id="filled-in-box-si" value="si"/>
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="DBTParents" id="filled-in-box-no" value="no"/>
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="DBTParentsR" name="DBTParentsR" class="materialize-textarea"></textarea>
+        <label for="DBTParentsR">Causas</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>HTA</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="HTAParents" id="filled-in-box-si" value="si"/>
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="HTAParents" id="filled-in-box-no" value="no"/>
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="HTAParentsR" id="HTAParentsR" class="materialize-textarea"></textarea>
+        <label for="HTAParentsR">Causas</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>TBC</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="TBCParents" id="filled-in-box-si" value="si"/>
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="TBCParents" id="filled-in-box-no" value="no"/>
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="TBCParentsR" id="TBCParentsR" class="materialize-textarea"></textarea>
+        <label for="TBCParentsR">Causas</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>Gemelar</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="gemelarParents" id="filled-in-box-si" value="si"/>
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="gemelarParents" id="filled-in-box-no" value="no"/>
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="gemelarParentsR" id="gemelarParentsR" class="materialize-textarea"></textarea>
+        <label for="gemelarParentsR">Causas</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>Otras</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="otherParents" id="filled-in-box-si" value="si"/>
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="otherParents" id="filled-in-box-no" value="no"/>
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="otherParentsR" id="otherParentsR" class="materialize-textarea"></textarea>
+        <label for="otherParentsR">Info</label>
+      </div>
+    </div><br>
 
-  <!--FALTA-->
-  <div class="row">
-    <div class="col l4 col s12">
-      <b>DBT</b>
+    <!--FALTA-->
+    <h3>Antecedentes Personales</h3><br>
+    <div class="row">
+      <b>1) Hábitos Tóxicos:</b><br><br>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Alcohol</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Tabaco</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Drogas</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Infusiones</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <b>2) Fisiológicos:</b><br><br>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Alimentación</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Dipsia</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Diuresia</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Catarsis</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Somnia</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Otros</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <b>2) Patológicos:</b><br><br>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Infancia</label>
+      </div>
+      <div class="input-field col l12 m12 s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Adulto</label>
+      </div>
     </div>
-    <div class="col l4 col s12">
-      <form action="#">
-       <p>
-         <input type="checkbox"  class="filled-in" id="filled-in-box-si" />
-         <label for="filled-in-box-si">Si</label>
-       </p>
-       <p>
-         <input type="checkbox" class="filled-in" id="filled-in-box-no" />
-         <label for="filled-in-box-no">No</label>
-       </p>
-     </form>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>DBT</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="DBT" id="filled-in-box-si" />
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="DBT" id="filled-in-box-no" />
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Info</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>HTA</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="HTA" id="filled-in-box-si" />
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="HTA" id="filled-in-box-no" />
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Info</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>TBC</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="TBC" id="filled-in-box-si" />
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="TBC" id="filled-in-box-no" />
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Info</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>Gemelar</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="gemelar" id="filled-in-box-si" />
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="gemelar" id="filled-in-box-no" />
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Info</label>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>Otras</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="otra" id="filled-in-box-si" />
+          <label for="filled-in-box-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="otras" id="filled-in-box-no" />
+          <label for="filled-in-box-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Info</label>
+      </div>
     </div>
-    <div class="col l4 col s12">
-      <input type="text" name="name" value="">
+    <div class="row">
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Quirúrgicos</label>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Traumatolǵicos</label>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Alérgicos</label>
+      </div>
+      <div class="input-field col l10 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Otros</label>
+      </div>
+    </div>
+    <div class="row">
+      <b>4) Gineco-Obstétricos</b><br><br>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">today</i>
+        <label for="nac">FUM</label>
+        <input type="text" name="birthdate" id="birthdate" placeholder="mm/dd/aaaa" required="" aria-required="true" class="datepicker validate"><br><br>
+      </div>
+      <div class="input-field col l6 col m6 col s12">
+        <i class="material-icons prefix">today</i>
+        <label for="nac">FPP</label>
+        <input type="text" name="birthdate" id="birthdate" placeholder="mm/dd/aaaa" required="" aria-required="true" class="datepicker validate"><br><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l3 col m3 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="EG">Edad Gestacional (Semanas)</label>
+        <input type="text" id="EG" name="EG"/>
+      </div>
+      <div class="input-field col l3 col m3 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="menarca">Menarca</label>
+        <input type="text" id="menarca" name="menarca"/>
+      </div>
+      <div class="input-field col l3 col m3 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="RM">RM (Rit. Menstr)</label>
+        <input type="text" id="RM" name="RM"/>
+      </div>
+      <div class="input-field col l3 col m3 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="IRS">IRS</label>
+        <input type="text" id="IRS" name="IRS"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l4 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="NP">N° de Parejas</label>
+        <input type="text" id="NP" name="NP"/>
+      </div>
+      <div class="input-field col l4 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="flujoG">Flujo Genital</label>
+        <input type="text" id="flujoG" name="flujoG"/>
+      </div>
+      <div class="input-field col l4 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="gestas">Gestas</label>
+        <input type="text" id="gestas" name="gestas"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l4 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="partos">Partos</label>
+        <input type="text" id="partos" name="partos"/>
+      </div>
+      <div class="input-field col l4 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="cesareas">Cesáreas</label>
+        <input type="text" id="cesareas" name="cesareas"/>
+      </div>
+      <div class="input-field col l4 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="abortos">Abortos</label>
+        <input type="text" id="abortos" name="abortos"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col l2 col s12">
+        <b>Anticonceptivos</b><br><br>
+        <div>
+          <input type="radio" class="with-gap" name="anti" id="anti-si" />
+          <label for="anti-si">Si</label>
+        </div><br>
+        <div>
+          <input type="radio" class="with-gap" name="anti" id="anti-no" />
+          <label for="anti-no">No</label>
+        </div>
+      </div>
+      <div class="input-field col l5 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="tipo">Tipo</label>
+        <input type="text" id="tipo" name="tipo"/>
+      </div>
+      <div class="input-field col l5 col m4 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="tiempo">Tiempo</label>
+        <input type="text" id="tiempo" name="tiempo"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l12 col m12 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <label for="toma">Última toma</label>
+        <input type="text" id="toma" name="toma"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l12 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Cirugías Ginecológicas (Especificar)</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col l12 col s12">
+        <i class="material-icons prefix">perm_identity</i>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Otros</label>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col l4 col s12">
-      <b>HTA</b>
-    </div>
-    <div class="col l4 col s12">
-      <form action="#">
-       <p>
-         <input type="checkbox"  class="filled-in" id="filled-in-box-si" />
-         <label for="filled-in-box-si">Si</label>
-       </p>
-       <p>
-         <input type="checkbox" class="filled-in" id="filled-in-box-no" />
-         <label for="filled-in-box-no">No</label>
-       </p>
-     </form>
-    </div>
-    <div class="col l4 col s12">
-      <input type="text" name="name" value="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col l4 col s12">
-      <b>TBC</b>
-    </div>
-    <div class="col l4 col s12">
-      <form action="#">
-       <p>
-         <input type="checkbox"  class="filled-in" id="filled-in-box-si" />
-         <label for="filled-in-box-si">Si</label>
-       </p>
-       <p>
-         <input type="checkbox" class="filled-in" id="filled-in-box-no" />
-         <label for="filled-in-box-no">No</label>
-       </p>
-     </form>
-    </div>
-    <div class="col l4 col s12">
-      <input type="text" name="name" value="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col l4 col s12">
-      <b>Gemelar</b>
-    </div>
-    <div class="col l4 col s12">
-      <form action="#">
-       <p>
-         <input type="checkbox"  class="filled-in" id="filled-in-box-si" />
-         <label for="filled-in-box-si">Si</label>
-       </p>
-       <p>
-         <input type="checkbox" class="filled-in" id="filled-in-box-no" />
-         <label for="filled-in-box-no">No</label>
-       </p>
-     </form>
-    </div>
-    <div class="col l4 col s12">
-      <input type="text" name="name" value="">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col l4 col s12">
-      <b>Otras</b>
-    </div>
-    <div class="col l4 col s12">
-      <form action="#">
-       <p>
-         <input type="checkbox"  class="filled-in" id="filled-in-box-si" />
-         <label for="filled-in-box-si">Si</label>
-       </p>
-       <p>
-         <input type="checkbox" class="filled-in" id="filled-in-box-no" />
-         <label for="filled-in-box-no">No</label>
-       </p>
-     </form>
-    </div>
-    <div class="col l4 col s12">
-      <input type="text" name="name" value="">
-    </div>
-  </div>
-</div>
+</form>
