@@ -34,7 +34,7 @@ exports.patients = function(req, res) {
     			}
     		}
 
-    		var histories = ["test"];
+    		var histories = [];
     		ClinicHistory.all(function(err, data) {
     			if (err) {
     				console.log('Error: ', err);

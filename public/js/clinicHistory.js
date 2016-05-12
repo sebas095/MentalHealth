@@ -5,5 +5,5 @@ $(function() {
 	if (histories.indexOf(patient) != -1) {
 		$('#viewOption').show();
 	}
-	else $('#viewOption').show();
+	else $('#viewOption').hide();
 });
