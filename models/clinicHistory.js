@@ -3,7 +3,8 @@ const resourceful = require('resourceful');
 var ClinicHistory = resourceful.define('clinicHistory', function() {
   this.string('id');
   this.string('idPatient');
-  this.string('job', {default: ""});
+  this.array('registers');
+  /*this.string('job', {default: ""});
   this.number('historyNumber');
   this.string('civilStatus');
   this.string('currAddress');
@@ -52,25 +53,7 @@ var ClinicHistory = resourceful.define('clinicHistory', function() {
   this.string('surgical');
   this.string('traumatology');
   this.string('allergy');
-  this.object('othersPathological');
-
-  // Gineco-obstéricos
-  this.string('FUM');
-  this.string('FPP');
-  this.string('gestation');
-  this.string('menarca');
-  this.string('rMenstr');
-  this.string('IRS');
-  this.number('numberCouples');
-  this.string('genitalDischarge');
-  this.string('feats');
-  this.string('births');
-  this.string('caesareans');
-  this.string('abortions');
-  this.object('contraceptives');
-  this.string('lastShow');
-  this.string('gynecological');
-  this.string('others')
+  this.object('othersPathological');*/
 
   this.timestamps();
 });

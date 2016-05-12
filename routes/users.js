@@ -30,6 +30,9 @@ module.exports = function(app, mountPoint) {
   router.get('/:id/:rol(\\eps|root)/allow', sessionController.loginRequired, userController.allow);
   router.get('/:id/data', sessionController.loginRequired, userController.dataRol);
   router.get('/:id/:rol(\\medico(General|Especialista))/patientsList', sessionController.loginRequired, clinicHistoryController.patients);
+  router.get('/:id/:rol(\\medico(General|Especialista))/clinicHistory/new', sessionController.loginRequired, clinicHistoryController.new);
+  router.get('/:id/:rol(\\medico(General|Especialista))/clinicHistory/edit', sessionController.loginRequired, clinicHistoryController.edit);
+  router.get('/:id/:rol(\\medico(General|Especialista))/clinicHistory/show', sessionController.loginRequired, clinicHistoryController.show);
 
   // POST
   router.post('/create/root', rootController.create);

@@ -12,7 +12,7 @@
 </div><hr><br>
 
 <div class="row" id="calendarGeneral">
-  <% var general, hasMG = true, hasME = true; %>
+  <% var hasMG = true, hasME = true; %>
   <% if (generales.length == 0)  { %>
     <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Generales disponibles')">
   <% } else { %>
@@ -22,7 +22,7 @@
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>
       <label>MÉDICOS GENERALES</label>
-      <select name="medicos" class="validate">
+      <select name="medicos" id="medicList" class="validate">
         <% if (generales.length == 0) { %>
           <option value="none">No hay Médicos Generales disponibles</option>
           <% hasMG = false; %>
@@ -30,7 +30,6 @@
           <% for (var user in generales) { %>
             <option value="<%= generales[user].names %>-<%= generales[user].documentNumber %>">
               <%= generales[user].names %>-<%= generales[user].documentNumber %>
-              <% general = generales[user].names + "-" + generales[user].documentNumber %>
             </option>
           <% } %>
         <% } %>
@@ -43,7 +42,7 @@
   <% if (hasMG && !seen) { %>
     <div class="row center col l12 col m12 col s12">
       <form action="/users/<%= session.user.id %>/paciente/calendar/register" method="get">
-        <input type="hidden" name="medico" value="<%= general %>">
+        <input type="hidden" id="idGen" name="medico">
         <input type="hidden" name="type" value="medicoGeneral">
         <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
       </form>
@@ -52,7 +51,6 @@
 </div>
 
 <div class="row" id="calendarEspecialista">
-  <% var especialista; %>
   <% if (especialistas.length == 0)  { %>
     <form action="/users/<%= session.user.id %>/paciente" method="get" onclick="alert('No hay Médicos Especialistas disponibles')">
   <% } else { %>
@@ -62,7 +60,7 @@
     <div class="col l8 offset-l2 col m12 col s12">
       <i class="material-icons prefix">supervisor_account</i>
       <label>MÉDICOS ESPECIALISTAS</label>
-      <select name="medicos" class="validate">
+      <select name="medicos" id="medicosEsp" class="validate">
         <% if (especialistas.length == 0) { %>
           <option value="none">No hay Médicos Especialistas disponibles</option>
           <% hasME = false; %>
@@ -70,7 +68,6 @@
           <% for (var user in especialistas) { %>
             <option value="<%= especialistas[user].names %>-<%= especialistas[user].documentNumber %>">
               <%= especialistas[user].names %>-<%= especialistas[user].documentNumber %>
-              <% especialista = especialistas[user].names + "-" +especialistas[user].documentNumber %>
             </option>
           <% } %>
         <% } %>
@@ -83,7 +80,7 @@
   <% if (hasME && !seen) { %>
     <div class="row center col l12 col m12 col s12">
       <form action="/users/<%= session.user.id %>/paciente/calendar/register" method="get">
-        <input type="hidden" name="medico" value="<%= especialista %>">
+        <input type="hidden" name="medico" id="idEsp">
         <input type="hidden" name="type" value="medicoEspecialista">
         <input class="waves-effect waves-light btn cyan darken-2" type="submit" name="button" value="AGENDAR CITA">
       </form>

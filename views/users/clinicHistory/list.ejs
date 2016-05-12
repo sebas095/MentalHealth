@@ -1,9 +1,36 @@
-<div class="row col l12 col m12 col s12">
-  <form action="#" method="post">
+<div class="row center col l12 col m12 col s12">
+<br><br>
+  <h4>Listado de Pacientes</h4>
+  <form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/new" method="get">
     <div class="col l8 offset-l2 col m12 col s12"><br>
-      <select name="patient">
-        <option value="TEST">Prueba</option>
+      <select name="patient" id="patientChoose">
+      	<% if (patients.length == 0) { %>
+      		<option value="none">No hay Pacientes asignados</option>
+      	<% } else { %>
+	        <% for (var i in patients) { %>
+	        	<option value="<%= patients[i].names %>-<%= patients[i].documentNumber %>"><%= patients[i].names %>-<%= patients[i].documentNumber %></option>
+	        <% } %>
+	       <% } %>
       </select>
     </div>
+    <div class="row center col l12 col m12 col s12">
+    	<br>
+      <input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="CREAR"/>
+    </div>
   </form>
+  <% if (histories.length > 0) { %>
+  	<input type="hidden" id="hist" value="<%= histories %>">
+  	<div id="viewOption">
+		  <form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/edit" mathod="get">
+		  	<div class="row center col l12 col m12 col s12">
+		      <input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="EDITAR"/>
+		    </div>
+		  </form>
+		  <form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/show" mathod="get">
+		  	<div class="row center col l12 col m12 col s12">
+		      <input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="VER"/>
+		    </div>
+		  </form>
+  	</div>
+  <% } %>
 </div>
