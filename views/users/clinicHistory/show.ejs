@@ -1,466 +1,467 @@
-  <div class="container">
-    <div class="center">
-      <h2>HISTORIA CLINICA</h2><br>
+<div class="container">
+  <div class="center">
+    <h2>HISTORIA CLINICA</h2><br>
+  </div>
+  <div class="row">
+    <h3>Datos Filiatorios</h3>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="names" id="names" autocomplete="off" value="<%= user.names %>" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="names">Nombres</label>
     </div>
-    <div class="row">
-      <h3>Datos Filiatorios</h3>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="names" id="names" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="names">Nombres</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="lastnames" id="lastnames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="lastnames">Apellidos</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">add</i>
-        <input type="text" name="age" id="age" autocomplete="off" class="validate" pattern="[0-9]+">
-        <label for="age">Edad</label>
-      </div>
-      <div class="col l6 col m6 col s12">
-        <i class="material-icons prefix">wc</i>
-        <label >Género </label>
-        <select name="gender" class="validate">
-          <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">card_travel</i>
-        <input type="text" name="job" id="job" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="job">Ocupación</label>
-      </div>
-      <div class="col l6 col m6 col s12">
-        <i class="material-icons prefix">today</i>
-        <label for="birthdate">Fecha de Nacimiento </label>
-        <input type="text" name="birthdate" id="birthdate" placeholder="mm/dd/aaaa" class="datepicker validate"><br><br>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">add</i>
-        <input type="text" name="numH" id="numH" autocomplete="off" class="validate" pattern="[0-9]+">
-        <label for="numH">Número de Historia</label>
-      </div>
-      <div class="col l6 col m6 col s12">
-        <i class="material-icons prefix">wc</i>
-        <label>Estado Civil </label>
-        <select name="state" class="validate">
-          <option value="soltero">Soltero(a)</option>
-          <option value="casado">Casado(a)</option>
-          <option value="divorciado">Divorciado(a)</option>
-          <option value="viudo">Viudo(a)</option>
-          <option value="union-libre">Unión Libre</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">label_outline</i>
-        <input type="text" name="document" id="document" autocomplete="off" class="validate">
-        <label for="document">DNI</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">public</i>
-        <input type="text" name="nacion" id="nacion" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="nacion">Nacionalidad</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">pin_drop</i>
-        <input type="text" name="currAddr" id="currAddr" autocomplete="off" class="validate">
-        <label for="currAddr">Residencia Actual</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">place</i>
-        <input type="text" name="pastAddr" id="pastAddr" autocomplete="off" class="validate">
-        <label for="pastAddr">Residencia Anterior</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">school</i>
-        <input type="text" name="grade" id="grade" autocomplete="off" class="validate">
-        <label for="grade">Grado de Instrucción</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">chrome_reader_mode</i>
-        <input type="text" name="religion" id="religion" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="religion">Religión</label>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="input-field col l12 col m12 col s12">
-        <i class="material-icons prefix">create</i>
-        <textarea id="reasonCons" name="reasonCons" class="materialize-textarea"></textarea>
-        <label for="reasonCons">Motivo de la Consulta</label>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="input-field col l12 col m12 col s12">
-        <i class="material-icons prefix">local_hospital</i>
-        <textarea id="history" name="history" class="materialize-textarea"></textarea>
-        <label for="history">Antecedentes de la Enfermedad</label>
-      </div>
-    </div>
-    <br>
-    <h3>Antecedentes Heredo Familiares</h3><br>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="parentsNames" id="parentsNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="parentsNames">Padres</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="parentsAlive" id="parentsAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="parentsAlive">Vivos</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">error_outline</i>
-        <input type="text" name="parentsDead" id="parentsDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="parentsDead">Fallecidos</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">subject</i>
-        <textarea id="parentsReasons" id="parentsReasons" class="materialize-textarea"></textarea>
-        <label for="parentsReasons">Causas</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="sibNames" id="sibNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="sibNames">Hermanos</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="sibAlive" id="sibAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="sibAlive">Vivos</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">error_outline</i>
-        <input type="text" name="sibDead" id="sibDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="sibDead">Fallecidos</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">subject</i>
-        <textarea id="sibReasons" id="sibReasons" class="materialize-textarea"></textarea>
-        <label for="sibReasons">Causas</label>
-      </div>
-    </div>
-      <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="sonNames" id="sonNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="sonNames">Hijos</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="sonAlive" id="sonAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="sonAlive">Vivos</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">error_outline</i>
-        <input type="text" name="sonDead" id="sonDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
-        <label for="sonDead">Fallecidos</label>
-      </div>
-      <div class="input-field col l6 col m6 col s12">
-        <i class="material-icons prefix">subject</i>
-        <textarea id="sonReasons" id="sonReasons" class="materialize-textarea"></textarea>
-        <label for="sonReasons">Causas</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>DBT</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="DBTParents" id="DBTParents-si" value="si"/>
-          <label for="DBTParents-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="DBTParents" id="DBTParents-no" value="no"/>
-          <label for="DBTParents-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="DBTParentsR" name="DBTParentsR" class="materialize-textarea"></textarea>
-        <label for="DBTParentsR">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>HTA</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="HTAParents" id="HTAParents-si" value="si"/>
-          <label for="HTAParents-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="HTAParents" id="HTAParents-no" value="no"/>
-          <label for="HTAParents-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="HTAParentsR" name="HTAParentsR" class="materialize-textarea"></textarea>
-        <label for="HTAParentsR">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>TBC</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="TBCParents" id="TBCParents-si" value="si"/>
-          <label for="TBCParents-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="TBCParents" id="TBCParents-no" value="no"/>
-          <label for="TBCParents-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="TBCParentsR" name="TBCParentsR" class="materialize-textarea"></textarea>
-        <label for="TBCParentsR">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>Gemelar</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="gemelarParents" id="gemelarParents-si" value="si"/>
-          <label for="gemelarParents-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="gemelarParents" id="gemelarParents-no" value="no"/>
-          <label for="gemelarParents-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="gemelarParentsR" name="gemelarParentsR" class="materialize-textarea"></textarea>
-        <label for="gemelarParentsR">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>Otras</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="otherParents" id="otherParents-si" value="si"/>
-          <label for="otherParents-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="otherParents" id="otherParents-no" value="no"/>
-          <label for="otherParents-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="otherParentsR" name="otherParentsR" class="materialize-textarea"></textarea>
-        <label for="otherParentsR">Observaciones</label>
-      </div>
-    </div><br>
-    <h3>Antecedentes Personales</h3><br>
-    <div class="row">
-      <b>1) Hábitos Tóxicos:</b><br><br>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">bookmark</i>
-        <textarea id="alcohol" name="alcohol" class="materialize-textarea"></textarea>
-        <label for="alcohol">Alcohol</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">bookmark</i>
-        <textarea id="snuff" name="snuff" class="materialize-textarea"></textarea>
-        <label for="snuff">Tabaco</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">bookmark</i>
-        <textarea id="drugs" name="drugs" class="materialize-textarea"></textarea>
-        <label for="drugs">Drogas</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">bookmark</i>
-        <textarea id="infusions" name="infusions" class="materialize-textarea"></textarea>
-        <label for="infusions">Infusiones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <b>2) Fisiológicos:</b><br><br>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="feeding" name="feeding" class="materialize-textarea"></textarea>
-        <label for="feeding">Alimentación</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="dipsia" name="dipsia" class="materialize-textarea"></textarea>
-        <label for="dipsia">Dipsia</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="diuresia" name="diuresia" class="materialize-textarea"></textarea>
-        <label for="diuresia">Diuresia</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="catarsis" name="catarsis" class="materialize-textarea"></textarea>
-        <label for="catarsis">Catarsis</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="somnia" name="somnia" class="materialize-textarea"></textarea>
-        <label for="somnia">Somnia</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="othersFis" name="othersFis" class="materialize-textarea"></textarea>
-        <label for="othersFis">Otros</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <b>3) Patológicos:</b><br><br>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="infancy" name="infancy" class="materialize-textarea"></textarea>
-        <label for="infancy">Infancia</label>
-      </div>
-      <div class="input-field col l12 m12 s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="adult" name="adult" class="materialize-textarea"></textarea>
-        <label for="adult">Adulto</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>DBT</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="DBT" id="DBT-si" value="si"/>
-          <label for="DBT-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="DBT" id="DBT-no" value="no"/>
-          <label for="DBT-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="DBTReasons" id="DBTReasons" class="materialize-textarea"></textarea>
-        <label for="DBTReasons">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>HTA</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="HTA" id="HTA-si" value="si"/>
-          <label for="HTA-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="HTA" id="HTA-no" value="no"/>
-          <label for="HTA-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="HTAReasons" name="HTAReasons" class="materialize-textarea"></textarea>
-        <label for="HTAReasons">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>TBC</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="TBC" id="TBC-si" value="si"/>
-          <label for="TBC-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="TBC" id="TBC-no" value="no"/>
-          <label for="TBC-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="TBCReasons" name="TBCReasons" class="materialize-textarea"></textarea>
-        <label for="TBCReasons">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>Gemelar</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="gemelar" id="gemelar-si" value="si"/>
-          <label for="gemelar-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="gemelar" id="gemelar-no" value="no"/>
-          <label for="gemelar-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="gemelarReasons" name="gemelarReasons" class="materialize-textarea"></textarea>
-        <label for="gemelarReasons">Observaciones</label>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col l2 col s12">
-        <b>Otras</b><br><br>
-        <div>
-          <input type="radio" class="with-gap" name="othersTr" id="othersTr-si" value="si"/>
-          <label for="othersTr-si">Si</label>
-        </div><br>
-        <div>
-          <input type="radio" class="with-gap" name="othersTr" id="othersTr-no" value="no"/>
-          <label for="othersTr-no">No</label>
-        </div>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">chat</i>
-        <textarea id="othersTrReasons" name="othersTrReasons" class="materialize-textarea"></textarea>
-        <label for="othersTrReasons">Observaciones</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="quir" name="quir" class="materialize-textarea"></textarea>
-        <label for="quir">Quirúrgicos</label>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="trauma" name="trauma" class="materialize-textarea"></textarea>
-        <label for="trauma">Traumatolǵicos</label>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="allergy" name="allergy" class="materialize-textarea"></textarea>
-        <label for="allergy">Alérgicos</label>
-      </div>
-      <div class="input-field col l10 col s12">
-        <i class="material-icons prefix">note</i>
-        <textarea id="otherPat" name="otherPat" class="materialize-textarea"></textarea>
-        <label for="otherPat">Otros</label>
-      </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="lastnames" id="lastnames" autocomplete="off" value="<%= user.lastnames %>" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="lastnames">Apellidos</label>
     </div>
   </div>
-  <div class="row center col l12 m12 s12">
-    <input type="submit" name="enviar" class="waves-effect waves-light btn cyan darken-2" value="GUARDAR">
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">add</i>
+      <input type="text" name="age" id="age" autocomplete="off" class="validate" pattern="[0-9]+">
+      <label for="age">Edad</label>
+    </div>
+    <div class="col l6 col m6 col s12">
+      <i class="material-icons prefix">wc</i>
+      <label >Género </label>
+      <select name="gender" class="validate">
+        <option value="masculino" <% if(user.gender == "masculino") { %> selected <% } %> >Masculino</option>
+        <option value="femenino" <% if (user.gender == "femenino") { %> selected <% } %>>Femenino</option>
+      </select>
+    </div>
   </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">card_travel</i>
+      <input type="text" name="job" id="job" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="job">Ocupación</label>
+    </div>
+    <div class="col l6 col m6 col s12">
+      <i class="material-icons prefix">today</i>
+      <label for="birthdate">Fecha de Nacimiento </label>
+      <input type="text" name="birthdate" id="birthdate" value="<%= user.birthdate %>" placeholder="mm/dd/aaaa" class="datepicker validate"><br><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">add</i>
+      <input type="hidden" name="page" value="<%= page %>">
+      <input type="text" name="numH" id="numH" autocomplete="off" disabled value="<%= page %>">
+      <label>Número de Historia</label>
+    </div>
+    <div class="col l6 col m6 col s12">
+      <i class="material-icons prefix">wc</i>
+      <label>Estado Civil </label>
+      <select name="state" class="validate">
+        <option value="soltero">Soltero(a)</option>
+        <option value="casado">Casado(a)</option>
+        <option value="divorciado">Divorciado(a)</option>
+        <option value="viudo">Viudo(a)</option>
+        <option value="union-libre">Unión Libre</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">label_outline</i>
+      <input type="text" name="document" id="document" value="<%= user.documentNumber %>" autocomplete="off" class="validate">
+      <label for="document">DNI</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">public</i>
+      <input type="text" name="nacion" id="nacion" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="nacion">Nacionalidad</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">pin_drop</i>
+      <input type="text" name="currAddr" id="currAddr" autocomplete="off" class="validate">
+      <label for="currAddr">Residencia Actual</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">place</i>
+      <input type="text" name="pastAddr" id="pastAddr" autocomplete="off" class="validate">
+      <label for="pastAddr">Residencia Anterior</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">school</i>
+      <input type="text" name="grade" id="grade" autocomplete="off" class="validate">
+      <label for="grade">Grado de Instrucción</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">chrome_reader_mode</i>
+      <input type="text" name="religion" id="religion" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="religion">Religión</label>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="input-field col l12 col m12 col s12">
+      <i class="material-icons prefix">create</i>
+      <textarea id="reasonCons" name="reasonCons" class="materialize-textarea"></textarea>
+      <label for="reasonCons">Motivo de la Consulta</label>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="input-field col l12 col m12 col s12">
+      <i class="material-icons prefix">local_hospital</i>
+      <textarea id="history" name="history" class="materialize-textarea"></textarea>
+      <label for="history">Antecedentes de la Enfermedad</label>
+    </div>
+  </div>
+  <br>
+  <h3>Antecedentes Heredo Familiares</h3><br>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="parentsNames" id="parentsNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="parentsNames">Padres</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="parentsAlive" id="parentsAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="parentsAlive">Vivos</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">error_outline</i>
+      <input type="text" name="parentsDead" id="parentsDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="parentsDead">Fallecidos</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">subject</i>
+      <textarea id="parentsReasons" name="parentsReasons" class="materialize-textarea"></textarea>
+      <label for="parentsReasons">Causas</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="sibNames" id="sibNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="sibNames">Hermanos</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="sibAlive" id="sibAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="sibAlive">Vivos</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">error_outline</i>
+      <input type="text" name="sibDead" id="sibDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="sibDead">Fallecidos</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">subject</i>
+      <textarea id="sibReasons" name="sibReasons" class="materialize-textarea"></textarea>
+      <label for="sibReasons">Causas</label>
+    </div>
+  </div>
+    <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="sonNames" id="sonNames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="sonNames">Hijos</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">perm_identity</i>
+      <input type="text" name="sonAlive" id="sonAlive" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="sonAlive">Vivos</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">error_outline</i>
+      <input type="text" name="sonDead" id="sonDead" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+      <label for="sonDead">Fallecidos</label>
+    </div>
+    <div class="input-field col l6 col m6 col s12">
+      <i class="material-icons prefix">subject</i>
+      <textarea id="sonReasons" name="sonReasons" class="materialize-textarea"></textarea>
+      <label for="sonReasons">Causas</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>DBT</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="DBTParents" id="DBTParents-si" value="si"/>
+        <label for="DBTParents-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="DBTParents" id="DBTParents-no" value="no"/>
+        <label for="DBTParents-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="DBTParentsR" name="DBTParentsR" class="materialize-textarea"></textarea>
+      <label for="DBTParentsR">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>HTA</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="HTAParents" id="HTAParents-si" value="si"/>
+        <label for="HTAParents-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="HTAParents" id="HTAParents-no" value="no"/>
+        <label for="HTAParents-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="HTAParentsR" name="HTAParentsR" class="materialize-textarea"></textarea>
+      <label for="HTAParentsR">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>TBC</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="TBCParents" id="TBCParents-si" value="si"/>
+        <label for="TBCParents-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="TBCParents" id="TBCParents-no" value="no"/>
+        <label for="TBCParents-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="TBCParentsR" name="TBCParentsR" class="materialize-textarea"></textarea>
+      <label for="TBCParentsR">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>Gemelar</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="gemelarParents" id="gemelarParents-si" value="si"/>
+        <label for="gemelarParents-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="gemelarParents" id="gemelarParents-no" value="no"/>
+        <label for="gemelarParents-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="gemelarParentsR" name="gemelarParentsR" class="materialize-textarea"></textarea>
+      <label for="gemelarParentsR">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>Otras</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="otherParents" id="otherParents-si" value="si"/>
+        <label for="otherParents-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="otherParents" id="otherParents-no" value="no"/>
+        <label for="otherParents-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="otherParentsR" name="otherParentsR" class="materialize-textarea"></textarea>
+      <label for="otherParentsR">Observaciones</label>
+    </div>
+  </div><br>
+  <h3>Antecedentes Personales</h3><br>
+  <div class="row">
+    <b>1) Hábitos Tóxicos:</b><br><br>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">bookmark</i>
+      <textarea id="alcohol" name="alcohol" class="materialize-textarea"></textarea>
+      <label for="alcohol">Alcohol</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">bookmark</i>
+      <textarea id="snuff" name="snuff" class="materialize-textarea"></textarea>
+      <label for="snuff">Tabaco</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">bookmark</i>
+      <textarea id="drugs" name="drugs" class="materialize-textarea"></textarea>
+      <label for="drugs">Drogas</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">bookmark</i>
+      <textarea id="infusions" name="infusions" class="materialize-textarea"></textarea>
+      <label for="infusions">Infusiones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <b>2) Fisiológicos:</b><br><br>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="feeding" name="feeding" class="materialize-textarea"></textarea>
+      <label for="feeding">Alimentación</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="dipsia" name="dipsia" class="materialize-textarea"></textarea>
+      <label for="dipsia">Dipsia</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="diuresia" name="diuresia" class="materialize-textarea"></textarea>
+      <label for="diuresia">Diuresia</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="catarsis" name="catarsis" class="materialize-textarea"></textarea>
+      <label for="catarsis">Catarsis</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="somnia" name="somnia" class="materialize-textarea"></textarea>
+      <label for="somnia">Somnia</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="othersFis" name="othersFis" class="materialize-textarea"></textarea>
+      <label for="othersFis">Otros</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <b>3) Patológicos:</b><br><br>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="infancy" name="infancy" class="materialize-textarea"></textarea>
+      <label for="infancy">Infancia</label>
+    </div>
+    <div class="input-field col l12 m12 s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="adult" name="adult" class="materialize-textarea"></textarea>
+      <label for="adult">Adulto</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>DBT</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="DBT" id="DBT-si" value="si"/>
+        <label for="DBT-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="DBT" id="DBT-no" value="no"/>
+        <label for="DBT-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="DBTReasons" name="DBTReasons" class="materialize-textarea"></textarea>
+      <label for="DBTReasons">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>HTA</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="HTA" id="HTA-si" value="si"/>
+        <label for="HTA-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="HTA" id="HTA-no" value="no"/>
+        <label for="HTA-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="HTAReasons" name="HTAReasons" class="materialize-textarea"></textarea>
+      <label for="HTAReasons">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>TBC</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="TBC" id="TBC-si" value="si"/>
+        <label for="TBC-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="TBC" id="TBC-no" value="no"/>
+        <label for="TBC-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="TBCReasons" name="TBCReasons" class="materialize-textarea"></textarea>
+      <label for="TBCReasons">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>Gemelar</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="gemelar" id="gemelar-si" value="si"/>
+        <label for="gemelar-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="gemelar" id="gemelar-no" value="no"/>
+        <label for="gemelar-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="gemelarReasons" name="gemelarReasons" class="materialize-textarea"></textarea>
+      <label for="gemelarReasons">Observaciones</label>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col l2 col s12">
+      <b>Otras</b><br><br>
+      <div>
+        <input type="radio" class="with-gap" name="othersTr" id="othersTr-si" value="si"/>
+        <label for="othersTr-si">Si</label>
+      </div><br>
+      <div>
+        <input type="radio" class="with-gap" name="othersTr" id="othersTr-no" value="no"/>
+        <label for="othersTr-no">No</label>
+      </div>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">chat</i>
+      <textarea id="othersTrReasons" name="othersTrReasons" class="materialize-textarea"></textarea>
+      <label for="othersTrReasons">Observaciones</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="quir" name="quir" class="materialize-textarea"></textarea>
+      <label for="quir">Quirúrgicos</label>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="trauma" name="trauma" class="materialize-textarea"></textarea>
+      <label for="trauma">Traumatolǵicos</label>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="allergy" name="allergy" class="materialize-textarea"></textarea>
+      <label for="allergy">Alérgicos</label>
+    </div>
+    <div class="input-field col l10 col s12">
+      <i class="material-icons prefix">note</i>
+      <textarea id="otherPat" name="otherPat" class="materialize-textarea"></textarea>
+      <label for="otherPat">Otros</label>
+    </div>
+  </div>
+</div>
+<div class="row center col l12 m12 s12">
+  <input type="submit" name="enviar" class="waves-effect waves-light btn cyan darken-2" value="GUARDAR">
+</div>

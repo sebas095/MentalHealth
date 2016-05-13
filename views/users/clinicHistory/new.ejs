@@ -1,4 +1,5 @@
 <form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/create" method="post">
+  <input type="hidden" name="patient" value="<%= patient %>">
   <div class="container">
     <div class="center">
       <h2>HISTORIA CLINICA</h2><br>
@@ -9,12 +10,12 @@
     <div class="row">
       <div class="input-field col l6 col m6 col s12">
         <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="names" id="names" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <input type="text" name="names" id="names" autocomplete="off" value="<%= user.names %>" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
         <label for="names">Nombres</label>
       </div>
       <div class="input-field col l6 col m6 col s12">
         <i class="material-icons prefix">perm_identity</i>
-        <input type="text" name="lastnames" id="lastnames" autocomplete="off" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
+        <input type="text" name="lastnames" id="lastnames" autocomplete="off" value="<%= user.lastnames %>" class="validate" pattern="(?=^.{2,}$)[A-Za-zñÑáÁéÉíÍóÓúÚüÜ ]+">
         <label for="lastnames">Apellidos</label>
       </div>
     </div>
@@ -28,8 +29,8 @@
         <i class="material-icons prefix">wc</i>
         <label >Género </label>
         <select name="gender" class="validate">
-          <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
+          <option value="masculino" <% if(user.gender == "masculino") { %> selected <% } %> >Masculino</option>
+          <option value="femenino" <% if (user.gender == "femenino") { %> selected <% } %>>Femenino</option>
         </select>
       </div>
     </div>
@@ -42,14 +43,15 @@
       <div class="col l6 col m6 col s12">
         <i class="material-icons prefix">today</i>
         <label for="birthdate">Fecha de Nacimiento </label>
-        <input type="text" name="birthdate" id="birthdate" placeholder="mm/dd/aaaa" class="datepicker validate"><br><br>
+        <input type="text" name="birthdate" id="birthdate" value="<%= user.birthdate %>" placeholder="mm/dd/aaaa" class="datepicker validate"><br><br>
       </div>
     </div>
     <div class="row">
       <div class="input-field col l6 col m6 col s12">
         <i class="material-icons prefix">add</i>
-        <input type="text" name="numH" id="numH" autocomplete="off" class="validate" pattern="[0-9]+">
-        <label for="numH">Número de Historia</label>
+        <input type="hidden" name="page" value="<%= page %>">
+        <input type="text" name="numH" id="numH" autocomplete="off" disabled value="<%= page %>">
+        <label>Número de Historia</label>
       </div>
       <div class="col l6 col m6 col s12">
         <i class="material-icons prefix">wc</i>
@@ -66,7 +68,7 @@
     <div class="row">
       <div class="input-field col l6 col m6 col s12">
         <i class="material-icons prefix">label_outline</i>
-        <input type="text" name="document" id="document" autocomplete="off" class="validate">
+        <input type="text" name="document" id="document" value="<%= user.documentNumber %>" autocomplete="off" class="validate">
         <label for="document">DNI</label>
       </div>
       <div class="input-field col l6 col m6 col s12">
@@ -137,7 +139,7 @@
       </div>
       <div class="input-field col l6 col m6 col s12">
         <i class="material-icons prefix">subject</i>
-        <textarea id="parentsReasons" id="parentsReasons" class="materialize-textarea"></textarea>
+        <textarea id="parentsReasons" name="parentsReasons" class="materialize-textarea"></textarea>
         <label for="parentsReasons">Causas</label>
       </div>
     </div>
@@ -161,7 +163,7 @@
       </div>
       <div class="input-field col l6 col m6 col s12">
         <i class="material-icons prefix">subject</i>
-        <textarea id="sibReasons" id="sibReasons" class="materialize-textarea"></textarea>
+        <textarea id="sibReasons" name="sibReasons" class="materialize-textarea"></textarea>
         <label for="sibReasons">Causas</label>
       </div>
     </div>
@@ -185,7 +187,7 @@
       </div>
       <div class="input-field col l6 col m6 col s12">
         <i class="material-icons prefix">subject</i>
-        <textarea id="sonReasons" id="sonReasons" class="materialize-textarea"></textarea>
+        <textarea id="sonReasons" name="sonReasons" class="materialize-textarea"></textarea>
         <label for="sonReasons">Causas</label>
       </div>
     </div>
@@ -363,7 +365,7 @@
       </div>
       <div class="input-field col l10 col s12">
         <i class="material-icons prefix">chat</i>
-        <textarea id="DBTReasons" id="DBTReasons" class="materialize-textarea"></textarea>
+        <textarea id="DBTReasons" name="DBTReasons" class="materialize-textarea"></textarea>
         <label for="DBTReasons">Observaciones</label>
       </div>
     </div><br>
