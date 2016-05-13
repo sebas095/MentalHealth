@@ -1,14 +1,25 @@
 <div class="row center col l12 col m12 col s12">
 	<br><br>
 	<h4>Listado de Historias Clínicas de <%= user.names %> <%= user.lastnames%></h4>
-	<form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/new" method="get">
-		 <div class="col l8 offset-l2 col m12 col s12"><br>
+	<% var mode = (view)? "visualizar" : "modificar" %>
+	<% var option = (view)? "show" : "edit" %>
+	<br>
+	<label>Elija el número de la historia clinica que desea <%= mode %></label>
+	<form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/<%= option %>" method="get">
+		 <div class="row center col l8 offset-l2 col m12 col s12"><br>
 			<select name="numPage">
-				<option value="1">TEST</option>
+				<% for (var i in history) { %>
+					<% var json = JSON.stringify({index: i, history: history[i]}) %>
+					<option value="<%= json %>">Historia N°<%= Number(i) + 1 %></option>
+				<% } %>
 			</select>
 		</div>
 		<div class="row center col l12 col m12 col s12">
-			<input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="EDITAR"/>
+			<% if (view) { %>
+				<input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="VER"/>
+			<% } else { %>
+				<input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="EDITAR"/>
+			<% } %>
 		</div>
 	</form>
 </div>

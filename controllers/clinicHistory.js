@@ -109,53 +109,9 @@ exports.chooseEdit = function(req, res) {
       console.log('Error: ', err);
       return res.send(500, err);
     }
-    res.render('users/clinicHistory/chooseEdit', {rol: req.params.rol, user: data[0]});
-  });
-}
 
-exports.edit = function(req, res) {
-  // Luego cambiara
-  var user = req.query.hist.split('-');
-  var names = user[0];
-  var documentNumber = user[1];
-
-  User.find({
-    names: names,
-    documentNumber: documentNumber
-  }, function(err, data) {
-    if (err) {
-      console.log('Error: ', err);
-      return res.send(500, err);
-    }
-
-    ClinicHistory.find({idPatient: data[0].id}, function(err, data) {
-      if (err) {
-        console.log('Error: ', err);
-        return res.send(500, err);
-      }
-      var page = '1';//req.query.numPage;
-      var history = data[0].registers[Number(page) - 1];
-
-      res.render('users/clinicHistory/edit', {rol: req.params.rol, history: history, page: page});
-    });
-  });
-}
-
-exports.show = function(req, res) {
-  var user = req.query.hist.split('-');
-  var names = user[0];
-  var documentNumber = user[1];
-
-  User.find({
-    names: names,
-    documentNumber: documentNumber
-  }, function(err, data) {
-    if (err) {
-      console.log('Error: ', err);
-      return res.send(500, err);
-    }
-    var user = data[0];
     var idP = data[0].id;
+    var user = data[0];
 
     ClinicHistory.find({idPatient: idP}, function(err, data) {
       if (err) {
@@ -163,11 +119,44 @@ exports.show = function(req, res) {
         return res.send(500, err);
       }
 
-      // Falta index del selct de la vista choose
-      var history = data[0].registers[0];
-      var page = data[0].registers.length;
+      var history = data[0].registers;
+      var view = (req.query.button != "EDITAR");
 
-      res.render('users/clinicHistory/show', {rol: req.params.rol, page: page, user: user, history: history});
+      res.render('users/clinicHistory/chooseEdit', {rol: req.params.rol, user: user, view: view, history: history});
+    });
+  });
+}
+
+exports.option = function(req, res) {
+  var tmp = JSON.parse(req.query.numPage);
+  var index = Number(tmp.index);
+  var user = tmp.history;
+  var names = user.names;
+  var documentNumber = user.documentNumber;
+
+  User.find({
+    names: names,
+    documentNumber: documentNumber
+  }, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+      return res.send(500, err);
+    }
+    
+    var userHistory = data[0];
+    ClinicHistory.find({idPatient: data[0].id}, function(err, data) {
+      if (err) {
+        console.log('Error: ', err);
+        return res.send(500, err);
+      }
+
+      var history = data[0].registers[index];
+      var view = (req.query.button != 'EDITAR');
+
+      if (view) {
+        res.render('users/clinicHistory/show', {rol: req.params.rol, user: userHistory, history: history, page: index + 1});
+      }
+      else res.render('users/clinicHistory/edit', {rol: req.params.rol, user: userHistory, history: history, page: index + 1});
     });
   });
 }
