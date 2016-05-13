@@ -166,6 +166,7 @@ exports.show = function(req, res) {
       // Falta index del selct de la vista choose
       var history = data[0].registers[0];
       var page = data[0].registers.length;
+
       res.render('users/clinicHistory/show', {rol: req.params.rol, page: page, user: user, history: history});
     });
   });
