@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Calendar = require('../models/calendar');
+const ClinicHistory = require('../models/clinicHistory'); 
 const nodemailer = require('nodemailer');
 const config = require('../config/email');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
@@ -256,6 +257,16 @@ exports.resetCited = function(req, res) {
             console.log('Error: ', err);
             res.send(500, err);
           }
+
+          Email.sendMail({
+            from: req.session.admin,
+            to: req.session.user.email,
+            subject: "Eliminación de cita en MENTALHEALTH",
+            html: `<p>Estimado Usuario ${req.session.user.names},` +
+                  `</p><br><br>Se informa que su cita del dia ${dateCurr.key} a las ${dateCurr.hour} en MentalHealth ha sido eliminada` +
+                  ` si desea ingresar para ver los cambios ingresa a la siguiente dirección: <a href="${req.session.url}login">Iniciar sesión</a>` +
+                  `<br><br><br><br> Att,<br><br> Equipo Administrativo de MENTALHEALTH`
+          });
 
           res.redirect("/users/" + req.session.user.id + "/paciente/pendingList");
         });

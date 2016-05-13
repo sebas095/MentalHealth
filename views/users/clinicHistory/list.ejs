@@ -13,12 +13,14 @@
 	       <% } %>
       </select>
     </div>
-    <div class="row center col l12 col m12 col s12">
-    	<br>
-      <input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="CREAR"/>
-    </div>
+    <% if (patients.length > 0) { %>
+      <div class="row center col l12 col m12 col s12">
+      	<br>
+        <input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="CREAR"/>
+      </div>
+    <% } %>
   </form>
-  <% if (histories.length > 0) { %>
+  <% if (histories.length > 0 && patients.length > 0) { %>
     <div id="viewOption">
       <form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/choose" mathod="get">
   	    <input type="hidden" name="hist" id="hist" value="<%= histories %>">
@@ -35,5 +37,9 @@
 		    </div>
 		  </form>
   	</div>
+  <% } else { %>
+    <div class="row center col l12 col m12 col s12">
+      <a href="/users/<%= session.user.id %>/<%= rol %>" class="waves-effect waves-light btn cyan darken-2">VOLVER</a>
+    </div>
   <% } %>
 </div>
