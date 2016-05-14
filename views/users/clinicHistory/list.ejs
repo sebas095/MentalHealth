@@ -23,7 +23,7 @@
   <% if (histories.length > 0 && patients.length > 0) { %>
     <div id="viewOption">
       <form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/choose" mathod="get">
-  	    <input type="hidden" name="hist" id="hist" value="<%= histories %>">
+  	    <input type="hidden" name="hist" class="hist" value="<%= histories %>">
         <input type="hidden" name="view" value="<%= false %>">
         <div class="row center col l12 col m12 col s12">
 		      <input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="EDITAR"/>
@@ -31,7 +31,7 @@
 		  </form>
 		  <form action="/users/<%= session.user.id %>/<%= rol %>/clinicHistory/choose" mathod="get">
 		  	<div class="row center col l12 col m12 col s12">
-          <input type="hidden" name="hist" id="hist" value="<%= histories %>">
+          <input type="hidden" name="hist" class="hist" value="<%= histories %>">
           <input type="hidden" name="view" value="<%= true %>">
 		      <input type="submit" class="waves-effect waves-light btn cyan darken-2" name="button" value="VER"/>
 		    </div>
