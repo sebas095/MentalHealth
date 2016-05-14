@@ -5,6 +5,7 @@ $(function() {
 
 	if (histories.indexOf(patient) != -1) {
 		$('#viewOption').show();
+		$('#hist').val(histories[histories.indexOf(patient)]);
 	}
 	else $('#viewOption').hide();
 });
