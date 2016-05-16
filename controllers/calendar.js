@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Calendar = require('../models/calendar');
-const ClinicHistory = require('../models/clinicHistory'); 
+const ClinicHistory = require('../models/clinicHistory');
 const nodemailer = require('nodemailer');
 const config = require('../config/email');
 const Email = nodemailer.createTransport({service: "hotmail", auth: config.auth});
@@ -592,11 +592,12 @@ function chooseDate(req, week) {
 
 function getDate() {
   var keys = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-  var now = new Date().strtotime('last monday').toString();
+  var now = new Date(Date.now().toString()).strtotime('+1 day').toString();
+  now = new Date(now).strtotime('last monday').toString();
   var dateWeek = {};
 
   for (var i = 0; i < 6; i++) {
-    var day = new Date(now).strtotime('+' + i +' day').toString().split(' ');
+    var day = new Date(now).strtotime('+' + (i).toString() +' day').toString().split(' ');
     day = day[1] + '/' + day[2] + '/' + day[3];
     dateWeek[keys[i]] = day;
   }
